@@ -183,11 +183,6 @@
                         <span class="leancloud-visitors-count"> </span> 次阅读
                     </li>
                     
-                        <li>
-                            <i class="fa fa-commenting-o"></i>
-                            <span data-xid="/2021/10/18/MySQL/%E5%9C%A8SQLBolt%E5%AD%A6%E4%B9%A0%E6%95%B0%E6%8D%AE%E5%BA%93/10.SQL%20Lesson%2010%20Queries%20with%20aggregates%20(Pt.%201)/SQL%20Lesson%2010%20Queries%20with%20aggregates%20(Pt.%201)/" class="waline-comment-count"> </span> 条评论
-                        </li>
-                    
                 
             </ul>
         </header>
@@ -358,24 +353,28 @@ SQL Lesson 10: Queries with aggregates (Pt. 1)Select query ...`;
         </nav>
     
     
-        <div id="w-comments" class="post-comments"></div>
+        <div id="v-comments" class="post-comments"></div>
 <script>
     var load_comm = () => {
         const init = () => {
-            new Waline(Object.assign({
-                el: '#w-comments',
+            new Valine({
+                el: '#v-comments',
+                appId: 'ov9d0pSM6tSAzbc43FJHYPzT-gzGzoHsz',
+                appKey: 'B2wMGp8TE3duzmpI04GwcOxv',
+                visitor: true,
+                enableQQ: true,
                 path: '/2021/10/18/MySQL/%E5%9C%A8SQLBolt%E5%AD%A6%E4%B9%A0%E6%95%B0%E6%8D%AE%E5%BA%93/10.SQL%20Lesson%2010%20Queries%20with%20aggregates%20(Pt.%201)/SQL%20Lesson%2010%20Queries%20with%20aggregates%20(Pt.%201)/'
-            }, JSON.parse('{"serverURL":null,"visitor":true}')));
+            });
         }
-        if (typeof Waline == 'undefined') {
-            const src = 'https://cdn.jsdelivr.net/npm/@waline/client/dist/Waline.min.js';
+        if (typeof Valine == 'undefined') {
+            const src = 'https://cdn.jsdelivr.net/npm/valine@1.4.14/dist/Valine.min.js';
             $.getScript(src, init);
         } else {
             init();
         }
     };
 </script>
-<noscript>Please enable JavaScript to view the <a target="_blank" rel="noopener" href="https://waline.js.org/">comments powered by Waline.</a></noscript>
+<noscript>Please enable JavaScript to view the <a target="_blank" rel="noopener" href="https://valine.js.org/">comments powered by Valine.</a></noscript>
 
     
 </article>
@@ -445,7 +444,7 @@ SQL Lesson 10: Queries with aggregates (Pt. 1)Select query ...`;
         
           
           
-            <a class="list-group-item" href="/2021/10/26/MySQL/%E5%9C%A8SQLBolt%E5%AD%A6%E4%B9%A0%E6%95%B0%E6%8D%AE%E5%BA%93/19.%E6%80%BB%E7%BB%93/%E5%9C%A8sqlbolt%E4%B8%8A%E5%AD%A6%E4%B9%A0SQL/"><i class="fa  fa-book"></i> MySQL重要指令学习-all</a>
+            <a class="list-group-item" href="/2021/10/26/MySQL/%E5%9C%A8SQLBolt%E5%AD%A6%E4%B9%A0%E6%95%B0%E6%8D%AE%E5%BA%93/19.%E6%80%BB%E7%BB%93/%E5%9C%A8sqlbolt%E4%B8%8A%E5%AD%A6%E4%B9%A0SQL/"><i class="fa  fa-book"></i> MySQL重要指令学习-ALL</a>
             
           
         
