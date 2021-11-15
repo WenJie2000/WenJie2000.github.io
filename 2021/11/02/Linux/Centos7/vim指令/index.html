@@ -1,0 +1,678 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+  <!-- 元数据 -->
+  <meta charset="utf-8">
+  <link rel="icon" href="/images/logo.png">
+  <title>vim常用指令 | 张文杰的个人博客</title>
+  <meta name="author" content="Wen" />
+  <meta http-equiv="Cache-Control" content="no-transform" />
+  <meta http-equiv="Cache-Control" content="no-siteapp" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="robots" content="index,follow" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+  <meta name="format-detection" content="telphone=no, email=no" />
+  
+    <meta name="keywords" content="Centos7, Linux, 大数据" />
+  
+  <meta name="description" content="第一讲 光标在屏幕文本中的移动既可以用箭头键，也可以使用 hjkl 字母键。h (左移)    j (下行)       k (上行)        l (右移)  欲进入 Vim 编辑器(从命令行提示符)，请输入：vim 文件名 &lt;回车&gt;  欲退出 Vim 编辑器，请输入    :q!   &lt;回车&gt; 放弃所有改动。或者输入    :wq   &lt;回车&gt; 保存改动">
+<meta property="og:type" content="article">
+<meta property="og:title" content="vim常用指令">
+<meta property="og:url" content="http://example.com/2021/11/02/Linux/Centos7/vim%E6%8C%87%E4%BB%A4/index.html">
+<meta property="og:site_name" content="张文杰的个人博客">
+<meta property="og:description" content="第一讲 光标在屏幕文本中的移动既可以用箭头键，也可以使用 hjkl 字母键。h (左移)    j (下行)       k (上行)        l (右移)  欲进入 Vim 编辑器(从命令行提示符)，请输入：vim 文件名 &lt;回车&gt;  欲退出 Vim 编辑器，请输入    :q!   &lt;回车&gt; 放弃所有改动。或者输入    :wq   &lt;回车&gt; 保存改动">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/2021/11/02/Linux/Centos7/vim%E6%8C%87%E4%BB%A4/https:/gimg2.baidu.com/image_search/src=http%3A%2F%2Fbianhb.com%2Fwp-content%2Fuploads%2Ffrc-56a4a6bc9e6078b1795b2a3f2ec8911c.jpeg&refer=http%3A%2F%2Fbianhb.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1638415516&t=df85279db5863804e0a5a3f62997a29e">
+<meta property="article:published_time" content="2021-11-02T03:03:01.841Z">
+<meta property="article:modified_time" content="2021-11-02T03:37:03.044Z">
+<meta property="article:author" content="Wen">
+<meta property="article:tag" content="Centos7">
+<meta property="article:tag" content="Linux">
+<meta property="article:tag" content="大数据">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/2021/11/02/Linux/Centos7/vim%E6%8C%87%E4%BB%A4/https:/gimg2.baidu.com/image_search/src=http%3A%2F%2Fbianhb.com%2Fwp-content%2Fuploads%2Ffrc-56a4a6bc9e6078b1795b2a3f2ec8911c.jpeg&refer=http%3A%2F%2Fbianhb.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1638415516&t=df85279db5863804e0a5a3f62997a29e">
+<meta name="twitter:site" content="@null">
+  
+  <!-- 站点验证相关 -->
+  
+    
+    
+    
+  
+  <!-- 样式表文件 -->
+  <link rel="stylesheet" id="kratos-css" href="/css/kratosr.min.css" type="text/css" media="all">
+  
+    <link rel="stylesheet" id="highlight-css" href="/css/highlight/night.min.css" type="text/css" media="all">
+  
+  
+  <link rel="stylesheet" id="fontawe-css" href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" type="text/css" media="all">
+  <link rel="stylesheet" id="nprogress-css" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" type="text/css" media="all">
+  
+  
+  
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css">
+  
+  
+    <link rel="stylesheet" id="darkmode-css" href="/css/kr-dark.min.css" type="text/css" media="all">
+  
+  <!-- 不得不预先加载的一些JS文件 -->
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
+  
+    <script src="https://cdn.jsdelivr.net/npm/qrcode_js@1.0.0/qrcode.min.js"></script>
+  
+  
+  <style>
+    
+      .kratos-cover.kratos-cover-2 {
+        background-image: url('/images/banner2.jpg');
+      }
+    
+    
+      @media(min-width:768px) {
+        body.custom-background {
+          background-image: url('/images/bg2.webp');
+        }
+      }
+    
+  </style>
+  
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+
+    <body class="custom-background">
+        <div id="kratos-wrapper">
+    <div id="kratos-page">
+        <div id="kratos-header">
+            <header id="kratos-desktop-topnav" class="kratos-topnav">
+                <div class="container">
+                    <div class="nav-header">
+                        <nav id="kratos-menu-wrap">
+                            <ul id="kratos-primary-menu" class="sf-menu">
+                                
+                                    
+                                        <li><a href="/"><i class="fa fa-home"></i>首页</a></li>
+                                    
+                                
+                                    
+                                        <li><a href="/archives/"><i class="fa fa-file"></i>档案馆</a></li>
+                                    
+                                
+                                    
+                                        <li><a href="/friends/"><i class="fa fa-paw"></i>好伙伴</a></li>
+                                    
+                                
+                                    
+                                        <li>
+                                            <a><i class="fa fa-link"></i>链接</a>
+                                            <ul class="sub-menu">
+                                                
+                                                    
+                                                
+                                                    
+                                                        <li><a target="_blank" rel="noopener" href="https://home.cnblogs.com/u/2592433">作者博客</a></li>
+                                                    
+                                                
+                                                    
+                                                        <li><a target="_blank" rel="noopener" href="https://github.com/WenJie2000">项目链接</a></li>
+                                                    
+                                                
+                                            </ul>
+                                        </li>
+                                    
+                                
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+            </header>
+            <header id="kratos-mobile-topnav" class="kratos-topnav">
+                <div class="container">
+                    <div class="color-logo"><a href="/">张文杰的个人博客</a></div>
+                    <div class="nav-toggle">
+                        <a class="kratos-nav-toggle js-kratos-nav-toggle">
+                            <i></i>
+                        </a>
+                    </div>
+                </div>
+            </header>
+        </div>
+        <div class="kratos-start kratos-hero-2">
+            <!-- <div class="kratos-overlay"></div> -->
+            <div class="kratos-cover kratos-cover-2 text-center">
+                <div class="desc desc2 animate-box">
+                    <a href="/">
+                        <h2>张文杰的个人博客</h2> <br />
+                        <span>read, study and learn about everything imporant in your life.</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div id="kratos-blog-post">
+            <div class="container">
+                <div id="main" class="row">
+                    
+
+        
+
+            <section class="col-md-8">
+
+        
+
+            <article>
+    <div class="kratos-hentry kratos-post-inner clearfix">
+        <header class="kratos-entry-header">
+            
+                <h1 class="kratos-entry-title text-center">vim常用指令</h1>
+            
+            
+            <ul class="kratos-post-meta text-center">
+                <li><i class="fa fa-calendar"></i> 2021-11-02</li>
+                <li><i class="fa fa-user"></i> 作者 Wen</li>
+                <li>
+                    <i class="fa fa-edit"></i> 
+                    
+                    
+                        ~2.66K
+                    
+                    字
+                </li>
+                
+                    <li id="/2021/11/02/Linux/Centos7/vim%E6%8C%87%E4%BB%A4/" class="leancloud_visitors" data-flag-title="vim常用指令">
+                        <i class="fa fa-eye"></i>
+                        <span class="leancloud-visitors-count"> </span> 次阅读
+                    </li>
+                    
+                
+            </ul>
+        </header>
+        <div class="kratos-post-content">
+            <div id="expire-alert" class="alert alert-warning hidden" role="alert">
+                本文最后编辑于 <time datetime="1635824223044"></time> 前，其中的内容可能需要更新。
+            </div>
+            
+                <div class="kratos-post-inner-toc">
+                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AC%AC%E4%B8%80%E8%AE%B2"><span class="toc-number">1.</span> <span class="toc-text">第一讲</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AC%AC%E4%BA%8C%E8%AE%B2"><span class="toc-number">2.</span> <span class="toc-text">第二讲</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AC%AC%E4%B8%89%E8%AE%B2"><span class="toc-number">3.</span> <span class="toc-text">第三讲</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AC%AC%E5%9B%9B%E8%AE%B2"><span class="toc-number">4.</span> <span class="toc-text">第四讲</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AC%AC%E4%BA%94%E8%AE%B2"><span class="toc-number">5.</span> <span class="toc-text">第五讲</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AC%AC%E5%85%AD%E8%AE%B2"><span class="toc-number">6.</span> <span class="toc-text">第六讲</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AC%AC%E4%B8%83%E8%AE%B2"><span class="toc-number">7.</span> <span class="toc-text">第七讲</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BB%83%E4%B9%A0%E9%A2%98"><span class="toc-number">8.</span> <span class="toc-text">练习题</span></a></li></ol>
+                </div>
+            
+            <hr />
+            <h3 id="第一讲"><a href="#第一讲" class="headerlink" title="第一讲"></a>第一讲</h3><ol>
+<li><p>光标在屏幕文本中的移动既可以用箭头键，也可以使用 hjkl 字母键。<br>h (左移)    j (下行)       k (上行)        l (右移)</p>
+</li>
+<li><p>欲进入 Vim 编辑器(从命令行提示符)，请输入：vim 文件名 &lt;回车&gt;</p>
+</li>
+<li><p>欲退出 Vim 编辑器，请输入 <ESC>   :q!   &lt;回车&gt; 放弃所有改动。或者输入 <ESC>   :wq   &lt;回车&gt; 保存改动。</ESC></ESC></p>
+</li>
+<li><p>在正常模式下删除光标所在位置的字符，请按： x</p>
+</li>
+<li><p>欲插入或添加文本，请输入：</p>
+<p>i   输入欲插入文本   <ESC>        在光标前插入文本<br>A   输入欲添加文本   <ESC>             在一行后添加文本</ESC></ESC></p>
+</li>
+</ol>
+<p>特别提示：按下 <ESC> 键会带您回到正常模式或者撤消一个不想输入或部分完整的命令。</ESC></p>
+<h3 id="第二讲"><a href="#第二讲" class="headerlink" title="第二讲"></a>第二讲</h3><ol>
+<li><p>欲从当前光标删除至下一个单词，请输入：dw</p>
+</li>
+<li><p>欲从当前光标删除至当前行末尾，请输入：d$</p>
+</li>
+<li><p>欲删除整行，请输入：dd</p>
+</li>
+<li><p>欲重复一个动作，请在它前面加上一个数字：2w</p>
+</li>
+<li><p>在正常模式下修改命令的格式是：<br>   operator   [number]   motion</p>
+<p>其中：<br>  operator - 操作符，代表要做的事情，比如 d 代表删除<br>  [number] - 可以附加的数字，代表动作重复的次数<br>  motion   - 动作，代表在所操作的文本上的移动，例如 w 代表单词(word)，$ 代表行末等等。</p>
+</li>
+<li><p>欲移动光标到行首，请按数字0键：0</p>
+</li>
+<li><p>欲撤消以前的操作，请输入：u (小写的u)<br>欲撤消在一行中所做的改动，请输入：U (大写的U)<br>欲撤消以前的撤消命令，恢复以前的操作结果，请输入：CTRL-R</p>
+</li>
+</ol>
+<h3 id="第三讲"><a href="#第三讲" class="headerlink" title="第三讲"></a>第三讲</h3><ol>
+<li><p>要重新置入已经删除的文本内容，请按小写字母 p 键。该操作可以将已删除的文本内容置于光标之后。如果最后一次删除的是一个整行，那么该行将置于当前光标所在行的下一行。</p>
+</li>
+<li><p>要替换光标所在位置的字符，请输入小写的 r 和要替换掉原位置字符的新字符即可。</p>
+</li>
+<li><p>更改类命令允许您改变从当前光标所在位置直到动作指示的位置中间的文本。比如输入 ce 可以替换当前光标到单词的末尾的内容；输入 c$ 可以替换当前光标到行末的内容。</p>
+</li>
+<li><p>更改类命令的格式是：<br>c   [number]   motion</p>
+</li>
+</ol>
+<h3 id="第四讲"><a href="#第四讲" class="headerlink" title="第四讲"></a>第四讲</h3><ol>
+<li><p>CTRL-G 用于显示当前光标所在位置和文件状态信息。G 用于将光标跳转至文件最后一行。先敲入一个行号然后输入大写 G 则是将光标移动至该行号代表的行。gg 用于将光标跳转至文件第一行。</p>
+</li>
+<li><p>输入 / 然后紧随一个字符串是在当前所编辑的文档中正向查找该字符串。<br>输入 ? 然后紧随一个字符串则是在当前所编辑的文档中反向查找该字符串。<br>完成一次查找之后按 n 键是重复上一次的命令，可在同一方向上查<br>找下一个匹配字符串所在；或者按大写 N 向相反方向查找下一匹配字符串所在。<br>CTRL-O 带您跳转回较旧的位置，CTRL-I 则带您到较新的位置。</p>
+</li>
+<li><p>如果光标当前位置是括号(、)、[、]、{、}，按 % 会将光标移动到配对的括号上。</p>
+</li>
+<li><p>在一行内替换头一个字符串 old 为新的字符串 new，请输入  :s/old/new<br>在一行内替换所有的字符串 old 为新的字符串 new，请输入  :s/old/new/g<br>在两行内替换所有的字符串 old 为新的字符串 new，请输入  :#,#s/old/new/g<br>在文件内替换所有的字符串 old 为新的字符串 new，请输入  :%s/old/new/g<br>进行全文替换时询问用户确认每个替换需添加 c 标志        :%s/old/new/gc</p>
+</li>
+</ol>
+<h3 id="第五讲"><a href="#第五讲" class="headerlink" title="第五讲"></a>第五讲</h3><ol>
+<li><p>:!command 用于执行一个外部命令 command。</p>
+<p>请看一些实际例子：<br>(MS-DOS)      (Unix)<br> :!dir           :!ls           -  用于显示当前目录的内容。<br> :!del FILENAME   :!rm FILENAME   -  用于删除名为 FILENAME 的文件。</p>
+</li>
+<li><p>:w FILENAME  可将当前 VIM 中正在编辑的文件保存到名为 FILENAME 的文件中。</p>
+</li>
+<li><p>v motion :w FILENAME 可将当前编辑文件中可视模式下选中的内容保存到文件FILENAME 中。</p>
+</li>
+<li><p>:r FILENAME 可提取磁盘文件 FILENAME 并将其插入到当前文件的光标位置后面。</p>
+</li>
+<li><p>:r !dir 可以读取 dir 命令的输出并将其放置到当前文件的光标位置后面。</p>
+</li>
+</ol>
+<h3 id="第六讲"><a href="#第六讲" class="headerlink" title="第六讲"></a>第六讲</h3><ol>
+<li><p>输入小写的 o 可以在光标下方打开新的一行并进入插入模式。<br>输入大写的 O 可以在光标上方打开新的一行。</p>
+</li>
+<li><p>输入小写的 a 可以在光标所在位置之后插入文本。<br>输入大写的 A 可以在光标所在行的行末之后插入文本。</p>
+</li>
+<li><p>e 命令可以使光标移动到单词末尾。</p>
+</li>
+<li><p>操作符 y 复制文本，p 粘贴先前复制的文本。</p>
+</li>
+<li><p>输入大写的 R 将进入替换模式，直至按 <ESC> 键回到正常模式。</ESC></p>
+</li>
+<li><p>输入 :set xxx 可以设置 xxx 选项。一些有用的选项如下：</p>
+<p>   ‘ic’ ‘ignorecase’    查找时忽略字母大小写<br>   ‘is’ ‘incsearch’    查找短语时显示部分匹配<br>   ‘hls’ ‘hlsearch’    高亮显示所有的匹配短语<br>选项名可以用完整版本，也可以用缩略版本。</p>
+</li>
+<li><p>在选项前加上 no 可以关闭选项：  :set noic</p>
+</li>
+</ol>
+<h3 id="第七讲"><a href="#第七讲" class="headerlink" title="第七讲"></a>第七讲</h3><ol>
+<li><p>输入 :help 或者按 <F1> 键或 <Help> 键可以打开帮助窗口。</Help></F1></p>
+</li>
+<li><p>输入 :help cmd 可以找到关于 cmd 命令的帮助。</p>
+</li>
+<li><p>输入 CTRL-W CTRL-W  可以使您在窗口之间跳转。</p>
+</li>
+<li><p>输入 :q 以关闭帮助窗口</p>
+</li>
+<li><p>您可以创建一个 vimrc 启动脚本文件用来保存您偏好的设置。</p>
+</li>
+<li><p>当输入 : 命令时，按 CTRL-D 可以查看可能的补全结果。<br>按 <TAB> 可以使用一个补全。</TAB></p>
+</li>
+</ol>
+<h3 id="练习题"><a href="#练习题" class="headerlink" title="练习题"></a>练习题</h3><p>1.输入以下内容<br>aaaaaa<br>bbbbbb<br>cccccc<br>dddddd<br>eeeeee<br>以下操作不能用键盘的上下左右键<br>2.打开行号<br>3.跳到最后一行，再跳到第2行，再跳到首行<br>4.将第一行复制放到第三行的后面<br>5.将2，3行复制放到最后<br>6.撤销第5步的操作，将2，3行复制到第4行后面<br>7.删除第2行<br>8.删除最后两行<br>9.将第1行的a替换成k<br>10.将整篇文章的c替换成y<br>11.将当前文件以文件名“XM1”另存到/tmp目录下。<br>12.统计该文件有多少行？</p>
+
+        </div>
+        
+        <footer class="kratos-entry-footer clearfix">
+            
+                <div class="post-like-donate text-center clearfix" id="post-like-donate">
+                
+                    <a class="donate" href="javascript:;"><i class="fa fa-bitcoin"></i> 打赏</a>
+                
+                
+                    <a class="share" href="javascript:;"><i class="fa fa-share-alt"></i> 分享</a>
+                    <div class="share-wrap" style="display: none;">
+    <div class="share-group">
+        <a href="javascript:;" class="share-plain qq" onclick="share('qq');" rel="nofollow">
+            <div class="icon-wrap">
+                <i class="fa fa-qq"></i>
+            </div>
+        </a>
+        <a href="javascript:;" class="share-plain qzone" onclick="share('qzone');" rel="nofollow">
+            <div class="icon-wrap">
+                <i class="fa fa-star"></i>
+            </div>
+        </a>
+        <a href="javascript:;" class="share-plain weixin pop style-plain" rel="nofollow">
+            <div class="icon-wrap">
+                <i class="fa fa-weixin"></i>
+            </div>
+            <div class="share-int">
+                <div class="qrcode" id="wechat-qr"></div>
+                <p>打开微信“扫一扫”，打开网页后点击屏幕右上角分享按钮</p>
+            </div>
+        </a>
+        <a href="javascript:;" class="share-plain weibo" onclick="share('weibo');" rel="nofollow">
+            <div class="icon-wrap">
+                <i class="fa fa-weibo"></i>
+            </div>
+        </a>
+        <a href="javascript:;" class="share-plain facebook style-plain" onclick="share('facebook');" rel="nofollow">
+            <div class="icon-wrap">
+                <i class="fa fa-facebook"></i>
+            </div>
+        </a>
+        <a href="javascript:;" class="share-plain twitter style-plain" onclick="share('twitter');" rel="nofollow">
+            <div class="icon-wrap">
+                <i class="fa fa-twitter"></i>
+            </div>
+        </a>
+    </div>
+    <script type="text/javascript">
+        $(()=>{
+            new QRCode("wechat-qr", {
+                text: "http://example.com/2021/11/02/Linux/Centos7/vim%E6%8C%87%E4%BB%A4/",
+                width: 150,
+                height: 150,
+                correctLevel : QRCode.CorrectLevel.H
+            });
+        });
+        function share(dest) {
+            const qqBase        = "https://connect.qq.com/widget/shareqq/index.html?";
+            const weiboBase     = "https://service.weibo.com/share/share.php?";
+            const qzoneBase     = "https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?";
+            const facebookBase  = "https://www.facebook.com/sharer/sharer.php?";
+            const twitterBase   = "https://twitter.com/intent/tweet?";
+            const hostUrl       = "http://example.com/2021/11/02/Linux/Centos7/vim%E6%8C%87%E4%BB%A4/";
+            const title         = "「vim常用指令」";
+            const excerpt       = `第一讲
+光标在屏幕文本中的移动既可以用箭头键，也可以使用 hjkl 字母键。h (左移)    j (下行)       k (上行)        l (右移)
+
+欲进入 Vim 编辑器(从命令行提示符)，请输入：vim 文件名 &...`;
+            let _URL;
+            switch (dest) {
+                case "qq"       : _URL = qqBase+"url="+hostUrl+"&title="+title+"&desc=&summary="+excerpt+"&site=cxpy";     break;
+                case "weibo"    : _URL = weiboBase+"url="+hostUrl+"&title="+title+excerpt;                                 break;
+                case "qzone"    : _URL = qzoneBase+"url="+hostUrl+"&title="+title+"&desc=&summary="+excerpt+"&site=cxpy";  break;
+                case "facebook" : _URL = facebookBase+"u="+hostUrl;                                                        break;
+                case "twitter"  : _URL = twitterBase+"text="+title+excerpt+"&url="+hostUrl;                                break;
+            }
+            window.open(_URL);
+        };
+    </script>
+</div>
+                
+                </div>
+            
+            <div class="footer-tag clearfix">
+                <div class="pull-left">
+                <i class="fa fa-tags"></i>
+                    <a class="tag-none-link" href="/tags/Centos7/" rel="tag">Centos7</a>, <a class="tag-none-link" href="/tags/Linux/" rel="tag">Linux</a>, <a class="tag-none-link" href="/tags/%E5%A4%A7%E6%95%B0%E6%8D%AE/" rel="tag">大数据</a>
+                </div>
+                <div class="pull-date">
+                <span>最后编辑：2021-11-02</span>
+                </div>
+            </div>
+        </footer>
+    </div>
+    
+        <nav class="navigation post-navigation clearfix" role="navigation">
+            
+            <div class="nav-previous clearfix">
+                <a title=" find命令" href="/2021/10/29/Linux/Centos7/find命令详解/">&lt; 上一篇</a>
+            </div>
+            
+            
+            <div class="nav-next clearfix">
+                <a title=" (无标题)" href="/2021/11/03/JAVA/JAVA基础学习/JAVA基础学习-DAY2/">下一篇 &gt;</a>
+            </div>
+            
+        </nav>
+    
+    
+        <div id="v-comments" class="post-comments"></div>
+<script>
+    var load_comm = () => {
+        const init = () => {
+            new Valine({
+                el: '#v-comments',
+                appId: 'ov9d0pSM6tSAzbc43FJHYPzT-gzGzoHsz',
+                appKey: 'B2wMGp8TE3duzmpI04GwcOxv',
+                visitor: true,
+                enableQQ: true,
+                path: '/2021/11/02/Linux/Centos7/vim%E6%8C%87%E4%BB%A4/'
+            });
+        }
+        if (typeof Valine == 'undefined') {
+            const src = 'https://cdn.jsdelivr.net/npm/valine@1.4.14/dist/Valine.min.js';
+            $.getScript(src, init);
+        } else {
+            init();
+        }
+    };
+</script>
+<noscript>Please enable JavaScript to view the <a target="_blank" rel="noopener" href="https://valine.js.org/">comments powered by Valine.</a></noscript>
+
+    
+</article>
+
+        
+
+            </section>
+
+        
+
+                
+            
+
+<section id="kratos-widget-area" class="col-md-4 hidden-xs hidden-sm">
+    <!-- 文章和页面根据splitter来分割，没有的话就从头开始设置为sticky -->
+    
+    
+                <aside id="krw-about" class="widget widget-kratos-about clearfix">
+    <div class="photo-background"></div>
+    <div class="photo-wrapper clearfix">
+        <div class="photo-wrapper-tip text-center">
+            <img class="about-photo" src="/images/avatar2.jpg" />
+        </div>
+    </div>
+    <div class="textwidget">
+        <p class="text-center">个人记录学习的网站</p>
+    </div>
+</aside>
+            
+                    <div class="sticky-area">
+                
+                    <aside id="krw-toc" class="widget widget-kratos-toc clearfix">
+    <div class="photo-background"></div>
+    <h4 class="widget-title no-after">
+        <i class="fa fa-compass"></i>
+        文章目录
+        <span class="toc-progress-bar"></span>
+    </h4>
+    <div class="textwidget">
+        <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AC%AC%E4%B8%80%E8%AE%B2"><span class="toc-text">第一讲</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AC%AC%E4%BA%8C%E8%AE%B2"><span class="toc-text">第二讲</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AC%AC%E4%B8%89%E8%AE%B2"><span class="toc-text">第三讲</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AC%AC%E5%9B%9B%E8%AE%B2"><span class="toc-text">第四讲</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AC%AC%E4%BA%94%E8%AE%B2"><span class="toc-text">第五讲</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AC%AC%E5%85%AD%E8%AE%B2"><span class="toc-text">第六讲</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AC%AC%E4%B8%83%E8%AE%B2"><span class="toc-text">第七讲</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BB%83%E4%B9%A0%E9%A2%98"><span class="toc-text">练习题</span></a></li></ol>
+    </div>
+</aside>
+                
+                
+  <aside id="krw-categories" class="widget widget-kratos-categories clearfix">
+    <h4 class="widget-title"><i class="fa fa-folder"></i>分类目录</h4>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Hadoop/">Hadoop</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/JAVA/">JAVA</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/MySQL/">MySQL</a><span class="category-list-count">20</span></li></ul>
+  </aside>
+
+
+            
+                
+  <aside id="krw-tags" class="widget widget-kratos-tags clearfix">
+    <h4 class="widget-title"><i class="fa fa-tags"></i>标签聚合</h4>
+      <div class="tag-clouds">
+        <a href="/tags/Centos7/" style="font-size: 0.7em;">Centos7</a> <a href="/tags/Hadoop/" style="font-size: 0.6em;">Hadoop</a> <a href="/tags/JAVA/" style="font-size: 0.65em;">JAVA</a> <a href="/tags/Linux/" style="font-size: 0.7em;">Linux</a> <a href="/tags/MySQL/" style="font-size: 0.75em;">MySQL</a> <a href="/tags/docker/" style="font-size: 0.6em;">docker</a> <a href="/tags/hive/" style="font-size: 0.6em;">hive</a> <a href="/tags/sqoop/" style="font-size: 0.6em;">sqoop</a> <a href="/tags/%E5%A4%A7%E6%95%B0%E6%8D%AE/" style="font-size: 0.8em;">大数据</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" style="font-size: 0.75em;">数据库</a>
+      </div>
+  </aside>
+
+            
+                
+  <aside id="krw-posts" class="widget widget-kratos-posts">
+  <h4 class="widget-title"><i class="fa fa-file"></i>最新文章</h4>
+  <div class="tab-content">
+      <ul class="list-group">
+        
+        
+          
+          
+        
+          
+          
+        
+          
+          
+            <a class="list-group-item" href="/2021/11/02/Linux/Centos7/vim%E6%8C%87%E4%BB%A4/"><i class="fa  fa-book"></i> vim常用指令</a>
+            
+          
+        
+          
+          
+            <a class="list-group-item" href="/2021/10/29/Linux/Centos7/find%E5%91%BD%E4%BB%A4%E8%AF%A6%E8%A7%A3/"><i class="fa  fa-book"></i> find命令</a>
+            
+          
+        
+          
+          
+            <a class="list-group-item" href="/2021/10/29/Linux/Centos7/CENTOS7%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AE/"><i class="fa  fa-book"></i> Centos7安装配置</a>
+            
+          
+        
+          
+          
+            <a class="list-group-item" href="/2021/10/27/MySQL/SQL%E7%BB%8F%E5%85%B850%E9%A2%98&%E7%AD%94%E6%A1%88/SQL%E7%BB%8F%E5%85%B850%E9%A2%98&%E7%AD%94%E6%A1%88/"><i class="fa  fa-book"></i> SQL经典50题</a>
+            
+          
+        
+          
+          
+            <a class="list-group-item" href="/2021/06/28/JAVA/JAVA%E5%9F%BA%E7%A1%80%E5%AD%A6%E4%B9%A0/JAVA%E5%9F%BA%E7%A1%80%E5%AD%A6%E4%B9%A0-DAY1/"><i class="fa  fa-book"></i> JAVA基础学习-DAY1</a>
+            
+          
+        
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+      </ul>
+  </div>
+  </aside>
+
+            
+    </div>
+</section>
+        
+        </div>
+    </div>
+</div>
+<footer>
+    <div id="footer"  >
+        <div class="kr-tool text-center">
+            <div class="tool">
+                
+                    <div class="box search-box">
+                        <a href="/search/">
+                            <span class="fa fa-search"></span>
+                        </a>
+                    </div>
+                
+                
+                    <div class="box theme-box" id="darkmode-switch">
+                        <span class="fa fa-adjust"></span>
+                    </div>
+                
+                
+            </div>
+            <div class="box gotop-box">
+                <span class="fa fa-chevron-up"></span>
+            </div>
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 col-md-offset-3 footer-list text-center">
+                    <ul class="kratos-social-icons">
+                        
+                        <li><a href="mailto:438626154@qq.com"><i class="fa fa-envelope"></i></a></li>
+                        
+                        
+                        
+                        
+                        
+                        <li><a target="_blank" rel="nofollow" href="https://github.com/WenJie2000"><i class="fa fa-github"></i></a></li>
+                        
+                    </ul>
+                    <ul class="kratos-copyright">
+                        <div>
+                            <li>&copy; 2021 张文杰的个人博客 版权所有.</li>
+                            <li>本站已运行<span id="span_dt">Loading...</span></li>
+                        </div>
+                        
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+</div>
+</div>
+
+        <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@3.3.4/dist/js/bootstrap.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.js"></script>
+<script>
+    if (!window.kr) {
+        window.kr = {};
+    }
+    window.kr.notMobile = (!(navigator.userAgent.match(/(phone|pad|pod|iPhone|iPod|ios|iPad|Android|Mobile|BlackBerry|IEMobile|MQQBrowser|JUC|Fennec|wOSBrowser|BrowserNG|WebOS|Symbian|Windows Phone)/i)));
+    window.kr.siteRoot = "/";
+</script>
+
+    <div>
+        <canvas id="snow"></canvas>
+        <script async type="text/javascript" src="/js/snow.min.js"></script>
+    </div>
+
+
+    <script async src="/js/candy.min.js"></script>
+
+
+
+
+    <script defer src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+
+<script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js"></script>
+<script defer src="/js/kratosr.min.js"></script>
+<script defer src="/js/pjax.min.js"></script>
+
+    <script defer src="https://cdn.jsdelivr.net/npm/layui-src@2.5.5/dist/layui.all.js"></script>
+
+
+    <script defer src="/js/kr-dark.min.js"></script>
+
+
+
+<!-- Extra support for third-party plguins  -->
+
+
+    </body>
+</html>

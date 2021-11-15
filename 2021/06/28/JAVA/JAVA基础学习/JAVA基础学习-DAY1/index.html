@@ -1,0 +1,638 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+  <!-- 元数据 -->
+  <meta charset="utf-8">
+  <link rel="icon" href="/images/logo.png">
+  <title>JAVA基础学习-DAY1 | 张文杰的个人博客</title>
+  <meta name="author" content="Wen" />
+  <meta http-equiv="Cache-Control" content="no-transform" />
+  <meta http-equiv="Cache-Control" content="no-siteapp" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="robots" content="index,follow" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+  <meta name="format-detection" content="telphone=no, email=no" />
+  
+    <meta name="keywords" content="JAVA" />
+  
+  <meta name="description" content="JAVA学习-DAY1此文本为个人学习JAVA中的笔记。我学习时是看的尚硅谷的视频，个人认为他讲的很细。视频网址为https:&#x2F;&#x2F;www.bilibili.com&#x2F;video&#x2F;BV1Kb411W75N。本人有一定的其他语言基础所以笔记从P20开始。如果有其他语言基础建议从P17开始看。 DAY1JAVA基础知识图谱 JAVA历史1991年 Green项目，开发语言最初命名为Oak (橡树)1994">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JAVA基础学习-DAY1">
+<meta property="og:url" content="http://example.com/2021/06/28/JAVA/JAVA%E5%9F%BA%E7%A1%80%E5%AD%A6%E4%B9%A0/JAVA%E5%9F%BA%E7%A1%80%E5%AD%A6%E4%B9%A0-DAY1/index.html">
+<meta property="og:site_name" content="张文杰的个人博客">
+<meta property="og:description" content="JAVA学习-DAY1此文本为个人学习JAVA中的笔记。我学习时是看的尚硅谷的视频，个人认为他讲的很细。视频网址为https:&#x2F;&#x2F;www.bilibili.com&#x2F;video&#x2F;BV1Kb411W75N。本人有一定的其他语言基础所以笔记从P20开始。如果有其他语言基础建议从P17开始看。 DAY1JAVA基础知识图谱 JAVA历史1991年 Green项目，开发语言最初命名为Oak (橡树)1994">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/2021/06/28/JAVA/JAVA%E5%9F%BA%E7%A1%80%E5%AD%A6%E4%B9%A0/JAVA%E5%9F%BA%E7%A1%80%E5%AD%A6%E4%B9%A0-DAY1/https:/gimg2.baidu.com/image_search/src=http%3A%2F%2Fwww.shuangzishu.com%2Fattachment%2Finformation%2F202005%2F15892060436q1hq.jpg&refer=http%3A%2F%2Fwww.shuangzishu.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1638416677&t=5c8d5526f94b293863f381359c2167a4">
+<meta property="article:published_time" content="2021-06-27T16:00:00.000Z">
+<meta property="article:modified_time" content="2021-11-15T14:44:09.025Z">
+<meta property="article:author" content="Wen">
+<meta property="article:tag" content="JAVA">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/2021/06/28/JAVA/JAVA%E5%9F%BA%E7%A1%80%E5%AD%A6%E4%B9%A0/JAVA%E5%9F%BA%E7%A1%80%E5%AD%A6%E4%B9%A0-DAY1/https:/gimg2.baidu.com/image_search/src=http%3A%2F%2Fwww.shuangzishu.com%2Fattachment%2Finformation%2F202005%2F15892060436q1hq.jpg&refer=http%3A%2F%2Fwww.shuangzishu.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1638416677&t=5c8d5526f94b293863f381359c2167a4">
+<meta name="twitter:site" content="@null">
+  
+  <!-- 站点验证相关 -->
+  
+    
+    
+    
+  
+  <!-- 样式表文件 -->
+  <link rel="stylesheet" id="kratos-css" href="/css/kratosr.min.css" type="text/css" media="all">
+  
+    <link rel="stylesheet" id="highlight-css" href="/css/highlight/night.min.css" type="text/css" media="all">
+  
+  
+  <link rel="stylesheet" id="fontawe-css" href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" type="text/css" media="all">
+  <link rel="stylesheet" id="nprogress-css" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" type="text/css" media="all">
+  
+  
+  
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css">
+  
+  
+    <link rel="stylesheet" id="darkmode-css" href="/css/kr-dark.min.css" type="text/css" media="all">
+  
+  <!-- 不得不预先加载的一些JS文件 -->
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
+  
+    <script src="https://cdn.jsdelivr.net/npm/qrcode_js@1.0.0/qrcode.min.js"></script>
+  
+  
+  <style>
+    
+      .kratos-cover.kratos-cover-2 {
+        background-image: url('/images/banner2.jpg');
+      }
+    
+    
+      @media(min-width:768px) {
+        body.custom-background {
+          background-image: url('/images/bg2.webp');
+        }
+      }
+    
+  </style>
+  
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+
+    <body class="custom-background">
+        <div id="kratos-wrapper">
+    <div id="kratos-page">
+        <div id="kratos-header">
+            <header id="kratos-desktop-topnav" class="kratos-topnav">
+                <div class="container">
+                    <div class="nav-header">
+                        <nav id="kratos-menu-wrap">
+                            <ul id="kratos-primary-menu" class="sf-menu">
+                                
+                                    
+                                        <li><a href="/"><i class="fa fa-home"></i>首页</a></li>
+                                    
+                                
+                                    
+                                        <li><a href="/archives/"><i class="fa fa-file"></i>档案馆</a></li>
+                                    
+                                
+                                    
+                                        <li><a href="/friends/"><i class="fa fa-paw"></i>好伙伴</a></li>
+                                    
+                                
+                                    
+                                        <li>
+                                            <a><i class="fa fa-link"></i>链接</a>
+                                            <ul class="sub-menu">
+                                                
+                                                    
+                                                
+                                                    
+                                                        <li><a target="_blank" rel="noopener" href="https://home.cnblogs.com/u/2592433">作者博客</a></li>
+                                                    
+                                                
+                                                    
+                                                        <li><a target="_blank" rel="noopener" href="https://github.com/WenJie2000">项目链接</a></li>
+                                                    
+                                                
+                                            </ul>
+                                        </li>
+                                    
+                                
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+            </header>
+            <header id="kratos-mobile-topnav" class="kratos-topnav">
+                <div class="container">
+                    <div class="color-logo"><a href="/">张文杰的个人博客</a></div>
+                    <div class="nav-toggle">
+                        <a class="kratos-nav-toggle js-kratos-nav-toggle">
+                            <i></i>
+                        </a>
+                    </div>
+                </div>
+            </header>
+        </div>
+        <div class="kratos-start kratos-hero-2">
+            <!-- <div class="kratos-overlay"></div> -->
+            <div class="kratos-cover kratos-cover-2 text-center">
+                <div class="desc desc2 animate-box">
+                    <a href="/">
+                        <h2>张文杰的个人博客</h2> <br />
+                        <span>read, study and learn about everything imporant in your life.</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div id="kratos-blog-post">
+            <div class="container">
+                <div id="main" class="row">
+                    
+
+        
+
+            <section class="col-md-8">
+
+        
+
+            <article>
+    <div class="kratos-hentry kratos-post-inner clearfix">
+        <header class="kratos-entry-header">
+            
+                <h1 class="kratos-entry-title text-center">JAVA基础学习-DAY1</h1>
+            
+            
+            <ul class="kratos-post-meta text-center">
+                <li><i class="fa fa-calendar"></i> 2021-06-28</li>
+                <li><i class="fa fa-user"></i> 作者 Wen</li>
+                <li>
+                    <i class="fa fa-edit"></i> 
+                    
+                    
+                        ~2.26K
+                    
+                    字
+                </li>
+                
+                    <li id="/2021/06/28/JAVA/JAVA%E5%9F%BA%E7%A1%80%E5%AD%A6%E4%B9%A0/JAVA%E5%9F%BA%E7%A1%80%E5%AD%A6%E4%B9%A0-DAY1/" class="leancloud_visitors" data-flag-title="JAVA基础学习-DAY1">
+                        <i class="fa fa-eye"></i>
+                        <span class="leancloud-visitors-count"> </span> 次阅读
+                    </li>
+                    
+                
+            </ul>
+        </header>
+        <div class="kratos-post-content">
+            <div id="expire-alert" class="alert alert-warning hidden" role="alert">
+                本文最后编辑于 <time datetime="1636987449025"></time> 前，其中的内容可能需要更新。
+            </div>
+            
+                <div class="kratos-post-inner-toc">
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#JAVA%E5%AD%A6%E4%B9%A0-DAY1"><span class="toc-number">1.</span> <span class="toc-text">JAVA学习-DAY1</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#DAY1"><span class="toc-number">1.1.</span> <span class="toc-text">DAY1</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#JAVA%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86%E5%9B%BE%E8%B0%B1"><span class="toc-number">1.1.1.</span> <span class="toc-text">JAVA基础知识图谱</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#JAVA%E5%8E%86%E5%8F%B2"><span class="toc-number">1.1.2.</span> <span class="toc-text">JAVA历史</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Java%E7%9A%84%E5%BA%94%E7%94%A8%E9%A2%86%E5%9F%9F"><span class="toc-number">1.1.3.</span> <span class="toc-text">Java的应用领域</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Java%E8%AF%AD%E8%A8%80%E7%9A%84%E7%89%B9%E7%82%B9"><span class="toc-number">1.1.4.</span> <span class="toc-text">Java语言的特点</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A0%B8%E5%BF%83%E6%9C%BA%E5%88%B6%E2%80%94Java%E8%99%9A%E6%8B%9F%E6%9C%BA"><span class="toc-number">1.1.5.</span> <span class="toc-text">核心机制—Java虚拟机</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A0%B8%E5%BF%83%E6%9C%BA%E5%88%B6%E2%80%94%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6"><span class="toc-number">1.1.6.</span> <span class="toc-text">核心机制—垃圾回收</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#P35-%E6%B3%A8%E9%87%8A"><span class="toc-number">1.1.7.</span> <span class="toc-text">P35 注释</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#p36-%E6%96%87%E6%A1%A3%E6%B3%A8%E9%87%8A"><span class="toc-number">1.1.8.</span> <span class="toc-text">p36 文档注释</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#P39-JAVA-API%E6%96%87%E6%A1%A3"><span class="toc-number">1.1.9.</span> <span class="toc-text">P39 JAVA API文档</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#P40-%E7%AC%AC%E4%B8%80%E4%B8%AAJAVA%E7%A8%8B%E5%BA%8F%E7%9A%84%E6%80%BB%E7%BB%93"><span class="toc-number">1.1.10.</span> <span class="toc-text">P40 第一个JAVA程序的总结</span></a></li></ol></li></ol></li></ol>
+                </div>
+            
+            <hr />
+            <h1 id="JAVA学习-DAY1"><a href="#JAVA学习-DAY1" class="headerlink" title="JAVA学习-DAY1"></a>JAVA学习-DAY1</h1><p>此文本为个人学习JAVA中的笔记。我学习时是看的尚硅谷的视频，个人认为他讲的很细。视频网址为<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1Kb411W75N">https://www.bilibili.com/video/BV1Kb411W75N</a>。本人有一定的其他语言基础所以笔记从P20开始。如果有其他语言基础建议从<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1Kb411W75N?p=17">P17</a>开始看。</p>
+<h2 id="DAY1"><a href="#DAY1" class="headerlink" title="DAY1"></a>DAY1</h2><h3 id="JAVA基础知识图谱"><a href="#JAVA基础知识图谱" class="headerlink" title="JAVA基础知识图谱"></a>JAVA基础知识图谱</h3><p><img src="/2021/06/28/JAVA/JAVA%E5%9F%BA%E7%A1%80%E5%AD%A6%E4%B9%A0/JAVA%E5%9F%BA%E7%A1%80%E5%AD%A6%E4%B9%A0-DAY1/image-20211028005851078.png"></p>
+<h3 id="JAVA历史"><a href="#JAVA历史" class="headerlink" title="JAVA历史"></a>JAVA历史</h3><p>1991年 Green项目，开发语言最初命名为Oak (橡树)<br>1994年，开发组意识到Oak 非常适合于互联网<br>1996年，发布JDK 1.0，约8.3万个网页应用Java技术来制作<br>1997年，发布JDK 1.1，JavaOne会议召开，创当时全球同类会议规模之最<br>1998年，发布JDK 1.2，同年发布企业平台J2EE<br>1999年，Java分成J2SE、J2EE和J2ME，JSP/Servlet技术诞生<br>2004年，<strong>发布里程碑式版本：JDK 1.5，为突出此版本的重要性，更名为JDK 5.0</strong><br>2005年，J2SE -&gt; JavaSE，J2EE -&gt; JavaEE，J2ME -&gt; JavaME<br>2009年，Oracle公司收购SUN，交易价格74亿美元<br>2011年，发布JDK 7.0<br>2014年，<strong>发布JDK 8.0，是继JDK 5.0以来变化最大的版本</strong><br>2017年，发布JDK 9.0，最大限度实现模块化<br>2018年3月，<u>发布JDK 10.0，版本号也称为18.3</u><br>2018年9月，发布JDK 11.0，版本号也称为18.9</p>
+<p>课程主要讲JDK8.0。</p>
+<h3 id="Java的应用领域"><a href="#Java的应用领域" class="headerlink" title="Java的应用领域"></a>Java的应用领域</h3><p>• <strong>企业级应用</strong>：JAVA后台开发。</p>
+<p>• <strong>Android平台应用</strong>：Android应用程序使用Java语言编写。Android开发水平的高低</p>
+<p>很大程度上取决于Java语言核心能力是否扎实。 </p>
+<p>• <strong>大数据平台开发</strong>：各类框架有Hadoop，spark，storm，flink等，就这类技术生态</p>
+<p>圈来讲，还有各种中间件如flume，kafka，sqoop等等 ，这些框架以及工具大多数</p>
+<p>是用Java编写而成，但提供诸如Java，scala，Python，R等各种语言API供编程。</p>
+<p>• 移动领域应用：主要表现在消费和嵌入式领域，是指在各种小型设备上的应用，包括手</p>
+<p>机、PDA、机顶盒、汽车通信设备等。</p>
+<h3 id="Java语言的特点"><a href="#Java语言的特点" class="headerlink" title="Java语言的特点"></a>Java语言的特点</h3><p>特点一：<strong>面向对象</strong></p>
+<p>​    两个基本概念：类、对象</p>
+<p>​    三大特性：封装、继承、多态</p>
+<p>特点二：<strong>健壮性</strong></p>
+<p>​    吸收了C/C++语言的优点，但去掉了其影响程序健壮性的部分（如指针、内存的申请与</p>
+<p>释放等），提供了一个相对安全的内存管理和访问机制</p>
+<p>特点三：<strong>跨平台性</strong></p>
+<p>​    跨平台性：通过Java语言编写的应用程序在不同的系统平台上都可以运行。<strong>“Write</strong></p>
+<p><strong>once , Run Anywhere”</strong></p>
+<p>​    原理：只要在需要运行 java 应用程序的操作系统上，先安装一个Java虚拟机 (JVM Java </p>
+<p>Virtual Machine) 即可。由JVM来负责Java程序在该系统中的运行。</p>
+<h3 id="核心机制—Java虚拟机"><a href="#核心机制—Java虚拟机" class="headerlink" title="核心机制—Java虚拟机"></a>核心机制—Java虚拟机</h3><p>​    <strong>JVM</strong>是一个虚拟的计算机，具有指令集并使用不同的存储区域。负责执行指**</p>
+<p><strong>令，管理数据、内存、寄存器</strong>。</p>
+<h3 id="核心机制—垃圾回收"><a href="#核心机制—垃圾回收" class="headerlink" title="核心机制—垃圾回收"></a>核心机制—垃圾回收</h3><p>​    Java 语言消除了程序员回收无用内存空间的责任：它提供一种系统级线程跟踪存储空</p>
+<p>间的分配情况。并在JVM空闲时，检查并释放那些可被释放的存储空间。</p>
+<p><strong>JDK=JRE+开发工具集</strong></p>
+<p><strong>JRE=JVM+JAVASE标准类库</strong></p>
+<p>jdk安装跳过</p>
+<p>java开发步骤</p>
+<p><img src="/2021/06/28/JAVA/JAVA%E5%9F%BA%E7%A1%80%E5%AD%A6%E4%B9%A0/JAVA%E5%9F%BA%E7%A1%80%E5%AD%A6%E4%B9%A0-DAY1/image-20211029225859298.png" alt="image-20211029225859298"> </p>
+<p>第一个java程序</p>
+<p>创建文件HelloWorld.java</p>
+<p><img src="/2021/06/28/JAVA/JAVA%E5%9F%BA%E7%A1%80%E5%AD%A6%E4%B9%A0/JAVA%E5%9F%BA%E7%A1%80%E5%AD%A6%E4%B9%A0-DAY1/image-20211029225708916.png" alt="image-20211029225708916"></p>
+<p>用记事本打开，并写入代码</p>
+<p><img src="/2021/06/28/JAVA/JAVA%E5%9F%BA%E7%A1%80%E5%AD%A6%E4%B9%A0/JAVA%E5%9F%BA%E7%A1%80%E5%AD%A6%E4%B9%A0-DAY1/image-20211029230458274.png" alt="image-20211029230458274"></p>
+<p>打开cmd 进入该文件目录。</p>
+<p>运行指令javac HelloWorld.java 生成HelloWorld.class</p>
+<p>输入指令 java HelloWorld 运行</p>
+<h3 id="P35-注释"><a href="#P35-注释" class="headerlink" title="P35 注释"></a>P35 注释</h3><p><strong>//</strong>  单行注释</p>
+<p><strong>/</strong>*  多行注释  ***/**（不能嵌套使用）</p>
+<h3 id="p36-文档注释"><a href="#p36-文档注释" class="headerlink" title="p36 文档注释"></a>p36 文档注释</h3><p>格式：/**</p>
+<p>@author    指定java程序的作者</p>
+<p>@version    指定源文件的版本</p>
+<p>*/</p>
+<p>注释内容可以被JDK提供的工具 javadoc 所解析，生成一套以网页文件形</p>
+<p>式体现的该程序的说明文档。</p>
+<p>使用指令：<code>javadoc -d 命名 -author -version 源程序名</code></p>
+<h3 id="P39-JAVA-API文档"><a href="#P39-JAVA-API文档" class="headerlink" title="P39 JAVA API文档"></a>P39 JAVA API文档</h3><p>Java语言提供了大量的基础类，因此 Oracle 也为这些基础类提供了相应的</p>
+<p>API文档，用于告诉开发者如何使用这些类，以及这些类里包含的方法。</p>
+<p>英文版下载地址 <a target="_blank" rel="noopener" href="https://www.oracle.com/cn/java/technologies/java-se-api-doc.html">https://www.oracle.com/cn/java/technologies/java-se-api-doc.html</a></p>
+<p>中文版java8 <a target="_blank" rel="noopener" href="https://www.matools.com/api/java8">https://www.matools.com/api/java8</a></p>
+<h3 id="P40-第一个JAVA程序的总结"><a href="#P40-第一个JAVA程序的总结" class="headerlink" title="P40 第一个JAVA程序的总结"></a>P40 第一个JAVA程序的总结</h3><p>1.在一个java源文件中可以声明多个class。但只能最多有一个声明为public的。</p>
+<p>​    而且要求声明为public的类名必须与源文件名相同。</p>
+<p>2.程序的入口是main()方法。格式是固定的。</p>
+<p>3.输出语句</p>
+<p>​    System.out.println();  (输出完换行)</p>
+<p>​    System.out.print(); （只输出不换行）</p>
+<p>4.每个执行语句都以分号结束</p>
+<p>5.编译过程：编译以后，会生成一个或多个字节码文件。字节码文件的文件名与java源文件中的类名相同。</p>
+
+        </div>
+        
+        <footer class="kratos-entry-footer clearfix">
+            
+                <div class="post-like-donate text-center clearfix" id="post-like-donate">
+                
+                    <a class="donate" href="javascript:;"><i class="fa fa-bitcoin"></i> 打赏</a>
+                
+                
+                    <a class="share" href="javascript:;"><i class="fa fa-share-alt"></i> 分享</a>
+                    <div class="share-wrap" style="display: none;">
+    <div class="share-group">
+        <a href="javascript:;" class="share-plain qq" onclick="share('qq');" rel="nofollow">
+            <div class="icon-wrap">
+                <i class="fa fa-qq"></i>
+            </div>
+        </a>
+        <a href="javascript:;" class="share-plain qzone" onclick="share('qzone');" rel="nofollow">
+            <div class="icon-wrap">
+                <i class="fa fa-star"></i>
+            </div>
+        </a>
+        <a href="javascript:;" class="share-plain weixin pop style-plain" rel="nofollow">
+            <div class="icon-wrap">
+                <i class="fa fa-weixin"></i>
+            </div>
+            <div class="share-int">
+                <div class="qrcode" id="wechat-qr"></div>
+                <p>打开微信“扫一扫”，打开网页后点击屏幕右上角分享按钮</p>
+            </div>
+        </a>
+        <a href="javascript:;" class="share-plain weibo" onclick="share('weibo');" rel="nofollow">
+            <div class="icon-wrap">
+                <i class="fa fa-weibo"></i>
+            </div>
+        </a>
+        <a href="javascript:;" class="share-plain facebook style-plain" onclick="share('facebook');" rel="nofollow">
+            <div class="icon-wrap">
+                <i class="fa fa-facebook"></i>
+            </div>
+        </a>
+        <a href="javascript:;" class="share-plain twitter style-plain" onclick="share('twitter');" rel="nofollow">
+            <div class="icon-wrap">
+                <i class="fa fa-twitter"></i>
+            </div>
+        </a>
+    </div>
+    <script type="text/javascript">
+        $(()=>{
+            new QRCode("wechat-qr", {
+                text: "http://example.com/2021/06/28/JAVA/JAVA%E5%9F%BA%E7%A1%80%E5%AD%A6%E4%B9%A0/JAVA%E5%9F%BA%E7%A1%80%E5%AD%A6%E4%B9%A0-DAY1/",
+                width: 150,
+                height: 150,
+                correctLevel : QRCode.CorrectLevel.H
+            });
+        });
+        function share(dest) {
+            const qqBase        = "https://connect.qq.com/widget/shareqq/index.html?";
+            const weiboBase     = "https://service.weibo.com/share/share.php?";
+            const qzoneBase     = "https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?";
+            const facebookBase  = "https://www.facebook.com/sharer/sharer.php?";
+            const twitterBase   = "https://twitter.com/intent/tweet?";
+            const hostUrl       = "http://example.com/2021/06/28/JAVA/JAVA%E5%9F%BA%E7%A1%80%E5%AD%A6%E4%B9%A0/JAVA%E5%9F%BA%E7%A1%80%E5%AD%A6%E4%B9%A0-DAY1/";
+            const title         = "「JAVA基础学习-DAY1」";
+            const excerpt       = `JAVA学习-DAY1此文本为个人学习JAVA中的笔记。我学习时是看的尚硅谷的视频，个人认为他讲的很细。视频网址为https://www.bilibili.com/video/BV1Kb411W75N。本人有一定的其他语言基础所以笔记...`;
+            let _URL;
+            switch (dest) {
+                case "qq"       : _URL = qqBase+"url="+hostUrl+"&title="+title+"&desc=&summary="+excerpt+"&site=cxpy";     break;
+                case "weibo"    : _URL = weiboBase+"url="+hostUrl+"&title="+title+excerpt;                                 break;
+                case "qzone"    : _URL = qzoneBase+"url="+hostUrl+"&title="+title+"&desc=&summary="+excerpt+"&site=cxpy";  break;
+                case "facebook" : _URL = facebookBase+"u="+hostUrl;                                                        break;
+                case "twitter"  : _URL = twitterBase+"text="+title+excerpt+"&url="+hostUrl;                                break;
+            }
+            window.open(_URL);
+        };
+    </script>
+</div>
+                
+                </div>
+            
+            <div class="footer-tag clearfix">
+                <div class="pull-left">
+                <i class="fa fa-tags"></i>
+                    <a class="tag-none-link" href="/tags/JAVA/" rel="tag">JAVA</a>
+                </div>
+                <div class="pull-date">
+                <span>最后编辑：2021-11-15</span>
+                </div>
+            </div>
+        </footer>
+    </div>
+    
+        <nav class="navigation post-navigation clearfix" role="navigation">
+            
+            <div class="nav-previous clearfix">
+                <a title=" hive安装配置" href="/2021/06/23/Hadoop/5.hive/hive安装/">&lt; 上一篇</a>
+            </div>
+            
+            
+            <div class="nav-next clearfix">
+                <a title=" SQL经典50题" href="/2021/10/27/MySQL/SQL经典50题&答案/SQL经典50题&答案/">下一篇 &gt;</a>
+            </div>
+            
+        </nav>
+    
+    
+        <div id="v-comments" class="post-comments"></div>
+<script>
+    var load_comm = () => {
+        const init = () => {
+            new Valine({
+                el: '#v-comments',
+                appId: 'ov9d0pSM6tSAzbc43FJHYPzT-gzGzoHsz',
+                appKey: 'B2wMGp8TE3duzmpI04GwcOxv',
+                visitor: true,
+                enableQQ: true,
+                path: '/2021/06/28/JAVA/JAVA%E5%9F%BA%E7%A1%80%E5%AD%A6%E4%B9%A0/JAVA%E5%9F%BA%E7%A1%80%E5%AD%A6%E4%B9%A0-DAY1/'
+            });
+        }
+        if (typeof Valine == 'undefined') {
+            const src = 'https://cdn.jsdelivr.net/npm/valine@1.4.14/dist/Valine.min.js';
+            $.getScript(src, init);
+        } else {
+            init();
+        }
+    };
+</script>
+<noscript>Please enable JavaScript to view the <a target="_blank" rel="noopener" href="https://valine.js.org/">comments powered by Valine.</a></noscript>
+
+    
+</article>
+
+        
+
+            </section>
+
+        
+
+                
+            
+
+<section id="kratos-widget-area" class="col-md-4 hidden-xs hidden-sm">
+    <!-- 文章和页面根据splitter来分割，没有的话就从头开始设置为sticky -->
+    
+    
+                <aside id="krw-about" class="widget widget-kratos-about clearfix">
+    <div class="photo-background"></div>
+    <div class="photo-wrapper clearfix">
+        <div class="photo-wrapper-tip text-center">
+            <img class="about-photo" src="/images/avatar2.jpg" />
+        </div>
+    </div>
+    <div class="textwidget">
+        <p class="text-center">个人记录学习的网站</p>
+    </div>
+</aside>
+            
+                    <div class="sticky-area">
+                
+                    <aside id="krw-toc" class="widget widget-kratos-toc clearfix">
+    <div class="photo-background"></div>
+    <h4 class="widget-title no-after">
+        <i class="fa fa-compass"></i>
+        文章目录
+        <span class="toc-progress-bar"></span>
+    </h4>
+    <div class="textwidget">
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#JAVA%E5%AD%A6%E4%B9%A0-DAY1"><span class="toc-text">JAVA学习-DAY1</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#DAY1"><span class="toc-text">DAY1</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#JAVA%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86%E5%9B%BE%E8%B0%B1"><span class="toc-text">JAVA基础知识图谱</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#JAVA%E5%8E%86%E5%8F%B2"><span class="toc-text">JAVA历史</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Java%E7%9A%84%E5%BA%94%E7%94%A8%E9%A2%86%E5%9F%9F"><span class="toc-text">Java的应用领域</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Java%E8%AF%AD%E8%A8%80%E7%9A%84%E7%89%B9%E7%82%B9"><span class="toc-text">Java语言的特点</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A0%B8%E5%BF%83%E6%9C%BA%E5%88%B6%E2%80%94Java%E8%99%9A%E6%8B%9F%E6%9C%BA"><span class="toc-text">核心机制—Java虚拟机</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A0%B8%E5%BF%83%E6%9C%BA%E5%88%B6%E2%80%94%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6"><span class="toc-text">核心机制—垃圾回收</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#P35-%E6%B3%A8%E9%87%8A"><span class="toc-text">P35 注释</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#p36-%E6%96%87%E6%A1%A3%E6%B3%A8%E9%87%8A"><span class="toc-text">p36 文档注释</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#P39-JAVA-API%E6%96%87%E6%A1%A3"><span class="toc-text">P39 JAVA API文档</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#P40-%E7%AC%AC%E4%B8%80%E4%B8%AAJAVA%E7%A8%8B%E5%BA%8F%E7%9A%84%E6%80%BB%E7%BB%93"><span class="toc-text">P40 第一个JAVA程序的总结</span></a></li></ol></li></ol></li></ol>
+    </div>
+</aside>
+                
+                
+  <aside id="krw-categories" class="widget widget-kratos-categories clearfix">
+    <h4 class="widget-title"><i class="fa fa-folder"></i>分类目录</h4>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Hadoop/">Hadoop</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/JAVA/">JAVA</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/MySQL/">MySQL</a><span class="category-list-count">20</span></li></ul>
+  </aside>
+
+
+            
+                
+  <aside id="krw-tags" class="widget widget-kratos-tags clearfix">
+    <h4 class="widget-title"><i class="fa fa-tags"></i>标签聚合</h4>
+      <div class="tag-clouds">
+        <a href="/tags/Centos7/" style="font-size: 0.7em;">Centos7</a> <a href="/tags/Hadoop/" style="font-size: 0.6em;">Hadoop</a> <a href="/tags/JAVA/" style="font-size: 0.65em;">JAVA</a> <a href="/tags/Linux/" style="font-size: 0.7em;">Linux</a> <a href="/tags/MySQL/" style="font-size: 0.75em;">MySQL</a> <a href="/tags/docker/" style="font-size: 0.6em;">docker</a> <a href="/tags/hive/" style="font-size: 0.6em;">hive</a> <a href="/tags/sqoop/" style="font-size: 0.6em;">sqoop</a> <a href="/tags/%E5%A4%A7%E6%95%B0%E6%8D%AE/" style="font-size: 0.8em;">大数据</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" style="font-size: 0.75em;">数据库</a>
+      </div>
+  </aside>
+
+            
+                
+  <aside id="krw-posts" class="widget widget-kratos-posts">
+  <h4 class="widget-title"><i class="fa fa-file"></i>最新文章</h4>
+  <div class="tab-content">
+      <ul class="list-group">
+        
+        
+          
+          
+        
+          
+          
+        
+          
+          
+            <a class="list-group-item" href="/2021/11/02/Linux/Centos7/vim%E6%8C%87%E4%BB%A4/"><i class="fa  fa-book"></i> vim常用指令</a>
+            
+          
+        
+          
+          
+            <a class="list-group-item" href="/2021/10/29/Linux/Centos7/find%E5%91%BD%E4%BB%A4%E8%AF%A6%E8%A7%A3/"><i class="fa  fa-book"></i> find命令</a>
+            
+          
+        
+          
+          
+            <a class="list-group-item" href="/2021/10/29/Linux/Centos7/CENTOS7%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AE/"><i class="fa  fa-book"></i> Centos7安装配置</a>
+            
+          
+        
+          
+          
+            <a class="list-group-item" href="/2021/10/27/MySQL/SQL%E7%BB%8F%E5%85%B850%E9%A2%98&%E7%AD%94%E6%A1%88/SQL%E7%BB%8F%E5%85%B850%E9%A2%98&%E7%AD%94%E6%A1%88/"><i class="fa  fa-book"></i> SQL经典50题</a>
+            
+          
+        
+          
+          
+            <a class="list-group-item" href="/2021/06/28/JAVA/JAVA%E5%9F%BA%E7%A1%80%E5%AD%A6%E4%B9%A0/JAVA%E5%9F%BA%E7%A1%80%E5%AD%A6%E4%B9%A0-DAY1/"><i class="fa  fa-book"></i> JAVA基础学习-DAY1</a>
+            
+          
+        
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+      </ul>
+  </div>
+  </aside>
+
+            
+    </div>
+</section>
+        
+        </div>
+    </div>
+</div>
+<footer>
+    <div id="footer"  >
+        <div class="kr-tool text-center">
+            <div class="tool">
+                
+                    <div class="box search-box">
+                        <a href="/search/">
+                            <span class="fa fa-search"></span>
+                        </a>
+                    </div>
+                
+                
+                    <div class="box theme-box" id="darkmode-switch">
+                        <span class="fa fa-adjust"></span>
+                    </div>
+                
+                
+            </div>
+            <div class="box gotop-box">
+                <span class="fa fa-chevron-up"></span>
+            </div>
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 col-md-offset-3 footer-list text-center">
+                    <ul class="kratos-social-icons">
+                        
+                        <li><a href="mailto:438626154@qq.com"><i class="fa fa-envelope"></i></a></li>
+                        
+                        
+                        
+                        
+                        
+                        <li><a target="_blank" rel="nofollow" href="https://github.com/WenJie2000"><i class="fa fa-github"></i></a></li>
+                        
+                    </ul>
+                    <ul class="kratos-copyright">
+                        <div>
+                            <li>&copy; 2021 张文杰的个人博客 版权所有.</li>
+                            <li>本站已运行<span id="span_dt">Loading...</span></li>
+                        </div>
+                        
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+</div>
+</div>
+
+        <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@3.3.4/dist/js/bootstrap.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.js"></script>
+<script>
+    if (!window.kr) {
+        window.kr = {};
+    }
+    window.kr.notMobile = (!(navigator.userAgent.match(/(phone|pad|pod|iPhone|iPod|ios|iPad|Android|Mobile|BlackBerry|IEMobile|MQQBrowser|JUC|Fennec|wOSBrowser|BrowserNG|WebOS|Symbian|Windows Phone)/i)));
+    window.kr.siteRoot = "/";
+</script>
+
+    <div>
+        <canvas id="snow"></canvas>
+        <script async type="text/javascript" src="/js/snow.min.js"></script>
+    </div>
+
+
+    <script async src="/js/candy.min.js"></script>
+
+
+
+
+    <script defer src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+
+<script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js"></script>
+<script defer src="/js/kratosr.min.js"></script>
+<script defer src="/js/pjax.min.js"></script>
+
+    <script defer src="https://cdn.jsdelivr.net/npm/layui-src@2.5.5/dist/layui.all.js"></script>
+
+
+    <script defer src="/js/kr-dark.min.js"></script>
+
+
+
+<!-- Extra support for third-party plguins  -->
+
+
+    </body>
+</html>

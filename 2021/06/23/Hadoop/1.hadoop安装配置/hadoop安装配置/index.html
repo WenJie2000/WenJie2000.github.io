@@ -1,0 +1,687 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+  <!-- 元数据 -->
+  <meta charset="utf-8">
+  <link rel="icon" href="/images/logo.png">
+  <title>JAVA安装配置 | 张文杰的个人博客</title>
+  <meta name="author" content="Wen" />
+  <meta http-equiv="Cache-Control" content="no-transform" />
+  <meta http-equiv="Cache-Control" content="no-siteapp" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="robots" content="index,follow" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+  <meta name="format-detection" content="telphone=no, email=no" />
+  
+    <meta name="keywords" content="Hadoop" />
+  
+  <meta name="description" content="前提（centos7已安装且有至少一个非root的管理员用户） 看你的NAT网段和网关是多少？ 例：网关192.168.112.2 ​    网段192.168.112.0&#x2F;24  我的规划 Hadoop01 192.168.112.131 Hadoop02 192.168.112.132 Hadoop03 192.168.112.133 创建hadoop sudo权限下面命令在root用户下操作">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JAVA安装配置">
+<meta property="og:url" content="http://example.com/2021/06/23/Hadoop/1.hadoop%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AE/hadoop%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AE/index.html">
+<meta property="og:site_name" content="张文杰的个人博客">
+<meta property="og:description" content="前提（centos7已安装且有至少一个非root的管理员用户） 看你的NAT网段和网关是多少？ 例：网关192.168.112.2 ​    网段192.168.112.0&#x2F;24  我的规划 Hadoop01 192.168.112.131 Hadoop02 192.168.112.132 Hadoop03 192.168.112.133 创建hadoop sudo权限下面命令在root用户下操作">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/2021/06/23/Hadoop/1.hadoop%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AE/hadoop%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AE/https:/img1.baidu.com/it/u=3826588997,155119514&fm=26&fmt=auto">
+<meta property="article:published_time" content="2021-06-22T16:00:00.000Z">
+<meta property="article:modified_time" content="2021-11-15T14:51:31.116Z">
+<meta property="article:author" content="Wen">
+<meta property="article:tag" content="Hadoop">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/2021/06/23/Hadoop/1.hadoop%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AE/hadoop%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AE/https:/img1.baidu.com/it/u=3826588997,155119514&fm=26&fmt=auto">
+<meta name="twitter:site" content="@null">
+  
+  <!-- 站点验证相关 -->
+  
+    
+    
+    
+  
+  <!-- 样式表文件 -->
+  <link rel="stylesheet" id="kratos-css" href="/css/kratosr.min.css" type="text/css" media="all">
+  
+    <link rel="stylesheet" id="highlight-css" href="/css/highlight/night.min.css" type="text/css" media="all">
+  
+  
+  <link rel="stylesheet" id="fontawe-css" href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" type="text/css" media="all">
+  <link rel="stylesheet" id="nprogress-css" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" type="text/css" media="all">
+  
+  
+  
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css">
+  
+  
+    <link rel="stylesheet" id="darkmode-css" href="/css/kr-dark.min.css" type="text/css" media="all">
+  
+  <!-- 不得不预先加载的一些JS文件 -->
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
+  
+    <script src="https://cdn.jsdelivr.net/npm/qrcode_js@1.0.0/qrcode.min.js"></script>
+  
+  
+  <style>
+    
+      .kratos-cover.kratos-cover-2 {
+        background-image: url('/images/banner2.jpg');
+      }
+    
+    
+      @media(min-width:768px) {
+        body.custom-background {
+          background-image: url('/images/bg2.webp');
+        }
+      }
+    
+  </style>
+  
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+
+    <body class="custom-background">
+        <div id="kratos-wrapper">
+    <div id="kratos-page">
+        <div id="kratos-header">
+            <header id="kratos-desktop-topnav" class="kratos-topnav">
+                <div class="container">
+                    <div class="nav-header">
+                        <nav id="kratos-menu-wrap">
+                            <ul id="kratos-primary-menu" class="sf-menu">
+                                
+                                    
+                                        <li><a href="/"><i class="fa fa-home"></i>首页</a></li>
+                                    
+                                
+                                    
+                                        <li><a href="/archives/"><i class="fa fa-file"></i>档案馆</a></li>
+                                    
+                                
+                                    
+                                        <li><a href="/friends/"><i class="fa fa-paw"></i>好伙伴</a></li>
+                                    
+                                
+                                    
+                                        <li>
+                                            <a><i class="fa fa-link"></i>链接</a>
+                                            <ul class="sub-menu">
+                                                
+                                                    
+                                                
+                                                    
+                                                        <li><a target="_blank" rel="noopener" href="https://home.cnblogs.com/u/2592433">作者博客</a></li>
+                                                    
+                                                
+                                                    
+                                                        <li><a target="_blank" rel="noopener" href="https://github.com/WenJie2000">项目链接</a></li>
+                                                    
+                                                
+                                            </ul>
+                                        </li>
+                                    
+                                
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+            </header>
+            <header id="kratos-mobile-topnav" class="kratos-topnav">
+                <div class="container">
+                    <div class="color-logo"><a href="/">张文杰的个人博客</a></div>
+                    <div class="nav-toggle">
+                        <a class="kratos-nav-toggle js-kratos-nav-toggle">
+                            <i></i>
+                        </a>
+                    </div>
+                </div>
+            </header>
+        </div>
+        <div class="kratos-start kratos-hero-2">
+            <!-- <div class="kratos-overlay"></div> -->
+            <div class="kratos-cover kratos-cover-2 text-center">
+                <div class="desc desc2 animate-box">
+                    <a href="/">
+                        <h2>张文杰的个人博客</h2> <br />
+                        <span>read, study and learn about everything imporant in your life.</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div id="kratos-blog-post">
+            <div class="container">
+                <div id="main" class="row">
+                    
+
+        
+
+            <section class="col-md-8">
+
+        
+
+            <article>
+    <div class="kratos-hentry kratos-post-inner clearfix">
+        <header class="kratos-entry-header">
+            
+                <h1 class="kratos-entry-title text-center">JAVA安装配置</h1>
+            
+            
+            <ul class="kratos-post-meta text-center">
+                <li><i class="fa fa-calendar"></i> 2021-06-23</li>
+                <li><i class="fa fa-user"></i> 作者 Wen</li>
+                <li>
+                    <i class="fa fa-edit"></i> 
+                    
+                    
+                        ~2.95K
+                    
+                    字
+                </li>
+                
+                    <li id="/2021/06/23/Hadoop/1.hadoop%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AE/hadoop%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AE/" class="leancloud_visitors" data-flag-title="JAVA安装配置">
+                        <i class="fa fa-eye"></i>
+                        <span class="leancloud-visitors-count"> </span> 次阅读
+                    </li>
+                    
+                
+            </ul>
+        </header>
+        <div class="kratos-post-content">
+            <div id="expire-alert" class="alert alert-warning hidden" role="alert">
+                本文最后编辑于 <time datetime="1636987891116"></time> 前，其中的内容可能需要更新。
+            </div>
+            
+                <div class="kratos-post-inner-toc">
+                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%9B%E5%BB%BAhadoop-sudo%E6%9D%83%E9%99%90"><span class="toc-number">1.</span> <span class="toc-text">创建hadoop sudo权限</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%85%8D%E7%BD%AE%E9%9D%99%E6%80%81IP"><span class="toc-number">2.</span> <span class="toc-text">配置静态IP</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BF%AE%E6%94%B9%E4%B8%BB%E6%9C%BA%E5%90%8D%EF%BC%88%E6%8C%89%E9%9C%80%E6%B1%82%E4%BD%BF%E7%94%A8%EF%BC%89"><span class="toc-number">3.</span> <span class="toc-text">修改主机名（按需求使用）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BF%AE%E6%94%B9IP%E5%92%8C%E4%B8%BB%E6%9C%BA%E5%90%8D%E7%9A%84%E6%98%A0%E5%B0%84%E5%85%B3%E7%B3%BB"><span class="toc-number">4.</span> <span class="toc-text">修改IP和主机名的映射关系</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8D%B8%E8%BD%BDOPENJDK-%E5%AE%89%E8%A3%85%E6%96%B0%E7%89%88JDK"><span class="toc-number">5.</span> <span class="toc-text">卸载OPENJDK,安装新版JDK</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%9B%E5%BB%BA%E6%96%87%E4%BB%B6%E5%A4%B9softwares%E5%92%8Cmodules"><span class="toc-number">6.</span> <span class="toc-text">创建文件夹softwares和modules</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B0%86jdk%E4%BC%A0%E5%88%B0software"><span class="toc-number">7.</span> <span class="toc-text">将jdk传到software</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#jdk%E8%A7%A3%E5%8E%8B%E5%88%B0modules%E6%96%87%E4%BB%B6%E5%A4%B9"><span class="toc-number">8.</span> <span class="toc-text">jdk解压到modules文件夹</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%85%8D%E7%BD%AEJDK"><span class="toc-number">9.</span> <span class="toc-text">配置JDK</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AE%A9JDK%E7%94%9F%E6%95%88%E5%B9%B6%E9%AA%8C%E8%AF%81"><span class="toc-number">10.</span> <span class="toc-text">让JDK生效并验证</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%B3%E9%97%AD%E9%98%B2%E7%81%AB%E5%A2%99"><span class="toc-number">11.</span> <span class="toc-text">关闭防火墙</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%8B%E9%9A%86%E8%99%9A%E6%8B%9F%E6%9C%BA%EF%BC%882%E6%AC%A1%EF%BC%89"><span class="toc-number">12.</span> <span class="toc-text">克隆虚拟机（2次）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%9E%E7%8E%B0hadoop%E5%85%8D%E5%AF%86%E7%99%BB%E5%BD%95"><span class="toc-number">13.</span> <span class="toc-text">实现hadoop免密登录</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%89%E8%A3%85hadoop"><span class="toc-number">14.</span> <span class="toc-text">安装hadoop</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%85%8D%E7%BD%AEHADOOP%E9%87%8C%E7%9A%84%E6%96%87%E4%BB%B6"><span class="toc-number">15.</span> <span class="toc-text">配置HADOOP里的文件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BF%90%E8%A1%8Chadoop%E9%9B%86%E7%BE%A4"><span class="toc-number">16.</span> <span class="toc-text">运行hadoop集群</span></a></li></ol>
+                </div>
+            
+            <hr />
+            <p>前提（centos7已安装且有至少一个非root的管理员用户）</p>
+<p>看你的NAT网段和网关是多少？</p>
+<p>例：网关192.168.112.2</p>
+<p>​    网段192.168.112.0/24</p>
+<p><img src="/2021/06/23/Hadoop/1.hadoop%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AE/hadoop%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AE/image-20211103085555374.png"></p>
+<p>我的规划</p>
+<p>Hadoop01 192.168.112.131</p>
+<p>Hadoop02 192.168.112.132</p>
+<p>Hadoop03 192.168.112.133</p>
+<h3 id="创建hadoop-sudo权限"><a href="#创建hadoop-sudo权限" class="headerlink" title="创建hadoop sudo权限"></a>创建hadoop sudo权限</h3><p>下面命令在root用户下操作</p>
+<p>创建hadoop用户</p>
+<p>-————————</p>
+<p>useradd  hadoop</p>
+<p>passwd  Hadoop</p>
+<p>-———————–</p>
+<p>vim  /etc/sudoers</p>
+<p><img src="/2021/06/23/Hadoop/1.hadoop%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AE/hadoop%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AE/wps1.jpg"> </p>
+<p>切换到hadoop用户</p>
+<h3 id="配置静态IP"><a href="#配置静态IP" class="headerlink" title="配置静态IP"></a>配置静态IP</h3><p>ifconfig  查看网卡的名字 ——–我的是ens32也可能是ens33</p>
+<p><img src="/2021/06/23/Hadoop/1.hadoop%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AE/hadoop%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AE/image-20211103090345835.png"></p>
+<p>sudo  vim  /etc/sysconfig/network-scripts/ifcfg-ens32</p>
+<p>或sudo  vim  /etc/sysconfig/network-scripts/ifcfg-ens33</p>
+<p>修改文件，如图</p>
+<p><img src="/2021/06/23/Hadoop/1.hadoop%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AE/hadoop%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AE/image-20211103090910768.png"></p>
+<p>这里PREFIX=”24”也可以改为 NETMASK=255.255.255.0</p>
+<h3 id="修改主机名（按需求使用）"><a href="#修改主机名（按需求使用）" class="headerlink" title="修改主机名（按需求使用）"></a>修改主机名（按需求使用）</h3><p>查看机器的名称</p>
+<p>hostname</p>
+<p>vim    /etc/hostname</p>
+<h3 id="修改IP和主机名的映射关系"><a href="#修改IP和主机名的映射关系" class="headerlink" title="修改IP和主机名的映射关系"></a>修改IP和主机名的映射关系</h3><p>sudo vim  /etc/hosts</p>
+<p>添加以下内容</p>
+<p>192.168.112.131 hadoop01<br>192.168.112.132 hadoop02<br>192.168.112.133 hadoop03</p>
+<p><img src="/2021/06/23/Hadoop/1.hadoop%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AE/hadoop%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AE/image-20211103092208690.png"></p>
+<h3 id="卸载OPENJDK-安装新版JDK"><a href="#卸载OPENJDK-安装新版JDK" class="headerlink" title="卸载OPENJDK,安装新版JDK"></a>卸载OPENJDK,安装新版JDK</h3><p>查询现有JDK的版本</p>
+<p>rpm  -qa  |  grep java</p>
+<p>如果没有返回内容则未安装java</p>
+<p><img src="/2021/06/23/Hadoop/1.hadoop%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AE/hadoop%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AE/image-20211103093323475.png"></p>
+<p>卸载旧版本的JAVA</p>
+<p>卸载OPEN JDK JAVA</p>
+<p>sudo rpm -e –nodeps  软件名</p>
+<h3 id="创建文件夹softwares和modules"><a href="#创建文件夹softwares和modules" class="headerlink" title="创建文件夹softwares和modules"></a>创建文件夹softwares和modules</h3><p>sudo mkdir /opt/softwares</p>
+<p>sudo mkdir /opt/modules</p>
+<p><img src="/2021/06/23/Hadoop/1.hadoop%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AE/hadoop%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AE/image-20211103093753916.png"></p>
+<h3 id="将jdk传到software"><a href="#将jdk传到software" class="headerlink" title="将jdk传到software"></a>将jdk传到software</h3><p>JDK下载地址<a target="_blank" rel="noopener" href="https://www.oracle.com/java/technologies/javase/javase8u211-later-archive-downloads.html">https://www.oracle.com/java/technologies/javase/javase8u211-later-archive-downloads.html</a></p>
+<p>可以用xftp传，如果传输失败就用root用户登录。</p>
+<p><img src="/2021/06/23/Hadoop/1.hadoop%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AE/hadoop%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AE/image-20211103095107336.png"></p>
+<h3 id="jdk解压到modules文件夹"><a href="#jdk解压到modules文件夹" class="headerlink" title="jdk解压到modules文件夹"></a>jdk解压到modules文件夹</h3><p>sudo tar -xzvf /opt/softwares/jdk-8u301-linux-x64.tar.gz -C /opt/modules/</p>
+<h3 id="配置JDK"><a href="#配置JDK" class="headerlink" title="配置JDK"></a>配置JDK</h3><p>sudo vim /etc/profile</p>
+<p>在末尾添加</p>
+<p>export JAVA_HOME=/opt/modules/jdk1.8.0_301<br>export PATH=$PATH:$JAVA_HOME/bin</p>
+<p><img src="/2021/06/23/Hadoop/1.hadoop%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AE/hadoop%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AE/image-20211103100919348.png"></p>
+<h3 id="让JDK生效并验证"><a href="#让JDK生效并验证" class="headerlink" title="让JDK生效并验证"></a>让JDK生效并验证</h3><p>source vim /etc/profile</p>
+<p>java -version</p>
+<p><img src="/2021/06/23/Hadoop/1.hadoop%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AE/hadoop%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AE/image-20211103101402000.png"></p>
+<h3 id="关闭防火墙"><a href="#关闭防火墙" class="headerlink" title="关闭防火墙"></a>关闭防火墙</h3><p>sudo systemctl status firewalld.service</p>
+<p>sudo systemctl stop firewalld.service</p>
+<p>sudo systemctl disable firewalld.service</p>
+<h3 id="克隆虚拟机（2次）"><a href="#克隆虚拟机（2次）" class="headerlink" title="克隆虚拟机（2次）"></a>克隆虚拟机（2次）</h3><p><img src="/2021/06/23/Hadoop/1.hadoop%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AE/hadoop%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AE/image-20211103102846964.png"></p>
+<p><img src="/2021/06/23/Hadoop/1.hadoop%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AE/hadoop%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AE/image-20211103102732753.png"></p>
+<p><img src="/2021/06/23/Hadoop/1.hadoop%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AE/hadoop%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AE/image-20211103102759270.png"></p>
+<p><img src="/2021/06/23/Hadoop/1.hadoop%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AE/hadoop%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AE/image-20211103103153900.png"></p>
+<p>把IP，机器名更改后，再分别测试一下。</p>
+<h3 id="实现hadoop免密登录"><a href="#实现hadoop免密登录" class="headerlink" title="实现hadoop免密登录"></a>实现hadoop免密登录</h3><p>hadoop01为以下指令，另外两台也要配</p>
+<p>ssh-keygen -t rsa</p>
+<p> ssh-copy-id  hadoop01</p>
+<p> ssh-copy-id hadoop02</p>
+<p> ssh-copy-id hadoop03</p>
+<h3 id="安装hadoop"><a href="#安装hadoop" class="headerlink" title="安装hadoop"></a>安装hadoop</h3><p>将安装包传到/opt/softwares</p>
+<p><img src="/2021/06/23/Hadoop/1.hadoop%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AE/hadoop%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AE/image-20211103150141220.png"></p>
+<p>cd  /opt/softwares</p>
+<p>sudo tar -zxvf  hadoop-2.7.4.tar.gz  -C  /opt/modules/</p>
+<p>配置/etc/profile文件里的环境变量，配置同前面的JAVA_HOME</p>
+<p>sudo vi /etc/profile</p>
+<p>export JAVA_HOME=/opt/modules/jdk1.8.0_301<br>export HADOOP_HOME=/opt/modules/hadoop-2.7.4<br>export PATH=$PATH:$JAVA_HOME/bin:$HADOOP_HOME/bin:$HADOOP_HOME/sbin</p>
+<p>执行source  /etc/profile让环境变量生效</p>
+<h3 id="配置HADOOP里的文件"><a href="#配置HADOOP里的文件" class="headerlink" title="配置HADOOP里的文件"></a>配置HADOOP里的文件</h3><p>注意：果如提示hadoop文件权限不够，是因为hadoop文件夹不是hadoop用户解压来的，要用以下命令把权限全部改成hadoop所有。chown  -R  huser:huser  hadoop-2.7.4/</p>
+<p>将hadoop-env.sh mapred-env.sh yarn-env.sh 加入JAVA_HOME变量</p>
+<p>sudo echo “JAVA_HOME=/opt/modules/jdk1.8.0_301” &gt;&gt; /opt/modules/hadoop-2.7.4/etc/hadoop/hadoop-env.sh</p>
+<p> sudo echo “JAVA_HOME=/opt/modules/jdk1.8.0_301”  &gt;&gt; /opt/modules/hadoop-2.7.4/etc/hadoop/mapred-env.sh</p>
+<p>sudo echo “JAVA_HOME=/opt/modules/jdk1.8.0_301”  &gt;&gt; /opt/modules/hadoop-2.7.4/etc/hadoop/yarn-env.sh</p>
+<p>配置HDFS</p>
+<p>cd  /opt/modules/hadoop-2.7.2/etc/hadoop</p>
+<p><img src="/2021/06/23/Hadoop/1.hadoop%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AE/hadoop%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AE/image-20211103172237125.png"></p>
+<p><img src="/2021/06/23/Hadoop/1.hadoop%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AE/hadoop%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AE/image-20211103172300993.png"></p>
+<p><img src="/2021/06/23/Hadoop/1.hadoop%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AE/hadoop%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AE/image-20211103172313333.png"></p>
+<p>重命名mapred-site.xml.template更名为mapred-site.xml</p>
+<p>mv  mapred-site.xml.template  mapred-site.xml</p>
+<p><img src="/2021/06/23/Hadoop/1.hadoop%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AE/hadoop%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AE/image-20211103172442885.png">F</p>
+<p><img src="/2021/06/23/Hadoop/1.hadoop%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AE/hadoop%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AE/image-20211103172453565.png"></p>
+<p>将hadoop01上的hadoop2.7目录用SCP命令复制到hadoop02,hadoop03机器上</p>
+<p>在hadoop01上</p>
+<p>sudo  scp -r /opt/modules/hadoop-2.7.4  huser@hadoop02:/opt/modules</p>
+<p>sudo  scp –r /opt/modules/hadoop-2.7.4  huser@hadoop03:/opt/modules</p>
+<p>注意：如果从hadoop01用huser用户在复制时提示权限不够，在目标机运行以下的命令</p>
+<p>sudo  chown  -R huser:huser  /opt/modules/</p>
+<p>复制完成后，格式化hadoop01</p>
+<p>hadoop namenode -format</p>
+<h3 id="运行hadoop集群"><a href="#运行hadoop集群" class="headerlink" title="运行hadoop集群"></a>运行hadoop集群</h3><p>在hadoop01中</p>
+<p>start-all.sh</p>
+<p>在网页中输入 192.168.112.131:50070</p>
+<p>有此界面表明运成功</p>
+<p><img src="/2021/06/23/Hadoop/1.hadoop%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AE/hadoop%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AE/image-20211103191239148.png"></p>
+<p>在各个主机 jps 查看运行状况</p>
+<p>停止运行</p>
+<p>stop-all.sh</p>
+
+        </div>
+        
+        <footer class="kratos-entry-footer clearfix">
+            
+                <div class="post-like-donate text-center clearfix" id="post-like-donate">
+                
+                    <a class="donate" href="javascript:;"><i class="fa fa-bitcoin"></i> 打赏</a>
+                
+                
+                    <a class="share" href="javascript:;"><i class="fa fa-share-alt"></i> 分享</a>
+                    <div class="share-wrap" style="display: none;">
+    <div class="share-group">
+        <a href="javascript:;" class="share-plain qq" onclick="share('qq');" rel="nofollow">
+            <div class="icon-wrap">
+                <i class="fa fa-qq"></i>
+            </div>
+        </a>
+        <a href="javascript:;" class="share-plain qzone" onclick="share('qzone');" rel="nofollow">
+            <div class="icon-wrap">
+                <i class="fa fa-star"></i>
+            </div>
+        </a>
+        <a href="javascript:;" class="share-plain weixin pop style-plain" rel="nofollow">
+            <div class="icon-wrap">
+                <i class="fa fa-weixin"></i>
+            </div>
+            <div class="share-int">
+                <div class="qrcode" id="wechat-qr"></div>
+                <p>打开微信“扫一扫”，打开网页后点击屏幕右上角分享按钮</p>
+            </div>
+        </a>
+        <a href="javascript:;" class="share-plain weibo" onclick="share('weibo');" rel="nofollow">
+            <div class="icon-wrap">
+                <i class="fa fa-weibo"></i>
+            </div>
+        </a>
+        <a href="javascript:;" class="share-plain facebook style-plain" onclick="share('facebook');" rel="nofollow">
+            <div class="icon-wrap">
+                <i class="fa fa-facebook"></i>
+            </div>
+        </a>
+        <a href="javascript:;" class="share-plain twitter style-plain" onclick="share('twitter');" rel="nofollow">
+            <div class="icon-wrap">
+                <i class="fa fa-twitter"></i>
+            </div>
+        </a>
+    </div>
+    <script type="text/javascript">
+        $(()=>{
+            new QRCode("wechat-qr", {
+                text: "http://example.com/2021/06/23/Hadoop/1.hadoop%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AE/hadoop%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AE/",
+                width: 150,
+                height: 150,
+                correctLevel : QRCode.CorrectLevel.H
+            });
+        });
+        function share(dest) {
+            const qqBase        = "https://connect.qq.com/widget/shareqq/index.html?";
+            const weiboBase     = "https://service.weibo.com/share/share.php?";
+            const qzoneBase     = "https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?";
+            const facebookBase  = "https://www.facebook.com/sharer/sharer.php?";
+            const twitterBase   = "https://twitter.com/intent/tweet?";
+            const hostUrl       = "http://example.com/2021/06/23/Hadoop/1.hadoop%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AE/hadoop%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AE/";
+            const title         = "「JAVA安装配置」";
+            const excerpt       = `前提（centos7已安装且有至少一个非root的管理员用户）
+看你的NAT网段和网关是多少？
+例：网关192.168.112.2
+​    网段192.168.112.0/24
+
+我的规划
+Hadoop01 192.168.112....`;
+            let _URL;
+            switch (dest) {
+                case "qq"       : _URL = qqBase+"url="+hostUrl+"&title="+title+"&desc=&summary="+excerpt+"&site=cxpy";     break;
+                case "weibo"    : _URL = weiboBase+"url="+hostUrl+"&title="+title+excerpt;                                 break;
+                case "qzone"    : _URL = qzoneBase+"url="+hostUrl+"&title="+title+"&desc=&summary="+excerpt+"&site=cxpy";  break;
+                case "facebook" : _URL = facebookBase+"u="+hostUrl;                                                        break;
+                case "twitter"  : _URL = twitterBase+"text="+title+excerpt+"&url="+hostUrl;                                break;
+            }
+            window.open(_URL);
+        };
+    </script>
+</div>
+                
+                </div>
+            
+            <div class="footer-tag clearfix">
+                <div class="pull-left">
+                <i class="fa fa-tags"></i>
+                    <a class="tag-none-link" href="/tags/Hadoop/" rel="tag">Hadoop</a>
+                </div>
+                <div class="pull-date">
+                <span>最后编辑：2021-11-15</span>
+                </div>
+            </div>
+        </footer>
+    </div>
+    
+        <nav class="navigation post-navigation clearfix" role="navigation">
+            
+            <div class="nav-previous clearfix">
+                <a title=" sqoop安装配置" href="/2021/06/23/Hadoop/6.sqoop/sqoop安装/">&lt; 上一篇</a>
+            </div>
+            
+            
+            <div class="nav-next clearfix">
+                <a title=" docker安装配置" href="/2021/06/23/Hadoop/4.docker/docker安装/">下一篇 &gt;</a>
+            </div>
+            
+        </nav>
+    
+    
+        <div id="v-comments" class="post-comments"></div>
+<script>
+    var load_comm = () => {
+        const init = () => {
+            new Valine({
+                el: '#v-comments',
+                appId: 'ov9d0pSM6tSAzbc43FJHYPzT-gzGzoHsz',
+                appKey: 'B2wMGp8TE3duzmpI04GwcOxv',
+                visitor: true,
+                enableQQ: true,
+                path: '/2021/06/23/Hadoop/1.hadoop%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AE/hadoop%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AE/'
+            });
+        }
+        if (typeof Valine == 'undefined') {
+            const src = 'https://cdn.jsdelivr.net/npm/valine@1.4.14/dist/Valine.min.js';
+            $.getScript(src, init);
+        } else {
+            init();
+        }
+    };
+</script>
+<noscript>Please enable JavaScript to view the <a target="_blank" rel="noopener" href="https://valine.js.org/">comments powered by Valine.</a></noscript>
+
+    
+</article>
+
+        
+
+            </section>
+
+        
+
+                
+            
+
+<section id="kratos-widget-area" class="col-md-4 hidden-xs hidden-sm">
+    <!-- 文章和页面根据splitter来分割，没有的话就从头开始设置为sticky -->
+    
+    
+                <aside id="krw-about" class="widget widget-kratos-about clearfix">
+    <div class="photo-background"></div>
+    <div class="photo-wrapper clearfix">
+        <div class="photo-wrapper-tip text-center">
+            <img class="about-photo" src="/images/avatar2.jpg" />
+        </div>
+    </div>
+    <div class="textwidget">
+        <p class="text-center">个人记录学习的网站</p>
+    </div>
+</aside>
+            
+                    <div class="sticky-area">
+                
+                    <aside id="krw-toc" class="widget widget-kratos-toc clearfix">
+    <div class="photo-background"></div>
+    <h4 class="widget-title no-after">
+        <i class="fa fa-compass"></i>
+        文章目录
+        <span class="toc-progress-bar"></span>
+    </h4>
+    <div class="textwidget">
+        <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%9B%E5%BB%BAhadoop-sudo%E6%9D%83%E9%99%90"><span class="toc-text">创建hadoop sudo权限</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%85%8D%E7%BD%AE%E9%9D%99%E6%80%81IP"><span class="toc-text">配置静态IP</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BF%AE%E6%94%B9%E4%B8%BB%E6%9C%BA%E5%90%8D%EF%BC%88%E6%8C%89%E9%9C%80%E6%B1%82%E4%BD%BF%E7%94%A8%EF%BC%89"><span class="toc-text">修改主机名（按需求使用）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BF%AE%E6%94%B9IP%E5%92%8C%E4%B8%BB%E6%9C%BA%E5%90%8D%E7%9A%84%E6%98%A0%E5%B0%84%E5%85%B3%E7%B3%BB"><span class="toc-text">修改IP和主机名的映射关系</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8D%B8%E8%BD%BDOPENJDK-%E5%AE%89%E8%A3%85%E6%96%B0%E7%89%88JDK"><span class="toc-text">卸载OPENJDK,安装新版JDK</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%9B%E5%BB%BA%E6%96%87%E4%BB%B6%E5%A4%B9softwares%E5%92%8Cmodules"><span class="toc-text">创建文件夹softwares和modules</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B0%86jdk%E4%BC%A0%E5%88%B0software"><span class="toc-text">将jdk传到software</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#jdk%E8%A7%A3%E5%8E%8B%E5%88%B0modules%E6%96%87%E4%BB%B6%E5%A4%B9"><span class="toc-text">jdk解压到modules文件夹</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%85%8D%E7%BD%AEJDK"><span class="toc-text">配置JDK</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AE%A9JDK%E7%94%9F%E6%95%88%E5%B9%B6%E9%AA%8C%E8%AF%81"><span class="toc-text">让JDK生效并验证</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%B3%E9%97%AD%E9%98%B2%E7%81%AB%E5%A2%99"><span class="toc-text">关闭防火墙</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%8B%E9%9A%86%E8%99%9A%E6%8B%9F%E6%9C%BA%EF%BC%882%E6%AC%A1%EF%BC%89"><span class="toc-text">克隆虚拟机（2次）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%9E%E7%8E%B0hadoop%E5%85%8D%E5%AF%86%E7%99%BB%E5%BD%95"><span class="toc-text">实现hadoop免密登录</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%89%E8%A3%85hadoop"><span class="toc-text">安装hadoop</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%85%8D%E7%BD%AEHADOOP%E9%87%8C%E7%9A%84%E6%96%87%E4%BB%B6"><span class="toc-text">配置HADOOP里的文件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BF%90%E8%A1%8Chadoop%E9%9B%86%E7%BE%A4"><span class="toc-text">运行hadoop集群</span></a></li></ol>
+    </div>
+</aside>
+                
+                
+  <aside id="krw-categories" class="widget widget-kratos-categories clearfix">
+    <h4 class="widget-title"><i class="fa fa-folder"></i>分类目录</h4>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Hadoop/">Hadoop</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/JAVA/">JAVA</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/MySQL/">MySQL</a><span class="category-list-count">20</span></li></ul>
+  </aside>
+
+
+            
+                
+  <aside id="krw-tags" class="widget widget-kratos-tags clearfix">
+    <h4 class="widget-title"><i class="fa fa-tags"></i>标签聚合</h4>
+      <div class="tag-clouds">
+        <a href="/tags/Centos7/" style="font-size: 0.7em;">Centos7</a> <a href="/tags/Hadoop/" style="font-size: 0.6em;">Hadoop</a> <a href="/tags/JAVA/" style="font-size: 0.65em;">JAVA</a> <a href="/tags/Linux/" style="font-size: 0.7em;">Linux</a> <a href="/tags/MySQL/" style="font-size: 0.75em;">MySQL</a> <a href="/tags/docker/" style="font-size: 0.6em;">docker</a> <a href="/tags/hive/" style="font-size: 0.6em;">hive</a> <a href="/tags/sqoop/" style="font-size: 0.6em;">sqoop</a> <a href="/tags/%E5%A4%A7%E6%95%B0%E6%8D%AE/" style="font-size: 0.8em;">大数据</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" style="font-size: 0.75em;">数据库</a>
+      </div>
+  </aside>
+
+            
+                
+  <aside id="krw-posts" class="widget widget-kratos-posts">
+  <h4 class="widget-title"><i class="fa fa-file"></i>最新文章</h4>
+  <div class="tab-content">
+      <ul class="list-group">
+        
+        
+          
+          
+        
+          
+          
+        
+          
+          
+            <a class="list-group-item" href="/2021/11/02/Linux/Centos7/vim%E6%8C%87%E4%BB%A4/"><i class="fa  fa-book"></i> vim常用指令</a>
+            
+          
+        
+          
+          
+            <a class="list-group-item" href="/2021/10/29/Linux/Centos7/find%E5%91%BD%E4%BB%A4%E8%AF%A6%E8%A7%A3/"><i class="fa  fa-book"></i> find命令</a>
+            
+          
+        
+          
+          
+            <a class="list-group-item" href="/2021/10/29/Linux/Centos7/CENTOS7%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AE/"><i class="fa  fa-book"></i> Centos7安装配置</a>
+            
+          
+        
+          
+          
+            <a class="list-group-item" href="/2021/10/27/MySQL/SQL%E7%BB%8F%E5%85%B850%E9%A2%98&%E7%AD%94%E6%A1%88/SQL%E7%BB%8F%E5%85%B850%E9%A2%98&%E7%AD%94%E6%A1%88/"><i class="fa  fa-book"></i> SQL经典50题</a>
+            
+          
+        
+          
+          
+            <a class="list-group-item" href="/2021/06/28/JAVA/JAVA%E5%9F%BA%E7%A1%80%E5%AD%A6%E4%B9%A0/JAVA%E5%9F%BA%E7%A1%80%E5%AD%A6%E4%B9%A0-DAY1/"><i class="fa  fa-book"></i> JAVA基础学习-DAY1</a>
+            
+          
+        
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+      </ul>
+  </div>
+  </aside>
+
+            
+    </div>
+</section>
+        
+        </div>
+    </div>
+</div>
+<footer>
+    <div id="footer"  >
+        <div class="kr-tool text-center">
+            <div class="tool">
+                
+                    <div class="box search-box">
+                        <a href="/search/">
+                            <span class="fa fa-search"></span>
+                        </a>
+                    </div>
+                
+                
+                    <div class="box theme-box" id="darkmode-switch">
+                        <span class="fa fa-adjust"></span>
+                    </div>
+                
+                
+            </div>
+            <div class="box gotop-box">
+                <span class="fa fa-chevron-up"></span>
+            </div>
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 col-md-offset-3 footer-list text-center">
+                    <ul class="kratos-social-icons">
+                        
+                        <li><a href="mailto:438626154@qq.com"><i class="fa fa-envelope"></i></a></li>
+                        
+                        
+                        
+                        
+                        
+                        <li><a target="_blank" rel="nofollow" href="https://github.com/WenJie2000"><i class="fa fa-github"></i></a></li>
+                        
+                    </ul>
+                    <ul class="kratos-copyright">
+                        <div>
+                            <li>&copy; 2021 张文杰的个人博客 版权所有.</li>
+                            <li>本站已运行<span id="span_dt">Loading...</span></li>
+                        </div>
+                        
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+</div>
+</div>
+
+        <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@3.3.4/dist/js/bootstrap.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.js"></script>
+<script>
+    if (!window.kr) {
+        window.kr = {};
+    }
+    window.kr.notMobile = (!(navigator.userAgent.match(/(phone|pad|pod|iPhone|iPod|ios|iPad|Android|Mobile|BlackBerry|IEMobile|MQQBrowser|JUC|Fennec|wOSBrowser|BrowserNG|WebOS|Symbian|Windows Phone)/i)));
+    window.kr.siteRoot = "/";
+</script>
+
+    <div>
+        <canvas id="snow"></canvas>
+        <script async type="text/javascript" src="/js/snow.min.js"></script>
+    </div>
+
+
+    <script async src="/js/candy.min.js"></script>
+
+
+
+
+    <script defer src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+
+<script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js"></script>
+<script defer src="/js/kratosr.min.js"></script>
+<script defer src="/js/pjax.min.js"></script>
+
+    <script defer src="https://cdn.jsdelivr.net/npm/layui-src@2.5.5/dist/layui.all.js"></script>
+
+
+    <script defer src="/js/kr-dark.min.js"></script>
+
+
+
+<!-- Extra support for third-party plguins  -->
+
+
+    </body>
+</html>

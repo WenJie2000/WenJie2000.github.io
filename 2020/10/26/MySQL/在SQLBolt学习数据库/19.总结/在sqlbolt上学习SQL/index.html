@@ -1,0 +1,1163 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+  <!-- 元数据 -->
+  <meta charset="utf-8">
+  <link rel="icon" href="/images/logo.png">
+  <title>MySQL重要指令学习-ALL | 张文杰的个人博客</title>
+  <meta name="author" content="Wen" />
+  <meta http-equiv="Cache-Control" content="no-transform" />
+  <meta http-equiv="Cache-Control" content="no-siteapp" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="robots" content="index,follow" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+  <meta name="format-detection" content="telphone=no, email=no" />
+  
+    <meta name="keywords" content="MySQL, 大数据, 数据库" />
+  
+  <meta name="description" content="在sqlbolt上学习SQL学习网站原网址https:&#x2F;&#x2F;sqlbolt.com&#x2F; (！部分指令该网站不支持！)  SQL Lesson 1: SELECT queries 101查询表格中的特定列 123mysqlSELECT 列1, 列2,… FROM 表; 查询所有列 12SELECT * FROM 表;  Exercise1 — Tasks  1.Find the title of eac">
+<meta property="og:type" content="article">
+<meta property="og:title" content="MySQL重要指令学习-ALL">
+<meta property="og:url" content="http://example.com/2020/10/26/MySQL/%E5%9C%A8SQLBolt%E5%AD%A6%E4%B9%A0%E6%95%B0%E6%8D%AE%E5%BA%93/19.%E6%80%BB%E7%BB%93/%E5%9C%A8sqlbolt%E4%B8%8A%E5%AD%A6%E4%B9%A0SQL/index.html">
+<meta property="og:site_name" content="张文杰的个人博客">
+<meta property="og:description" content="在sqlbolt上学习SQL学习网站原网址https:&#x2F;&#x2F;sqlbolt.com&#x2F; (！部分指令该网站不支持！)  SQL Lesson 1: SELECT queries 101查询表格中的特定列 123mysqlSELECT 列1, 列2,… FROM 表; 查询所有列 12SELECT * FROM 表;  Exercise1 — Tasks  1.Find the title of eac">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/2020/10/26/MySQL/%E5%9C%A8SQLBolt%E5%AD%A6%E4%B9%A0%E6%95%B0%E6%8D%AE%E5%BA%93/19.%E6%80%BB%E7%BB%93/%E5%9C%A8sqlbolt%E4%B8%8A%E5%AD%A6%E4%B9%A0SQL/https:/gimg2.baidu.com/image_search/src=http%3A%2F%2Fwww.veesworld.com%2Fstorage%2Ftools%2F1575962925_762666648531_obdaukqwjd9w.png&refer=http%3A%2F%2Fwww.veesworld.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1637285302&t=5dad48b2d2516df948d8645ba1bd2563">
+<meta property="article:published_time" content="2020-10-25T16:00:00.000Z">
+<meta property="article:modified_time" content="2021-11-15T14:40:36.725Z">
+<meta property="article:author" content="Wen">
+<meta property="article:tag" content="大数据">
+<meta property="article:tag" content="数据库">
+<meta property="article:tag" content="MySQL">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/2020/10/26/MySQL/%E5%9C%A8SQLBolt%E5%AD%A6%E4%B9%A0%E6%95%B0%E6%8D%AE%E5%BA%93/19.%E6%80%BB%E7%BB%93/%E5%9C%A8sqlbolt%E4%B8%8A%E5%AD%A6%E4%B9%A0SQL/https:/gimg2.baidu.com/image_search/src=http%3A%2F%2Fwww.veesworld.com%2Fstorage%2Ftools%2F1575962925_762666648531_obdaukqwjd9w.png&refer=http%3A%2F%2Fwww.veesworld.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1637285302&t=5dad48b2d2516df948d8645ba1bd2563">
+<meta name="twitter:site" content="@null">
+  
+  <!-- 站点验证相关 -->
+  
+    
+    
+    
+  
+  <!-- 样式表文件 -->
+  <link rel="stylesheet" id="kratos-css" href="/css/kratosr.min.css" type="text/css" media="all">
+  
+    <link rel="stylesheet" id="highlight-css" href="/css/highlight/night.min.css" type="text/css" media="all">
+  
+  
+  <link rel="stylesheet" id="fontawe-css" href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" type="text/css" media="all">
+  <link rel="stylesheet" id="nprogress-css" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" type="text/css" media="all">
+  
+  
+  
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css">
+  
+  
+    <link rel="stylesheet" id="darkmode-css" href="/css/kr-dark.min.css" type="text/css" media="all">
+  
+  <!-- 不得不预先加载的一些JS文件 -->
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
+  
+    <script src="https://cdn.jsdelivr.net/npm/qrcode_js@1.0.0/qrcode.min.js"></script>
+  
+  
+  <style>
+    
+      .kratos-cover.kratos-cover-2 {
+        background-image: url('/images/banner2.jpg');
+      }
+    
+    
+      @media(min-width:768px) {
+        body.custom-background {
+          background-image: url('/images/bg2.webp');
+        }
+      }
+    
+  </style>
+  
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+
+    <body class="custom-background">
+        <div id="kratos-wrapper">
+    <div id="kratos-page">
+        <div id="kratos-header">
+            <header id="kratos-desktop-topnav" class="kratos-topnav">
+                <div class="container">
+                    <div class="nav-header">
+                        <nav id="kratos-menu-wrap">
+                            <ul id="kratos-primary-menu" class="sf-menu">
+                                
+                                    
+                                        <li><a href="/"><i class="fa fa-home"></i>首页</a></li>
+                                    
+                                
+                                    
+                                        <li><a href="/archives/"><i class="fa fa-file"></i>档案馆</a></li>
+                                    
+                                
+                                    
+                                        <li><a href="/friends/"><i class="fa fa-paw"></i>好伙伴</a></li>
+                                    
+                                
+                                    
+                                        <li>
+                                            <a><i class="fa fa-link"></i>链接</a>
+                                            <ul class="sub-menu">
+                                                
+                                                    
+                                                
+                                                    
+                                                        <li><a target="_blank" rel="noopener" href="https://home.cnblogs.com/u/2592433">作者博客</a></li>
+                                                    
+                                                
+                                                    
+                                                        <li><a target="_blank" rel="noopener" href="https://github.com/WenJie2000">项目链接</a></li>
+                                                    
+                                                
+                                            </ul>
+                                        </li>
+                                    
+                                
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+            </header>
+            <header id="kratos-mobile-topnav" class="kratos-topnav">
+                <div class="container">
+                    <div class="color-logo"><a href="/">张文杰的个人博客</a></div>
+                    <div class="nav-toggle">
+                        <a class="kratos-nav-toggle js-kratos-nav-toggle">
+                            <i></i>
+                        </a>
+                    </div>
+                </div>
+            </header>
+        </div>
+        <div class="kratos-start kratos-hero-2">
+            <!-- <div class="kratos-overlay"></div> -->
+            <div class="kratos-cover kratos-cover-2 text-center">
+                <div class="desc desc2 animate-box">
+                    <a href="/">
+                        <h2>张文杰的个人博客</h2> <br />
+                        <span>read, study and learn about everything imporant in your life.</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div id="kratos-blog-post">
+            <div class="container">
+                <div id="main" class="row">
+                    
+
+        
+
+            <section class="col-md-8">
+
+        
+
+            <article>
+    <div class="kratos-hentry kratos-post-inner clearfix">
+        <header class="kratos-entry-header">
+            
+                <h1 class="kratos-entry-title text-center">MySQL重要指令学习-ALL</h1>
+            
+            
+            <ul class="kratos-post-meta text-center">
+                <li><i class="fa fa-calendar"></i> 2020-10-26</li>
+                <li><i class="fa fa-user"></i> 作者 Wen</li>
+                <li>
+                    <i class="fa fa-edit"></i> 
+                    
+                    
+                        ~16.05K
+                    
+                    字
+                </li>
+                
+                    <li id="/2020/10/26/MySQL/%E5%9C%A8SQLBolt%E5%AD%A6%E4%B9%A0%E6%95%B0%E6%8D%AE%E5%BA%93/19.%E6%80%BB%E7%BB%93/%E5%9C%A8sqlbolt%E4%B8%8A%E5%AD%A6%E4%B9%A0SQL/" class="leancloud_visitors" data-flag-title="MySQL重要指令学习-ALL">
+                        <i class="fa fa-eye"></i>
+                        <span class="leancloud-visitors-count"> </span> 次阅读
+                    </li>
+                    
+                
+            </ul>
+        </header>
+        <div class="kratos-post-content">
+            <div id="expire-alert" class="alert alert-warning hidden" role="alert">
+                本文最后编辑于 <time datetime="1636987236725"></time> 前，其中的内容可能需要更新。
+            </div>
+            
+                <div class="kratos-post-inner-toc">
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%9C%A8sqlbolt%E4%B8%8A%E5%AD%A6%E4%B9%A0SQL"><span class="toc-number">1.</span> <span class="toc-text">在sqlbolt上学习SQL</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#SQL-Lesson-1-SELECT-queries-101"><span class="toc-number">1.1.</span> <span class="toc-text">SQL Lesson 1: SELECT queries 101</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Exercise1-%E2%80%94-Tasks"><span class="toc-number">1.1.1.</span> <span class="toc-text">Exercise1 — Tasks</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#SQL-Lesson-2-Queries-with-constraints-Pt-1"><span class="toc-number">1.2.</span> <span class="toc-text">SQL Lesson 2: Queries with constraints (Pt. 1)</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Exercise-2-%E2%80%94-Tasks"><span class="toc-number">1.2.1.</span> <span class="toc-text">Exercise 2 — Tasks</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#SQL-Lesson-3-Queries-with-constraints-Pt-2"><span class="toc-number">1.3.</span> <span class="toc-text">SQL Lesson 3: Queries with constraints (Pt. 2)</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Exercise-3-%E2%80%94-Tasks"><span class="toc-number">1.3.1.</span> <span class="toc-text">Exercise 3 — Tasks</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#SQL-Lesson-4-Filtering-and-sorting-Query-results"><span class="toc-number">1.4.</span> <span class="toc-text">SQL Lesson 4: Filtering and sorting Query results</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Exercise-4-%E2%80%94-Tasks"><span class="toc-number">1.4.1.</span> <span class="toc-text">Exercise 4 — Tasks</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#SQL-Review-Simple-SELECT-Queries"><span class="toc-number">1.5.</span> <span class="toc-text">SQL Review: Simple SELECT Queries</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Review-1-%E2%80%94-Tasks"><span class="toc-number">1.5.1.</span> <span class="toc-text">Review 1 — Tasks</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#SQL-Lesson-6-Multi-table-queries-with-JOINs"><span class="toc-number">1.6.</span> <span class="toc-text">SQL Lesson 6: Multi-table queries with JOINs</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Exercise-6-%E2%80%94-Tasks"><span class="toc-number">1.6.1.</span> <span class="toc-text">Exercise 6 — Tasks</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#SQL-Lesson-7-OUTER-JOINs"><span class="toc-number">1.7.</span> <span class="toc-text">SQL Lesson 7: OUTER JOINs</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Exercise-7-%E2%80%94-Tasks"><span class="toc-number">1.7.1.</span> <span class="toc-text">Exercise 7 — Tasks</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#SQL-Lesson-8-A-short-note-on-NULLs"><span class="toc-number">1.8.</span> <span class="toc-text">SQL Lesson 8: A short note on NULLs</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Exercise-8-%E2%80%94-Tasks"><span class="toc-number">1.8.1.</span> <span class="toc-text">Exercise 8 — Tasks</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#SQL-Lesson-9-Queries-with-expressions"><span class="toc-number">1.9.</span> <span class="toc-text">SQL Lesson 9: Queries with expressions</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Exercise-9-%E2%80%94-Tasks"><span class="toc-number">1.9.1.</span> <span class="toc-text">Exercise 9 — Tasks</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#SQL-Lesson-10-Queries-with-aggregates-Pt-1"><span class="toc-number">1.10.</span> <span class="toc-text">SQL Lesson 10: Queries with aggregates (Pt. 1)</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Exercise-10-%E2%80%94-Tasks"><span class="toc-number">1.10.1.</span> <span class="toc-text">Exercise 10 — Tasks</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#SQL-Lesson-11-Queries-with-aggregates-Pt-2"><span class="toc-number">1.11.</span> <span class="toc-text">SQL Lesson 11: Queries with aggregates (Pt. 2)</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Exercise-11-%E2%80%94-Tasks"><span class="toc-number">1.11.1.</span> <span class="toc-text">Exercise 11 — Tasks</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#SQL-Lesson-12-Order-of-execution-of-a-Query"><span class="toc-number">1.12.</span> <span class="toc-text">SQL Lesson 12: Order of execution of a Query</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Exercise-12-%E2%80%94-Tasks"><span class="toc-number">1.12.1.</span> <span class="toc-text">Exercise 12 — Tasks</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#SQL-Lesson-13-Inserting-rows"><span class="toc-number">1.13.</span> <span class="toc-text">SQL Lesson 13: Inserting rows</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Exercise-13-%E2%80%94-Tasks"><span class="toc-number">1.13.1.</span> <span class="toc-text">Exercise 13 — Tasks</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#SQL-Lesson-14-Updating-rows"><span class="toc-number">1.14.</span> <span class="toc-text">SQL Lesson 14: Updating rows</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Exercise-14-%E2%80%94-Tasks"><span class="toc-number">1.14.1.</span> <span class="toc-text">Exercise 14 — Tasks</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#SQL-Lesson-15-Deleting-rows"><span class="toc-number">1.15.</span> <span class="toc-text">SQL Lesson 15: Deleting rows</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Exercise-15-%E2%80%94-Tasks"><span class="toc-number">1.15.1.</span> <span class="toc-text">Exercise 15 — Tasks</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#SQL-Lesson-16-Creating-tables"><span class="toc-number">1.16.</span> <span class="toc-text">SQL Lesson 16: Creating tables</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Table-data-types"><span class="toc-number">1.16.1.</span> <span class="toc-text">Table data types</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Table-constraints"><span class="toc-number">1.16.2.</span> <span class="toc-text">Table constraints</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#An-example"><span class="toc-number">1.16.3.</span> <span class="toc-text">An example</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Exercise-16-%E2%80%94-Tasks"><span class="toc-number">1.16.4.</span> <span class="toc-text">Exercise 16 — Tasks</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#SQL-Lesson-17-%E4%BF%AE%E6%94%B9%E8%A1%A8"><span class="toc-number">1.17.</span> <span class="toc-text">SQL Lesson 17: 修改表</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B7%BB%E5%8A%A0%E5%88%97"><span class="toc-number">1.17.1.</span> <span class="toc-text">添加列</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%A7%BB%E9%99%A4%E5%88%97"><span class="toc-number">1.17.2.</span> <span class="toc-text">移除列</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%87%8D%E5%91%BD%E5%90%8D%E8%A1%A8"><span class="toc-number">1.17.3.</span> <span class="toc-text">重命名表</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Exercise-17-%E2%80%94-Tasks"><span class="toc-number">1.17.4.</span> <span class="toc-text">Exercise 17 — Tasks</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#SQL-Lesson-18-Dropping-tables"><span class="toc-number">1.18.</span> <span class="toc-text">SQL Lesson 18: Dropping tables</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Exercise-18-%E2%80%94-Tasks"><span class="toc-number">1.18.1.</span> <span class="toc-text">Exercise 18 — Tasks</span></a></li></ol></li></ol></li></ol>
+                </div>
+            
+            <hr />
+            <h1 id="在sqlbolt上学习SQL"><a href="#在sqlbolt上学习SQL" class="headerlink" title="在sqlbolt上学习SQL"></a>在sqlbolt上学习SQL</h1><p>学习网站原网址<a target="_blank" rel="noopener" href="https://sqlbolt.com/">https://sqlbolt.com/ </a>(！部分指令该网站不支持！)</p>
+<hr>
+<h2 id="SQL-Lesson-1-SELECT-queries-101"><a href="#SQL-Lesson-1-SELECT-queries-101" class="headerlink" title="SQL Lesson 1: SELECT queries 101"></a>SQL Lesson 1: SELECT queries 101</h2><p><strong>查询表格中的特定列</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">mysql</span><br><span class="line">SELECT 列1, 列2,… </span><br><span class="line">FROM 表;</span><br></pre></td></tr></table></figure>
+<p><strong>查询所有列</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">SELECT * </span><br><span class="line">FROM 表;</span><br></pre></td></tr></table></figure>
+
+<h3 id="Exercise1-—-Tasks"><a href="#Exercise1-—-Tasks" class="headerlink" title="Exercise1 — Tasks"></a>Exercise1 — Tasks</h3><p><img src="/2020/10/26/MySQL/%E5%9C%A8SQLBolt%E5%AD%A6%E4%B9%A0%E6%95%B0%E6%8D%AE%E5%BA%93/19.%E6%80%BB%E7%BB%93/%E5%9C%A8sqlbolt%E4%B8%8A%E5%AD%A6%E4%B9%A0SQL/SQL-Lesson-1.png"></p>
+<table><tr><td bgcolor="#EBEAE2">
+1.Find the title of each film<br>
+    从Movies中找到每个电影的名字(Title)<br>
+2.Find the director of each film<br>
+    找到每个电影的Director<br>
+3.Find the title and director of each film<br>
+    找到每个电影的Title和Director<br>
+4.Find the title and year of each film<br>
+    找到每个电影的Title和Year<br>
+5.Find all the information about each film<br>
+    找到每个电影的所有信息<br>
+</td></tr></table>
+
+<div class="xControl">
+    <div class="xHeading"><div class="xIcon"><i class="fa fa-plus"></i></div><span>参考答案</span></div>
+    <div class="xContent"><div class="inner">
+        <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">SELECT title</span><br><span class="line">FROM movies;</span><br><span class="line"></span><br><span class="line">SELECT director</span><br><span class="line">FROM movies;</span><br><span class="line"></span><br><span class="line">SELECT title, director</span><br><span class="line">FROM movies;</span><br><span class="line"></span><br><span class="line">SELECT title, year</span><br><span class="line">FROM movies;</span><br><span class="line"></span><br><span class="line">SELECT *</span><br><span class="line">FROM movies;</span><br></pre></td></tr></table></figure> 
+    </div></div>
+    </div>
+
+<hr>
+<h2 id="SQL-Lesson-2-Queries-with-constraints-Pt-1"><a href="#SQL-Lesson-2-Queries-with-constraints-Pt-1" class="headerlink" title="SQL Lesson 2: Queries with constraints (Pt. 1)"></a>SQL Lesson 2: Queries with constraints (Pt. 1)</h2><p><strong>带约束的选择查询</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">SELECT 列1, 列2, … FROM 表 </span><br><span class="line">	WHERE 条件1 </span><br><span class="line">		AND/OR 条件2</span><br><span class="line">		AND/OR …;</span><br></pre></td></tr></table></figure>
+
+<table>
+<thead>
+<tr>
+<th>Operator</th>
+<th>Condition</th>
+<th align="left">SQL Example</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>=, !=, &lt; &lt;=, &gt;, &gt;=</td>
+<td>标准<strong>数值</strong>运算符</td>
+<td align="left">列 <strong>!=</strong> 4</td>
+</tr>
+<tr>
+<td>BETWEEN … AND …</td>
+<td><strong>数值</strong>在两个值范围内 (包含)</td>
+<td align="left">列 <strong>BETWEEN</strong> 1.5 <strong>AND</strong> 10.5</td>
+</tr>
+<tr>
+<td>NOT BETWEEN … AND …</td>
+<td><strong>数值</strong>不在两个值范围内 (包含)</td>
+<td align="left">列 <strong>NOT BETWEEN</strong> 1 <strong>AND</strong> 10</td>
+</tr>
+<tr>
+<td>IN (…)</td>
+<td><strong>数值</strong>在列表中</td>
+<td align="left">列 <strong>IN</strong> (2, 4, 6)</td>
+</tr>
+<tr>
+<td>NOT IN (…)</td>
+<td><strong>数值</strong>没在列表中</td>
+<td align="left">列 <strong>NOT IN</strong> (1, 3, 5)</td>
+</tr>
+</tbody></table>
+<h3 id="Exercise-2-—-Tasks"><a href="#Exercise-2-—-Tasks" class="headerlink" title="Exercise 2 — Tasks"></a>Exercise 2 — Tasks</h3><p><img src="/2020/10/26/MySQL/%E5%9C%A8SQLBolt%E5%AD%A6%E4%B9%A0%E6%95%B0%E6%8D%AE%E5%BA%93/19.%E6%80%BB%E7%BB%93/%E5%9C%A8sqlbolt%E4%B8%8A%E5%AD%A6%E4%B9%A0SQL/SQL-Lesson-2.png"></p>
+<table><tr><td bgcolor="#EBEAE2">
+1.Find the movie with a row id of 6<br>
+    找到Id为6的电影<br>
+2.Find the movies released in the years between 2000 and 2010<br>
+    找到movies中2000到2010年的电影<br>
+3.Find the movies not released in the years between 2000 and 2010<br>
+    找到movies中没在2000到2010年的电影<br>
+4.Find the first 5 Pixar movies and their release year<br>
+    找到最早的5个皮克斯电影和它们的年份
+</td></tr></table>
+
+<div class="xControl">
+    <div class="xHeading"><div class="xIcon"><i class="fa fa-plus"></i></div><span>参考答案</span></div>
+    <div class="xContent"><div class="inner">
+        <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">SELECT id, title FROM movies</span><br><span class="line">WHERE id = 6;</span><br><span class="line"></span><br><span class="line">SELECT title, year FROM movies</span><br><span class="line">WHERE year BETWEEN 2000 AND 2010;</span><br><span class="line"></span><br><span class="line">SELECT title, year FROM movies</span><br><span class="line">WHERE year &lt; 2000 OR year &gt; 2010;</span><br><span class="line"></span><br><span class="line">SELECT Title, Year FROM movies WHERE id &lt;= 5;</span><br></pre></td></tr></table></figure> 
+    </div></div>
+    </div>
+
+<hr>
+<h2 id="SQL-Lesson-3-Queries-with-constraints-Pt-2"><a href="#SQL-Lesson-3-Queries-with-constraints-Pt-2" class="headerlink" title="SQL Lesson 3: Queries with constraints (Pt. 2)"></a>SQL Lesson 3: Queries with constraints (Pt. 2)</h2><table>
+<thead>
+<tr>
+<th>Operator</th>
+<th>Condition</th>
+<th align="left">Example</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>=</td>
+<td>区分大小写的字符串精确比较 (<em>注意单个的相等</em>)</td>
+<td align="left">列 <strong>=</strong> “abc”</td>
+</tr>
+<tr>
+<td>!= or &lt;&gt;</td>
+<td>区分大小写的字符串不等精确比较</td>
+<td align="left">列 <strong>!=</strong> “abcd”</td>
+</tr>
+<tr>
+<td>LIKE</td>
+<td>不区分大小写的精确字符串比较</td>
+<td align="left">列 <strong>LIKE</strong> “ABC”</td>
+</tr>
+<tr>
+<td>NOT LIKE</td>
+<td>不区分大小写的精确字符串不等比较</td>
+<td align="left">列 <strong>NOT LIKE</strong> “ABCD”</td>
+</tr>
+<tr>
+<td>%</td>
+<td>用于字符串中的任意位置，以匹配由零个或多个字符组成的序列 (只和 LIKE 或 NOT LIKE 同时使用)</td>
+<td align="left">列 <strong>LIKE</strong> “%AT%” (matches “AT”, “ATTIC”, “CAT” or even “BATS”)</td>
+</tr>
+<tr>
+<td>_</td>
+<td>用于字符串中的任意位置匹配单个字符 (只和 LIKE 或 NOT LIKE 同时使用)</td>
+<td align="left">列 <strong>LIKE</strong> “AN_” (matches “AND”, but not “AN”)</td>
+</tr>
+<tr>
+<td>IN (…)</td>
+<td>字符串存在于列表中</td>
+<td align="left">列 <strong>IN</strong> (“A”, “B”, “C”)</td>
+</tr>
+<tr>
+<td>NOT IN (…)</td>
+<td>字符串不在列表中</td>
+<td align="left">列 <strong>NOT IN</strong> (“D”, “E”, “F”)</td>
+</tr>
+</tbody></table>
+<p><strong>带约束的选择查询</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">SELECT 列1, 列2, … </span><br><span class="line">FROM 表 </span><br><span class="line">WHERE 条件1</span><br><span class="line">	AND/OR 条件2 </span><br><span class="line">	AND/OR …;</span><br></pre></td></tr></table></figure>
+
+<h3 id="Exercise-3-—-Tasks"><a href="#Exercise-3-—-Tasks" class="headerlink" title="Exercise 3 — Tasks"></a>Exercise 3 — Tasks</h3><p><img src="/2020/10/26/MySQL/%E5%9C%A8SQLBolt%E5%AD%A6%E4%B9%A0%E6%95%B0%E6%8D%AE%E5%BA%93/19.%E6%80%BB%E7%BB%93/%E5%9C%A8sqlbolt%E4%B8%8A%E5%AD%A6%E4%B9%A0SQL/SQL-Lesson-3.png"></p>
+<table><tr><td bgcolor="#EBEAE2">
+1.Find all the Toy Story movies<br>
+    找到所有的Toy Story电影<br>
+2.Find all the movies directed by John Lasseter<br>
+    找到所有由John Lasseter导演的电影<br>
+3.Find all the movies (and director) not directed by John Lasseter<br>
+    找到所有的不是John Lasseter导演的不是电影（和Director）<br>
+4.Find all the WALL-* movies<br>
+    找到所有的WALL-*电影
+</td></tr></table>
+
+<div class="xControl">
+    <div class="xHeading"><div class="xIcon"><i class="fa fa-plus"></i></div><span>参考答案</span></div>
+    <div class="xContent"><div class="inner">
+        <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">SELECT title, director FROM movies</span><br><span class="line">WHERE title LIKE &quot;Toy Story%&quot;;</span><br><span class="line"></span><br><span class="line">SELECT title, director FROM movies</span><br><span class="line">WHERE director = &quot;John Lasseter&quot;;</span><br><span class="line"></span><br><span class="line">SELECT title, director FROM movies</span><br><span class="line">WHERE director != &quot;John Lasseter&quot;;</span><br><span class="line"></span><br><span class="line">SELECT * FROM movies WHERE Title LIKE &quot;WALL-%&quot;;</span><br></pre></td></tr></table></figure> 
+    </div></div>
+    </div>
+
+<hr>
+<h2 id="SQL-Lesson-4-Filtering-and-sorting-Query-results"><a href="#SQL-Lesson-4-Filtering-and-sorting-Query-results" class="headerlink" title="SQL Lesson 4: Filtering and sorting Query results"></a>SQL Lesson 4: Filtering and sorting Query results</h2><p><strong>唯一结果的选择查询</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">SELECT DISTINCT 列1, 列2, … </span><br><span class="line">FROM 表</span><br><span class="line">WHERE condition(s);</span><br></pre></td></tr></table></figure>
+
+<p><strong>带有有序结果的选择查询</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">SELECT 列1, 列2, … </span><br><span class="line">FROM 表 WHERE 条件 </span><br><span class="line">ORDER BY 列 ASC/DESC;#ASC升序/DESC降序</span><br></pre></td></tr></table></figure>
+
+<p><strong>限制行的选择查询</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">SELECT 列1, 列2, …</span><br><span class="line">FROM 表</span><br><span class="line">WHERE 条件</span><br><span class="line">ORDER BY 列 ASC/DESC</span><br><span class="line">LIMIT 数量 OFFSET 开始位置;</span><br></pre></td></tr></table></figure>
+
+<h3 id="Exercise-4-—-Tasks"><a href="#Exercise-4-—-Tasks" class="headerlink" title="Exercise 4 — Tasks"></a>Exercise 4 — Tasks</h3><p><img src="/2020/10/26/MySQL/%E5%9C%A8SQLBolt%E5%AD%A6%E4%B9%A0%E6%95%B0%E6%8D%AE%E5%BA%93/19.%E6%80%BB%E7%BB%93/%E5%9C%A8sqlbolt%E4%B8%8A%E5%AD%A6%E4%B9%A0SQL/SQL-Lesson-4.png"></p>
+<table><tr><td bgcolor="#EBEAE2">
+1.List all directors of Pixar movies (alphabetically), without duplicates<br>
+    列出所有的皮克斯电影的directors（照字母顺序排列），没有重复<br>
+2.List the last four Pixar movies released (ordered from most recent to least)<br>
+    列出最近上映的四部皮克斯电影（从最近源到最早）<br>
+3.List the first five Pixar movies sorted alphabetically<br>
+    按字母顺序列出皮克斯的前五部电影<br>
+4.List the next five Pixar movies sorted alphabetically<br>
+    按字母顺序列出皮克斯5到10部电影<br>
+</td></tr></table>
+
+<div class="xControl">
+    <div class="xHeading"><div class="xIcon"><i class="fa fa-plus"></i></div><span>参考答案</span></div>
+    <div class="xContent"><div class="inner">
+        <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">SELECT DISTINCT director FROM movies</span><br><span class="line">ORDER BY director ASC;</span><br><span class="line"></span><br><span class="line">SELECT title, year FROM movies</span><br><span class="line">ORDER BY year DESC</span><br><span class="line">LIMIT 4;</span><br><span class="line"></span><br><span class="line">SELECT title FROM movies</span><br><span class="line">ORDER BY title ASC</span><br><span class="line">LIMIT 5;</span><br><span class="line"></span><br><span class="line">SELECT title FROM movies</span><br><span class="line">ORDER BY title ASC</span><br><span class="line">LIMIT 5 OFFSET 5;</span><br></pre></td></tr></table></figure> 
+    </div></div>
+    </div>
+
+<hr>
+<h2 id="SQL-Review-Simple-SELECT-Queries"><a href="#SQL-Review-Simple-SELECT-Queries" class="headerlink" title="SQL Review: Simple SELECT Queries"></a>SQL Review: Simple SELECT Queries</h2><p><strong>选择查询</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">SELECT 列1, 列2, …</span><br><span class="line">FROM 表</span><br><span class="line">WHERE 条件</span><br><span class="line">ORDER BY 列 ASC/DESC </span><br><span class="line">LIMIT 显示数量 OFFSET 开始位置;</span><br></pre></td></tr></table></figure>
+
+<h3 id="Review-1-—-Tasks"><a href="#Review-1-—-Tasks" class="headerlink" title="Review 1 — Tasks"></a>Review 1 — Tasks</h3><p><img src="/2020/10/26/MySQL/%E5%9C%A8SQLBolt%E5%AD%A6%E4%B9%A0%E6%95%B0%E6%8D%AE%E5%BA%93/19.%E6%80%BB%E7%BB%93/%E5%9C%A8sqlbolt%E4%B8%8A%E5%AD%A6%E4%B9%A0SQL/SQL-Review.png"></p>
+<table><tr><td bgcolor="#EBEAE2">
+1.List all the Canadian cities and their populations<br>
+    列出所有加拿大城市（City）及其人口(Population)<br>
+2.Order all the cities in the United States by their latitude from north to south<br>
+    按照从北到南的纬度把美国所有的城市排序<br>
+3.List all the cities west of Chicago, ordered from west to east<br>
+    列出芝加哥以西的所有城市，按从西到东的顺序<br>
+4.List the two largest cities in Mexico (by population)<br>
+    列出墨西哥最大的两个城市(按人口分)<br>
+5.List the third and fourth largest cities (by population) in the United States and their population<br>
+    列出美国第三和第四大城市(按人口)及其人口<br>
+注：Latitude 纬度， Longitude 经度<br>
+</td></tr></table>
+
+<div class="xControl">
+    <div class="xHeading"><div class="xIcon"><i class="fa fa-plus"></i></div><span>参考答案</span></div>
+    <div class="xContent"><div class="inner">
+        <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">SELECT city, population </span><br><span class="line">FROM north_american_cities</span><br><span class="line">WHERE country = &quot;Canada&quot;;</span><br><span class="line"></span><br><span class="line">SELECT city, latitude </span><br><span class="line">FROM north_american_cities</span><br><span class="line">WHERE country = &quot;United States&quot;</span><br><span class="line">ORDER BY latitude DESC;</span><br><span class="line"></span><br><span class="line">SELECT * </span><br><span class="line">FROM north_american_cities </span><br><span class="line">WHERE Longitude &lt; -87.5 </span><br><span class="line">ORDER BY Longitude ASC;</span><br><span class="line"></span><br><span class="line">SELECT * FROM north_american_cities </span><br><span class="line">WHERE Country=&#x27;Mexico&#x27; </span><br><span class="line">ORDER BY Population </span><br><span class="line">DESC LIMIT 2;</span><br><span class="line"></span><br><span class="line">SELECT * FROM north_american_cities </span><br><span class="line">WHERE Country=&#x27;United States&#x27; </span><br><span class="line">ORDER BY Population </span><br><span class="line">DESC LIMIT 2 OFFSET 2;</span><br></pre></td></tr></table></figure> 
+    </div></div>
+    </div>
+
+<hr>
+<h2 id="SQL-Lesson-6-Multi-table-queries-with-JOINs"><a href="#SQL-Lesson-6-Multi-table-queries-with-JOINs" class="headerlink" title="SQL Lesson 6: Multi-table queries with JOINs"></a>SQL Lesson 6: Multi-table queries with JOINs</h2><p><strong>在多个表上使用INNER JOIN选择查询</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">SELECT 列1, 列2, …</span><br><span class="line">FROM 表1</span><br><span class="line">INNER JOIN 表2 </span><br><span class="line">    ON 表1.id = 表2.id</span><br><span class="line">WHERE 条件</span><br><span class="line">ORDER BY 列, … ASC/DESC</span><br><span class="line">LIMIT 显示数量 OFFSET 开始位置;</span><br></pre></td></tr></table></figure>
+
+<h3 id="Exercise-6-—-Tasks"><a href="#Exercise-6-—-Tasks" class="headerlink" title="Exercise 6 — Tasks"></a>Exercise 6 — Tasks</h3><p><img src="/2020/10/26/MySQL/%E5%9C%A8SQLBolt%E5%AD%A6%E4%B9%A0%E6%95%B0%E6%8D%AE%E5%BA%93/19.%E6%80%BB%E7%BB%93/%E5%9C%A8sqlbolt%E4%B8%8A%E5%AD%A6%E4%B9%A0SQL/SQL-Lesson-6.png"></p>
+<table><tr><td bgcolor="#EBEAE2">
+1.Find the domestic and international sales for each movie<br>
+    找出每部电影(Title)在国内和国际上的销售情况(Domestic_sales,International_sales)<br>
+2.Show the sales numbers for each movie that did better internationally rather than domestically<br>
+    展示每一部在国际(International_sales)上比在国内(Domestic_sales)销量更好的电影<br>
+3.List all the movies by their ratings in descending order<br>
+    把所有的电影按评分（Rating）降序排列<br>
+</td></tr></table>
+<div class="xControl">
+    <div class="xHeading"><div class="xIcon"><i class="fa fa-plus"></i></div><span>参考答案</span></div>
+    <div class="xContent"><div class="inner">
+        <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">SELECT title, domestic_sales, international_sales</span><br><span class="line">FROM movies</span><br><span class="line">INNER JOIN boxoffice</span><br><span class="line">	ON movies.id = boxoffice.movie_id;</span><br><span class="line"></span><br><span class="line">SELECT *</span><br><span class="line">FROM movies</span><br><span class="line">INNER JOIN boxoffice</span><br><span class="line">	ON movies.id = boxoffice.movie_id</span><br><span class="line">WHERE international_sales &gt; domestic_sales;</span><br><span class="line"></span><br><span class="line">SELECT title, rating</span><br><span class="line">FROM movies</span><br><span class="line">INNER JOIN boxoffice</span><br><span class="line">	ON movies.id = boxoffice.movie_id</span><br><span class="line">ORDER BY rating DESC;</span><br></pre></td></tr></table></figure> 
+    </div></div>
+    </div>
+
+<hr>
+<h2 id="SQL-Lesson-7-OUTER-JOINs"><a href="#SQL-Lesson-7-OUTER-JOINs" class="headerlink" title="SQL Lesson 7: OUTER JOINs"></a>SQL Lesson 7: OUTER JOINs</h2><p><strong>在多个表上使用左/右/全连接选择查询</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">SELECT 列1, 列2, …</span><br><span class="line">FROM 表1</span><br><span class="line">INNER/LEFT/RIGHT/FULL JOIN 表2 </span><br><span class="line">    ON 表1.id = 表2.matching_id</span><br><span class="line">WHERE 条件</span><br><span class="line">ORDER BY 列1, … ASC/DESC</span><br><span class="line">LIMIT 数量 OFFSET 开始位置;</span><br></pre></td></tr></table></figure>
+
+<h3 id="Exercise-7-—-Tasks"><a href="#Exercise-7-—-Tasks" class="headerlink" title="Exercise 7 — Tasks"></a>Exercise 7 — Tasks</h3><p><img src="/2020/10/26/MySQL/%E5%9C%A8SQLBolt%E5%AD%A6%E4%B9%A0%E6%95%B0%E6%8D%AE%E5%BA%93/19.%E6%80%BB%E7%BB%93/%E5%9C%A8sqlbolt%E4%B8%8A%E5%AD%A6%E4%B9%A0SQL/SQL-Lesson-7.png"></p>
+<table><tr><td bgcolor="#EBEAE2">
+1.Find the list of all buildings that have employees<br>
+    找到所有有员工的建筑列表<br>
+2.Find the list of all buildings and their capacity<br>
+    找到所有建筑及其Capacity的列表<br>
+3.List all buildings and the distinct employee roles in each building (including empty buildings)<br>
+    列出所有建筑和每个建筑中不同的员工职责(role)(包括空的建筑)<br>
+</td></tr></table>
+
+<div class="xControl">
+    <div class="xHeading"><div class="xIcon"><i class="fa fa-plus"></i></div><span>参考答案</span></div>
+    <div class="xContent"><div class="inner">
+        <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">SELECT DISTINCT building_name</span><br><span class="line">FROM buildings</span><br><span class="line">LEFT JOIN employees</span><br><span class="line">	ON buildings.building_name = employees.building</span><br><span class="line">WHERE building IS NOT NULL;</span><br><span class="line"></span><br><span class="line">SELECT *</span><br><span class="line">FROM buildings;</span><br><span class="line"></span><br><span class="line">SELECT DISTINCT building_name, role</span><br><span class="line">FROM buildings</span><br><span class="line">LEFT JOIN employees</span><br><span class="line">	ON buildings.building_name = employees.building;</span><br></pre></td></tr></table></figure> 
+    </div></div>
+    </div>
+
+<hr>
+<h2 id="SQL-Lesson-8-A-short-note-on-NULLs"><a href="#SQL-Lesson-8-A-short-note-on-NULLs" class="headerlink" title="SQL Lesson 8: A short note on NULLs"></a>SQL Lesson 8: A short note on NULLs</h2><p><strong>对NULL值有约束的选择查询</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">SELECT 列1, 列2, …</span><br><span class="line">FROM 表</span><br><span class="line">WHERE 列 IS/IS NOT NULL</span><br><span class="line">AND/OR 条件2</span><br><span class="line">AND/OR …;</span><br></pre></td></tr></table></figure>
+
+<h3 id="Exercise-8-—-Tasks"><a href="#Exercise-8-—-Tasks" class="headerlink" title="Exercise 8 — Tasks"></a>Exercise 8 — Tasks</h3><p><img src="/2020/10/26/MySQL/%E5%9C%A8SQLBolt%E5%AD%A6%E4%B9%A0%E6%95%B0%E6%8D%AE%E5%BA%93/19.%E6%80%BB%E7%BB%93/%E5%9C%A8sqlbolt%E4%B8%8A%E5%AD%A6%E4%B9%A0SQL/SQL-Lesson-8.png"></p>
+<table><tr><td bgcolor="#EBEAE2">
+1.Find the name and role of all employees who have not been assigned to a building<br>
+    查找所有尚未分配到大楼的员工的名字和职责<br>
+2.Find the names of the buildings that hold no employees<br>
+    找出没有员工的大楼的名字<br>
+</td></tr></table>
+
+<div class="xControl">
+    <div class="xHeading"><div class="xIcon"><i class="fa fa-plus"></i></div><span>参考答案</span></div>
+    <div class="xContent"><div class="inner">
+        <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">SELECT name, role FROM employees</span><br><span class="line">WHERE building IS NULL;</span><br><span class="line"></span><br><span class="line">SELECT DISTINCT building_name</span><br><span class="line">FROM buildings</span><br><span class="line">  LEFT JOIN employees</span><br><span class="line">    ON building_name = building</span><br><span class="line">WHERE name IS NULL;</span><br></pre></td></tr></table></figure> 
+    </div></div>
+    </div>
+
+<hr>
+<h2 id="SQL-Lesson-9-Queries-with-expressions"><a href="#SQL-Lesson-9-Queries-with-expressions" class="headerlink" title="SQL Lesson 9: Queries with expressions"></a>SQL Lesson 9: Queries with expressions</h2><p><strong>带有表达式的查询示例</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">SELECT particle_speed / 2.0 AS half_particle_speed</span><br><span class="line">FROM physics_data</span><br><span class="line">WHERE ABS(particle_position) * 10.0 &gt; 500;</span><br></pre></td></tr></table></figure>
+<p><strong>带表达式的别名选择查询</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">SELECT col_expression AS expr_description, …</span><br><span class="line">FROM mytable;</span><br></pre></td></tr></table></figure>
+
+<p><strong>具有列和表别名的查询示例</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">SELECT column AS better_column_name, …</span><br><span class="line">FROM a_long_widgets_table_name AS mywidgets</span><br><span class="line">INNER JOIN widget_sales</span><br><span class="line">  ON mywidgets.id = widget_sales.widget_id;</span><br></pre></td></tr></table></figure>
+
+<h3 id="Exercise-9-—-Tasks"><a href="#Exercise-9-—-Tasks" class="headerlink" title="Exercise 9 — Tasks"></a>Exercise 9 — Tasks</h3><p><img src="/2020/10/26/MySQL/%E5%9C%A8SQLBolt%E5%AD%A6%E4%B9%A0%E6%95%B0%E6%8D%AE%E5%BA%93/19.%E6%80%BB%E7%BB%93/%E5%9C%A8sqlbolt%E4%B8%8A%E5%AD%A6%E4%B9%A0SQL/SQL-Lesson-9.png"></p>
+<table><tr><td bgcolor="#EBEAE2">
+1.List all movies and their combined sales in millions of dollars<br>
+列出所有电影及其总销售额（以百万美元计）<br>
+2.List all movies and their ratings in percent<br>
+列出所有电影及其收视率（使用百分比）<br>
+3.List all movies that were released on even number years<br>
+列出所有偶数年发行的电影<br>
+</td></tr></table>
+
+
+<div class="xControl">
+    <div class="xHeading"><div class="xIcon"><i class="fa fa-plus"></i></div><span>参考答案</span></div>
+    <div class="xContent"><div class="inner">
+        <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">SELECT title,(domestic_sales + international_sales)/1000000 AS million_dollars</span><br><span class="line">FROM movies</span><br><span class="line">JOIN boxoffice</span><br><span class="line">ON movies.id = boxoffice.movie_id;</span><br><span class="line"></span><br><span class="line">SELECT title, rating * 10 AS rating_percent</span><br><span class="line">FROM movies</span><br><span class="line">  JOIN boxoffice</span><br><span class="line">ON movies.id = boxoffice.movie_id;</span><br><span class="line"></span><br><span class="line">SELECT title, year</span><br><span class="line">FROM movies</span><br><span class="line">WHERE year % 2 = 0;</span><br></pre></td></tr></table></figure> 
+    </div></div>
+    </div>
+
+<hr>
+<h2 id="SQL-Lesson-10-Queries-with-aggregates-Pt-1"><a href="#SQL-Lesson-10-Queries-with-aggregates-Pt-1" class="headerlink" title="SQL Lesson 10: Queries with aggregates (Pt. 1)"></a>SQL Lesson 10: Queries with aggregates (Pt. 1)</h2><p><strong>Select query with aggregate functions over all rows</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">SELECT AGG_FUNC(column_or_expression) AS aggregate_description, …</span><br><span class="line">FROM mytable</span><br><span class="line">WHERE constraint_expression;</span><br></pre></td></tr></table></figure>
+
+<table>
+<thead>
+<tr>
+<th>Function</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>COUNT(</strong>***)**, <strong>COUNT(<em><strong>column</strong></em>)</strong></td>
+<td>一个常用函数，用于在未指定列名的情况下统计组中的行数。否则，计算指定列中具有非空值的组中的行数。</td>
+</tr>
+<tr>
+<td><strong>MIN(<em><strong>column</strong></em>)</strong></td>
+<td>为组中的所有行查找指定列中的最小数值</td>
+</tr>
+<tr>
+<td><strong>MAX(<em><strong>column</strong></em>)</strong></td>
+<td>为组中的所有行在指定列中查找最大的数值。</td>
+</tr>
+<tr>
+<td>**AVG(**<em>column</em>)</td>
+<td>在指定列中查找组中所有行的平均数值。</td>
+</tr>
+<tr>
+<td><strong>SUM(<em><strong>column</strong></em>)</strong></td>
+<td>在指定的列中查找组中各行的所有数值之和。</td>
+</tr>
+</tbody></table>
+<h3 id="Exercise-10-—-Tasks"><a href="#Exercise-10-—-Tasks" class="headerlink" title="Exercise 10 — Tasks"></a>Exercise 10 — Tasks</h3><p><img src="/2020/10/26/MySQL/%E5%9C%A8SQLBolt%E5%AD%A6%E4%B9%A0%E6%95%B0%E6%8D%AE%E5%BA%93/19.%E6%80%BB%E7%BB%93/%E5%9C%A8sqlbolt%E4%B8%8A%E5%AD%A6%E4%B9%A0SQL/SQL-Lesson-10.png"></p>
+<table><tr><td bgcolor="#EBEAE2">
+1.Find the longest time that an employee has been at the studio<br>
+    找出员工在工作室工作的最长时间<br>
+2.For each role, find the average number of years employed by employees in that role<br>
+    对于每个角色，查找该角色雇员的平均工作年限<br>
+3.Find the total number of employee years worked in each building<br>
+    查找在每个建筑物工作的员工总年数<br>
+</td></tr></table>
+<div class="xControl">
+    <div class="xHeading"><div class="xIcon"><i class="fa fa-plus"></i></div><span>参考答案</span></div>
+    <div class="xContent"><div class="inner">
+        <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">SELECT MAX(years_employed)</span><br><span class="line">FROM employees;</span><br><span class="line"></span><br><span class="line">SELECT role, AVG(years_employed)</span><br><span class="line">FROM employees</span><br><span class="line">GROUP BY role;</span><br><span class="line"></span><br><span class="line">SELECT building, SUM(years_employed)</span><br><span class="line">FROM employees</span><br><span class="line">GROUP BY building;</span><br></pre></td></tr></table></figure> 
+    </div></div>
+    </div>
+
+<hr>
+<h2 id="SQL-Lesson-11-Queries-with-aggregates-Pt-2"><a href="#SQL-Lesson-11-Queries-with-aggregates-Pt-2" class="headerlink" title="SQL Lesson 11: Queries with aggregates (Pt. 2)"></a>SQL Lesson 11: Queries with aggregates (Pt. 2)</h2><p><strong>选择具有约束的查询</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">SELECT group_by_column, AGG_FUNC(column_expression) AS aggregate_result_alias, …</span><br><span class="line">FROM 表名</span><br><span class="line">WHERE 条件</span><br><span class="line">GROUP BY 列名</span><br><span class="line">HAVING 组条件;</span><br></pre></td></tr></table></figure>
+
+<h3 id="Exercise-11-—-Tasks"><a href="#Exercise-11-—-Tasks" class="headerlink" title="Exercise 11 — Tasks"></a>Exercise 11 — Tasks</h3><p><img src="/2020/10/26/MySQL/%E5%9C%A8SQLBolt%E5%AD%A6%E4%B9%A0%E6%95%B0%E6%8D%AE%E5%BA%93/19.%E6%80%BB%E7%BB%93/%E5%9C%A8sqlbolt%E4%B8%8A%E5%AD%A6%E4%B9%A0SQL/SQL-Lesson-11.png"></p>
+<table><tr><td bgcolor="#EBEAE2">
+1.Find the number of Artists in the studio (without a HAVING clause)<br>
+    查找工作室中艺术家的数量(不用 HAVING 子句)<br>
+2.Find the number of Employees of each role in the studio<br>
+    查找工作室中每种职责的雇员人数<br>
+3.Find the total number of years employed by all Engineers<br>
+    找到所有工程师（Engineer）的总受雇年数（Years_employed）<br>
+</td></tr></table>
+
+
+<div class="xControl">
+    <div class="xHeading"><div class="xIcon"><i class="fa fa-plus"></i></div><span>参考答案</span></div>
+    <div class="xContent"><div class="inner">
+        <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">SELECT role, COUNT(*)</span><br><span class="line">FROM employees</span><br><span class="line">WHERE role = &quot;Artist&quot;;</span><br><span class="line"></span><br><span class="line">SELECT role, COUNT(*)</span><br><span class="line">FROM employees</span><br><span class="line">GROUP BY role;</span><br><span class="line"></span><br><span class="line">SELECT role, SUM(years_employed)</span><br><span class="line">FROM employees</span><br><span class="line">GROUP BY role</span><br><span class="line">HAVING role = &quot;Engineer&quot;;</span><br></pre></td></tr></table></figure> 
+    </div></div>
+    </div>
+
+<hr>
+<h2 id="SQL-Lesson-12-Order-of-execution-of-a-Query"><a href="#SQL-Lesson-12-Order-of-execution-of-a-Query" class="headerlink" title="SQL Lesson 12: Order of execution of a Query"></a>SQL Lesson 12: Order of execution of a Query</h2><p><strong>完整的SELECT查询</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">SELECT DISTINCT column, AGG_FUNC(column_or_expression), …</span><br><span class="line">FROM mytable</span><br><span class="line">    JOIN another_table</span><br><span class="line">      ON mytable.column = another_table.column</span><br><span class="line">    WHERE constraint_expression</span><br><span class="line">    GROUP BY column</span><br><span class="line">    HAVING constraint_expression</span><br><span class="line">    ORDER BY column ASC/DESC</span><br><span class="line">    LIMIT count OFFSET COUNT;</span><br></pre></td></tr></table></figure>
+
+<h3 id="Exercise-12-—-Tasks"><a href="#Exercise-12-—-Tasks" class="headerlink" title="Exercise 12 — Tasks"></a>Exercise 12 — Tasks</h3><p><img src="/2020/10/26/MySQL/%E5%9C%A8SQLBolt%E5%AD%A6%E4%B9%A0%E6%95%B0%E6%8D%AE%E5%BA%93/19.%E6%80%BB%E7%BB%93/%E5%9C%A8sqlbolt%E4%B8%8A%E5%AD%A6%E4%B9%A0SQL/SQL-Lesson-12.png"></p>
+<table><tr><td bgcolor="#EBEAE2">
+1.Find the number of movies each director has directed<br>
+    找出每位导演导演的电影数量<br>
+2.Find the total domestic and international sales that can be attributed to each director<br>
+    找出每一位导演在国内和国际上的总销售额<br>
+</td></tr></table>
+
+<div class="xControl">
+    <div class="xHeading"><div class="xIcon"><i class="fa fa-plus"></i></div><span>参考答案</span></div>
+    <div class="xContent"><div class="inner">
+        <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">SELECT director, COUNT(id) as Num_movies_directed</span><br><span class="line">FROM movies</span><br><span class="line">GROUP BY director;</span><br><span class="line"></span><br><span class="line">SELECT director, SUM(domestic_sales + international_sales) as Cumulative_sales_from_all_movies</span><br><span class="line">FROM movies</span><br><span class="line">    INNER JOIN boxoffice</span><br><span class="line">        ON movies.id = boxoffice.movie_id</span><br><span class="line">GROUP BY director;</span><br></pre></td></tr></table></figure> 
+    </div></div>
+    </div>
+
+<hr>
+<h2 id="SQL-Lesson-13-Inserting-rows"><a href="#SQL-Lesson-13-Inserting-rows" class="headerlink" title="SQL Lesson 13: Inserting rows"></a>SQL Lesson 13: Inserting rows</h2><p><strong>包含所有列的值的插入语句</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">INSERT INTO 表名</span><br><span class="line">VALUES (value_or_expr, another_value_or_expr, …),</span><br><span class="line">       (value_or_expr_2, another_value_or_expr_2, …),</span><br><span class="line">       …;</span><br></pre></td></tr></table></figure>
+
+<p><strong>插入特定列的语句</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">INSERT INTO 表名</span><br><span class="line">(列名1, 列名2, …)</span><br><span class="line">VALUES (value_or_expr, another_value_or_expr, …),</span><br><span class="line">      (value_or_expr_2, another_value_or_expr_2, …),</span><br><span class="line">      …;</span><br></pre></td></tr></table></figure>
+
+
+
+<p><img src="/2020/10/26/MySQL/%E5%9C%A8SQLBolt%E5%AD%A6%E4%B9%A0%E6%95%B0%E6%8D%AE%E5%BA%93/19.%E6%80%BB%E7%BB%93/%E5%9C%A8sqlbolt%E4%B8%8A%E5%AD%A6%E4%B9%A0SQL/SQL-Lesson-13.png"></p>
+<h3 id="Exercise-13-—-Tasks"><a href="#Exercise-13-—-Tasks" class="headerlink" title="Exercise 13 — Tasks"></a>Exercise 13 — Tasks</h3><table><tr><td bgcolor="#EBEAE2">
+1.Add the studio’s new production, Toy Story 4 to the list of movies (you can use any director)<br>
+    将该工作室的新作品Toy Story 4添加到电影列表中(你可以使用任何导演)
+2.Toy Story 4 has been released to critical acclaim! It had a rating of 8.7, and made 340 million domestically and 270 million internationally. Add the record to the BoxOffice table.<br>
+    Toy Story 4上映后广受好评!它的评分为8.7，国内票房为3.4亿美元，国际票房为2.7亿美元。将记录添加到BoxOffice表中。
+</td></tr></table>
+
+<div class="xControl">
+    <div class="xHeading"><div class="xIcon"><i class="fa fa-plus"></i></div><span>参考答案</span></div>
+    <div class="xContent"><div class="inner">
+        <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">INSERT INTO movies </span><br><span class="line">VALUES (4, &quot;Toy Story 4&quot;, &quot;El Directore&quot;, 2020, 90);</span><br><span class="line"></span><br><span class="line">INSERT INTO boxoffice </span><br><span class="line">VALUES (4, 8.7, 340000000, 270000000);</span><br></pre></td></tr></table></figure> 
+    </div></div>
+    </div>
+
+<hr>
+<h2 id="SQL-Lesson-14-Updating-rows"><a href="#SQL-Lesson-14-Updating-rows" class="headerlink" title="SQL Lesson 14: Updating rows"></a>SQL Lesson 14: Updating rows</h2><p><strong>跟新表数据</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">UPDATE mytable</span><br><span class="line">SET 列1 = value_or_expr, </span><br><span class="line">    列2 = another_value_or_expr, </span><br><span class="line">    …</span><br><span class="line">WHERE condition;</span><br></pre></td></tr></table></figure>
+
+
+
+<p><img src="/2020/10/26/MySQL/%E5%9C%A8SQLBolt%E5%AD%A6%E4%B9%A0%E6%95%B0%E6%8D%AE%E5%BA%93/19.%E6%80%BB%E7%BB%93/%E5%9C%A8sqlbolt%E4%B8%8A%E5%AD%A6%E4%B9%A0SQL/SQL-Lesson-14.png"></p>
+<h3 id="Exercise-14-—-Tasks"><a href="#Exercise-14-—-Tasks" class="headerlink" title="Exercise 14 — Tasks"></a>Exercise 14 — Tasks</h3><table><tr><td bgcolor="#EBEAE2">
+1.The director for A Bug's Life is incorrect, it was actually directed by John Lasseter<br>
+    A Bug's Life的导演是错误的，实际上是John Lasseter导演的<br>
+2.The year that Toy Story 2 was released is incorrect, it was actually released in 1999<br>
+    Toy Story 2发布的年份是不正确的，它实际上是在1999年上映的<br>
+3.Both the title and director for Toy Story 8 is incorrect! The title should be "Toy Story 3" and it was directed by Lee Unkrich<br>
+    Toy Story 2的片名和导演都是错误的！标题应该是“Toy Story 3”，它是由李昂克里奇导演的<br>
+</td></tr></table>
+
+<div class="xControl">
+    <div class="xHeading"><div class="xIcon"><i class="fa fa-plus"></i></div><span>参考答案</span></div>
+    <div class="xContent"><div class="inner">
+        <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">UPDATE movies</span><br><span class="line">SET director = &quot;John Lasseter&quot;</span><br><span class="line">WHERE Title = &#x27;A Bug&#x27;s Life&#x27;;</span><br><span class="line"></span><br><span class="line">UPDATE Movies</span><br><span class="line">SET Year = 1999</span><br><span class="line">WHERE Title=&#x27;Toy Story 2&#x27;;</span><br></pre></td></tr></table></figure> 
+    </div></div>
+    </div>
+
+<hr>
+<h2 id="SQL-Lesson-15-Deleting-rows"><a href="#SQL-Lesson-15-Deleting-rows" class="headerlink" title="SQL Lesson 15: Deleting rows"></a>SQL Lesson 15: Deleting rows</h2><p><strong>带条件的删除语句</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">DELETE FROM 表 </span><br><span class="line">WHERE 条件;</span><br></pre></td></tr></table></figure>
+
+<h3 id="Exercise-15-—-Tasks"><a href="#Exercise-15-—-Tasks" class="headerlink" title="Exercise 15 — Tasks"></a>Exercise 15 — Tasks</h3><p><img src="/2020/10/26/MySQL/%E5%9C%A8SQLBolt%E5%AD%A6%E4%B9%A0%E6%95%B0%E6%8D%AE%E5%BA%93/19.%E6%80%BB%E7%BB%93/%E5%9C%A8sqlbolt%E4%B8%8A%E5%AD%A6%E4%B9%A0SQL/SQL-Lesson-15.png"></p>
+<table><tr><td bgcolor="#EBEAE2">
+1.This database is getting too big, lets remove all movies that were released before 2005.<br>
+这个数据库太大了，让我们删除所有2005年之前上映的电影。  <br>
+2.Andrew Stanton has also left the studio, so please remove all movies directed by him.<br>
+Andrew Stanton也离开了工作室，所以请删除他执导的所有电影。  <br>
+</td></tr></table>
+<div class="xControl">
+    <div class="xHeading"><div class="xIcon"><i class="fa fa-plus"></i></div><span>参考答案</span></div>
+    <div class="xContent"><div class="inner">
+        <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">DELETE FROM movies </span><br><span class="line">WHERE year&lt;2005;</span><br><span class="line"></span><br><span class="line">DELETE FROM movies</span><br><span class="line">WHERE director = &#x27;Andrew Stanton&#x27;;</span><br></pre></td></tr></table></figure> 
+    </div></div>
+    </div>
+
+<hr>
+<h2 id="SQL-Lesson-16-Creating-tables"><a href="#SQL-Lesson-16-Creating-tables" class="headerlink" title="SQL Lesson 16: Creating tables"></a>SQL Lesson 16: Creating tables</h2><p><strong>创建带有可选表格约束和默认值的表格语句</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">CREATE TABLE IF NOT EXISTS 表 ( </span><br><span class="line">	列名1 数据类型 可选表格约束 DEFAULT 缺省值,</span><br><span class="line">    列名2 数据类型 可选表格约束 DEFAULT 缺省值,</span><br><span class="line">    … </span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+
+<h3 id="Table-data-types"><a href="#Table-data-types" class="headerlink" title="Table data types"></a>Table data types</h3><table>
+<thead>
+<tr>
+<th>Data type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>INTEGER</code>, <code>BOOLEAN</code></td>
+<td>整数数据类型可以存储整数值，如数字的计数或年龄。在某些实现中，布尔值只是表示为0或1的整数值。</td>
+</tr>
+<tr>
+<td><code>FLOAT</code>, <code>DOUBLE</code>, <code>REAL</code></td>
+<td>浮点数据类型可以存储更精确的数值数据，如测量值或小数值。根据该值所需的浮点精度，可以使用不同的类型。</td>
+</tr>
+<tr>
+<td><code>CHARACTER(num_chars)</code>, <code>VARCHAR(num_chars)</code>, <code>TEXT</code></td>
+<td>基于文本的数据类型可以在各种地区存储字符串和文本。在处理这些列时，不同类型之间的区别通常相当于底层数据库的效率。CHARACTER和VARCHAR(可变字符)类型都是用它们可以存储的最大字符数指定的(较长的值可能会被截断)，因此使用大表存储和查询更有效。</td>
+</tr>
+<tr>
+<td><code>DATE</code>, <code>DATETIME</code></td>
+<td>SQL还可以存储日期和时间戳，以跟踪时间序列和事件数据。使用它们可能很棘手，特别是在跨时区操作数据时。</td>
+</tr>
+<tr>
+<td><code>BLOB</code></td>
+<td>最后，SQL可以将二进制数据以blob的形式直接存储在数据库中。这些值对数据库通常是不透明的，因此通常必须使用正确的元数据存储它们，以便查询它们。</td>
+</tr>
+<tr>
+<td></td>
+<td>Docs: <a target="_blank" rel="noopener" href="http://dev.mysql.com/doc/refman/5.6/en/data-types.html">MySQL</a>, <a target="_blank" rel="noopener" href="http://www.postgresql.org/docs/9.4/static/datatype.html">Postgres</a>, <a target="_blank" rel="noopener" href="https://www.sqlite.org/datatype3.html">SQLite</a>, <a target="_blank" rel="noopener" href="https://msdn.microsoft.com/en-us/library/ms187752.aspx">Microsoft SQL Server</a></td>
+</tr>
+</tbody></table>
+<h3 id="Table-constraints"><a href="#Table-constraints" class="headerlink" title="Table constraints"></a>Table constraints</h3><table>
+<thead>
+<tr>
+<th>Constraint</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>PRIMARY KEY</code></td>
+<td>这意味着这个列中的值是唯一的，每个值都可以用来标识该表中的一行。</td>
+</tr>
+<tr>
+<td><code>AUTOINCREMENT</code></td>
+<td>对于整型值，这意味着值将自动填充，并在每次插入行时递增。不是所有数据库都支持。</td>
+</tr>
+<tr>
+<td><code>UNIQUE</code></td>
+<td>这意味着这一列中的值必须是唯一的，因此不能在这一列中插入与表中另一行值相同的行。与“主键”不同的是，它不必是表中某一行的键。</td>
+</tr>
+<tr>
+<td><code>NOT NULL</code></td>
+<td>这意味着插入的值不能是’ NULL ‘。</td>
+</tr>
+<tr>
+<td><code>CHECK (expression)</code></td>
+<td>这允许您运行更复杂的表达式来测试插入的值是否有效。例如，您可以检查值是否为正，或大于特定的大小，或以特定的前缀开头，等等。</td>
+</tr>
+<tr>
+<td><code>FOREIGN KEY</code></td>
+<td>这是一种一致性检查，确保此列中的每个值与另一个表中某列中的另一个值相对应。例如，如果有两个表，一个按ID列出所有雇员，另一个列出他们的工资信息，那么“FOREIGN KEY”可以确保工资表中的每一行都对应于主employee列表中的一个有效雇员。</td>
+</tr>
+</tbody></table>
+<h3 id="An-example"><a href="#An-example" class="headerlink" title="An example"></a>An example</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">Movies table schema</span><br><span class="line">CREATE TABLE movies (</span><br><span class="line">    id INTEGER PRIMARY KEY,</span><br><span class="line">    title TEXT,</span><br><span class="line">    director TEXT,</span><br><span class="line">    year INTEGER, </span><br><span class="line">    length_minutes INTEGER</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+
+<h3 id="Exercise-16-—-Tasks"><a href="#Exercise-16-—-Tasks" class="headerlink" title="Exercise 16 — Tasks"></a>Exercise 16 — Tasks</h3><table><tr><td bgcolor="#EBEAE2">
+1.创建一个名为Database的新表，包含以下列:<br>
+-Name描述数据库名称的字符串(文本)<br>
+-Version该数据库的最新版本号(浮点数)<br>
+-Download_count下载数据库的整数计数<br>
+该表没有约束。<br>
+</td></tr></table>
+<div class="xControl">
+    <div class="xHeading"><div class="xIcon"><i class="fa fa-plus"></i></div><span>参考答案</span></div>
+    <div class="xContent"><div class="inner">
+        <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">CREATE TABLE Database (</span><br><span class="line">    Name TEXT,</span><br><span class="line">    Version FLOAT,</span><br><span class="line">    Download_count INTEGER</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+ 
+    </div></div>
+    </div>
+
+<hr>
+<h2 id="SQL-Lesson-17-修改表"><a href="#SQL-Lesson-17-修改表" class="headerlink" title="SQL Lesson 17: 修改表"></a>SQL Lesson 17: 修改表</h2><h3 id="添加列"><a href="#添加列" class="headerlink" title="添加列"></a>添加列</h3><p><strong>修改表以添加新列</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ALTER TABLE 表名 </span><br><span class="line">ADD 列名 *数据类型*  可选表格约束 </span><br><span class="line">DEFAULT 缺省值;</span><br></pre></td></tr></table></figure>
+
+<h3 id="移除列"><a href="#移除列" class="headerlink" title="移除列"></a>移除列</h3><p><strong>修改表以删除列</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ALTER TABLE 表名 </span><br><span class="line">DROP 列名;</span><br></pre></td></tr></table></figure>
+
+<h3 id="重命名表"><a href="#重命名表" class="headerlink" title="重命名表"></a>重命名表</h3><p><strong>更改表名</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ALTER TABLE 表名 </span><br><span class="line">RENAME TO 新表名;</span><br></pre></td></tr></table></figure>
+
+<h3 id="Exercise-17-—-Tasks"><a href="#Exercise-17-—-Tasks" class="headerlink" title="Exercise 17 — Tasks"></a>Exercise 17 — Tasks</h3><table><tr><td bgcolor="#EBEAE2">
+1.Add a column named **Aspect_ratio** with a **FLOAT** data type to store the aspectratio each movie was released in.<br>
+    添加一个名为 Aspect _ ratio 的列，该列具有 FLOAT 数据类型，用于存储年发布的每部电影的 Aspect-ratio。<br>
+2.Add another column named **Language** with a **TEXT** data type to store the language that the movie was released in. Ensure that the default for this language is **English**.<br>
+    添加另一个名为 Language 的带有 TEXT 数据类型的列，以存储电影发行的语言。确保此语言的默认值为英语。<br>
+</td></tr></table>
+<div class="xControl">
+    <div class="xHeading"><div class="xIcon"><i class="fa fa-plus"></i></div><span>参考答案</span></div>
+    <div class="xContent"><div class="inner">
+        <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">ALTER TABLE Movies  </span><br><span class="line">	ADD COLUMN Aspect_ratio </span><br><span class="line">	FLOAT DEFAULT 2.39; </span><br><span class="line">ALTER TABLE Movies  </span><br><span class="line">	ADD COLUMN Language TEXT </span><br><span class="line">	DEFAULT &quot;English&quot;;`</span><br></pre></td></tr></table></figure>
+ 
+    </div></div>
+    </div>
+
+
+<hr>
+<h2 id="SQL-Lesson-18-Dropping-tables"><a href="#SQL-Lesson-18-Dropping-tables" class="headerlink" title="SQL Lesson 18: Dropping tables"></a>SQL Lesson 18: Dropping tables</h2><p><strong>Drop table statement</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">DROP TABLE IF EXISTS mytable;</span><br></pre></td></tr></table></figure>
+<h3 id="Exercise-18-—-Tasks"><a href="#Exercise-18-—-Tasks" class="headerlink" title="Exercise 18 — Tasks"></a>Exercise 18 — Tasks</h3><p><img src="/2020/10/26/MySQL/%E5%9C%A8SQLBolt%E5%AD%A6%E4%B9%A0%E6%95%B0%E6%8D%AE%E5%BA%93/19.%E6%80%BB%E7%BB%93/%E5%9C%A8sqlbolt%E4%B8%8A%E5%AD%A6%E4%B9%A0SQL/SQL-Lesson-18.png"></p>
+<table><tr><td bgcolor="#EBEAE2">
+1. We've sadly reached the end of our lessons, lets clean up by removing the *Movies* table<br>
+    我们已经很遗憾地结束了我们的课程，让我们删除Movies表<br>
+2. And drop the *BoxOffice* table as well<br>
+    并且同样的去除BoxOffice表<br>
+</td></tr></table>
+
+<div class="xControl">
+    <div class="xHeading"><div class="xIcon"><i class="fa fa-plus"></i></div><span>参考答案</span></div>
+    <div class="xContent"><div class="inner">
+        <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">DROP TABLE Movies;</span><br><span class="line">DROP TABLE BoxOffice;</span><br></pre></td></tr></table></figure>
+ 
+    </div></div>
+    </div>
+
+        </div>
+        
+        <footer class="kratos-entry-footer clearfix">
+            
+                <div class="post-like-donate text-center clearfix" id="post-like-donate">
+                
+                    <a class="donate" href="javascript:;"><i class="fa fa-bitcoin"></i> 打赏</a>
+                
+                
+                    <a class="share" href="javascript:;"><i class="fa fa-share-alt"></i> 分享</a>
+                    <div class="share-wrap" style="display: none;">
+    <div class="share-group">
+        <a href="javascript:;" class="share-plain qq" onclick="share('qq');" rel="nofollow">
+            <div class="icon-wrap">
+                <i class="fa fa-qq"></i>
+            </div>
+        </a>
+        <a href="javascript:;" class="share-plain qzone" onclick="share('qzone');" rel="nofollow">
+            <div class="icon-wrap">
+                <i class="fa fa-star"></i>
+            </div>
+        </a>
+        <a href="javascript:;" class="share-plain weixin pop style-plain" rel="nofollow">
+            <div class="icon-wrap">
+                <i class="fa fa-weixin"></i>
+            </div>
+            <div class="share-int">
+                <div class="qrcode" id="wechat-qr"></div>
+                <p>打开微信“扫一扫”，打开网页后点击屏幕右上角分享按钮</p>
+            </div>
+        </a>
+        <a href="javascript:;" class="share-plain weibo" onclick="share('weibo');" rel="nofollow">
+            <div class="icon-wrap">
+                <i class="fa fa-weibo"></i>
+            </div>
+        </a>
+        <a href="javascript:;" class="share-plain facebook style-plain" onclick="share('facebook');" rel="nofollow">
+            <div class="icon-wrap">
+                <i class="fa fa-facebook"></i>
+            </div>
+        </a>
+        <a href="javascript:;" class="share-plain twitter style-plain" onclick="share('twitter');" rel="nofollow">
+            <div class="icon-wrap">
+                <i class="fa fa-twitter"></i>
+            </div>
+        </a>
+    </div>
+    <script type="text/javascript">
+        $(()=>{
+            new QRCode("wechat-qr", {
+                text: "http://example.com/2020/10/26/MySQL/%E5%9C%A8SQLBolt%E5%AD%A6%E4%B9%A0%E6%95%B0%E6%8D%AE%E5%BA%93/19.%E6%80%BB%E7%BB%93/%E5%9C%A8sqlbolt%E4%B8%8A%E5%AD%A6%E4%B9%A0SQL/",
+                width: 150,
+                height: 150,
+                correctLevel : QRCode.CorrectLevel.H
+            });
+        });
+        function share(dest) {
+            const qqBase        = "https://connect.qq.com/widget/shareqq/index.html?";
+            const weiboBase     = "https://service.weibo.com/share/share.php?";
+            const qzoneBase     = "https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?";
+            const facebookBase  = "https://www.facebook.com/sharer/sharer.php?";
+            const twitterBase   = "https://twitter.com/intent/tweet?";
+            const hostUrl       = "http://example.com/2020/10/26/MySQL/%E5%9C%A8SQLBolt%E5%AD%A6%E4%B9%A0%E6%95%B0%E6%8D%AE%E5%BA%93/19.%E6%80%BB%E7%BB%93/%E5%9C%A8sqlbolt%E4%B8%8A%E5%AD%A6%E4%B9%A0SQL/";
+            const title         = "「MySQL重要指令学习-ALL」";
+            const excerpt       = `在sqlbolt上学习SQL学习网站原网址https://sqlbolt.com/ (！部分指令该网站不支持！)
+
+SQL Lesson 1: SELECT queries 101查询表格中的特定列
+123mysqlSELECT 列1...`;
+            let _URL;
+            switch (dest) {
+                case "qq"       : _URL = qqBase+"url="+hostUrl+"&title="+title+"&desc=&summary="+excerpt+"&site=cxpy";     break;
+                case "weibo"    : _URL = weiboBase+"url="+hostUrl+"&title="+title+excerpt;                                 break;
+                case "qzone"    : _URL = qzoneBase+"url="+hostUrl+"&title="+title+"&desc=&summary="+excerpt+"&site=cxpy";  break;
+                case "facebook" : _URL = facebookBase+"u="+hostUrl;                                                        break;
+                case "twitter"  : _URL = twitterBase+"text="+title+excerpt+"&url="+hostUrl;                                break;
+            }
+            window.open(_URL);
+        };
+    </script>
+</div>
+                
+                </div>
+            
+            <div class="footer-tag clearfix">
+                <div class="pull-left">
+                <i class="fa fa-tags"></i>
+                    <a class="tag-none-link" href="/tags/MySQL/" rel="tag">MySQL</a>, <a class="tag-none-link" href="/tags/%E5%A4%A7%E6%95%B0%E6%8D%AE/" rel="tag">大数据</a>, <a class="tag-none-link" href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" rel="tag">数据库</a>
+                </div>
+                <div class="pull-date">
+                <span>最后编辑：2021-11-15</span>
+                </div>
+            </div>
+        </footer>
+    </div>
+    
+        <nav class="navigation post-navigation clearfix" role="navigation">
+            
+            <div class="nav-previous clearfix">
+                <a title=" SQL Lesson 18: Dropping tables" href="/2020/10/23/MySQL/在SQLBolt学习数据库/18.SQL Lesson 18 Dropping tables/SQL Lesson 18 Dropping tables/">&lt; 上一篇</a>
+            </div>
+            
+            
+            <div class="nav-next clearfix">
+                <a title=" JAVA安装配置" href="/2021/06/23/JAVA/JAVA基础学习/JAVA安装配置/">下一篇 &gt;</a>
+            </div>
+            
+        </nav>
+    
+    
+        <div id="v-comments" class="post-comments"></div>
+<script>
+    var load_comm = () => {
+        const init = () => {
+            new Valine({
+                el: '#v-comments',
+                appId: 'ov9d0pSM6tSAzbc43FJHYPzT-gzGzoHsz',
+                appKey: 'B2wMGp8TE3duzmpI04GwcOxv',
+                visitor: true,
+                enableQQ: true,
+                path: '/2020/10/26/MySQL/%E5%9C%A8SQLBolt%E5%AD%A6%E4%B9%A0%E6%95%B0%E6%8D%AE%E5%BA%93/19.%E6%80%BB%E7%BB%93/%E5%9C%A8sqlbolt%E4%B8%8A%E5%AD%A6%E4%B9%A0SQL/'
+            });
+        }
+        if (typeof Valine == 'undefined') {
+            const src = 'https://cdn.jsdelivr.net/npm/valine@1.4.14/dist/Valine.min.js';
+            $.getScript(src, init);
+        } else {
+            init();
+        }
+    };
+</script>
+<noscript>Please enable JavaScript to view the <a target="_blank" rel="noopener" href="https://valine.js.org/">comments powered by Valine.</a></noscript>
+
+    
+</article>
+
+        
+
+            </section>
+
+        
+
+                
+            
+
+<section id="kratos-widget-area" class="col-md-4 hidden-xs hidden-sm">
+    <!-- 文章和页面根据splitter来分割，没有的话就从头开始设置为sticky -->
+    
+    
+                <aside id="krw-about" class="widget widget-kratos-about clearfix">
+    <div class="photo-background"></div>
+    <div class="photo-wrapper clearfix">
+        <div class="photo-wrapper-tip text-center">
+            <img class="about-photo" src="/images/avatar2.jpg" />
+        </div>
+    </div>
+    <div class="textwidget">
+        <p class="text-center">个人记录学习的网站</p>
+    </div>
+</aside>
+            
+                    <div class="sticky-area">
+                
+                    <aside id="krw-toc" class="widget widget-kratos-toc clearfix">
+    <div class="photo-background"></div>
+    <h4 class="widget-title no-after">
+        <i class="fa fa-compass"></i>
+        文章目录
+        <span class="toc-progress-bar"></span>
+    </h4>
+    <div class="textwidget">
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%9C%A8sqlbolt%E4%B8%8A%E5%AD%A6%E4%B9%A0SQL"><span class="toc-text">在sqlbolt上学习SQL</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#SQL-Lesson-1-SELECT-queries-101"><span class="toc-text">SQL Lesson 1: SELECT queries 101</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Exercise1-%E2%80%94-Tasks"><span class="toc-text">Exercise1 — Tasks</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#SQL-Lesson-2-Queries-with-constraints-Pt-1"><span class="toc-text">SQL Lesson 2: Queries with constraints (Pt. 1)</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Exercise-2-%E2%80%94-Tasks"><span class="toc-text">Exercise 2 — Tasks</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#SQL-Lesson-3-Queries-with-constraints-Pt-2"><span class="toc-text">SQL Lesson 3: Queries with constraints (Pt. 2)</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Exercise-3-%E2%80%94-Tasks"><span class="toc-text">Exercise 3 — Tasks</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#SQL-Lesson-4-Filtering-and-sorting-Query-results"><span class="toc-text">SQL Lesson 4: Filtering and sorting Query results</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Exercise-4-%E2%80%94-Tasks"><span class="toc-text">Exercise 4 — Tasks</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#SQL-Review-Simple-SELECT-Queries"><span class="toc-text">SQL Review: Simple SELECT Queries</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Review-1-%E2%80%94-Tasks"><span class="toc-text">Review 1 — Tasks</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#SQL-Lesson-6-Multi-table-queries-with-JOINs"><span class="toc-text">SQL Lesson 6: Multi-table queries with JOINs</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Exercise-6-%E2%80%94-Tasks"><span class="toc-text">Exercise 6 — Tasks</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#SQL-Lesson-7-OUTER-JOINs"><span class="toc-text">SQL Lesson 7: OUTER JOINs</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Exercise-7-%E2%80%94-Tasks"><span class="toc-text">Exercise 7 — Tasks</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#SQL-Lesson-8-A-short-note-on-NULLs"><span class="toc-text">SQL Lesson 8: A short note on NULLs</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Exercise-8-%E2%80%94-Tasks"><span class="toc-text">Exercise 8 — Tasks</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#SQL-Lesson-9-Queries-with-expressions"><span class="toc-text">SQL Lesson 9: Queries with expressions</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Exercise-9-%E2%80%94-Tasks"><span class="toc-text">Exercise 9 — Tasks</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#SQL-Lesson-10-Queries-with-aggregates-Pt-1"><span class="toc-text">SQL Lesson 10: Queries with aggregates (Pt. 1)</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Exercise-10-%E2%80%94-Tasks"><span class="toc-text">Exercise 10 — Tasks</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#SQL-Lesson-11-Queries-with-aggregates-Pt-2"><span class="toc-text">SQL Lesson 11: Queries with aggregates (Pt. 2)</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Exercise-11-%E2%80%94-Tasks"><span class="toc-text">Exercise 11 — Tasks</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#SQL-Lesson-12-Order-of-execution-of-a-Query"><span class="toc-text">SQL Lesson 12: Order of execution of a Query</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Exercise-12-%E2%80%94-Tasks"><span class="toc-text">Exercise 12 — Tasks</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#SQL-Lesson-13-Inserting-rows"><span class="toc-text">SQL Lesson 13: Inserting rows</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Exercise-13-%E2%80%94-Tasks"><span class="toc-text">Exercise 13 — Tasks</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#SQL-Lesson-14-Updating-rows"><span class="toc-text">SQL Lesson 14: Updating rows</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Exercise-14-%E2%80%94-Tasks"><span class="toc-text">Exercise 14 — Tasks</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#SQL-Lesson-15-Deleting-rows"><span class="toc-text">SQL Lesson 15: Deleting rows</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Exercise-15-%E2%80%94-Tasks"><span class="toc-text">Exercise 15 — Tasks</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#SQL-Lesson-16-Creating-tables"><span class="toc-text">SQL Lesson 16: Creating tables</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Table-data-types"><span class="toc-text">Table data types</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Table-constraints"><span class="toc-text">Table constraints</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#An-example"><span class="toc-text">An example</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Exercise-16-%E2%80%94-Tasks"><span class="toc-text">Exercise 16 — Tasks</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#SQL-Lesson-17-%E4%BF%AE%E6%94%B9%E8%A1%A8"><span class="toc-text">SQL Lesson 17: 修改表</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B7%BB%E5%8A%A0%E5%88%97"><span class="toc-text">添加列</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%A7%BB%E9%99%A4%E5%88%97"><span class="toc-text">移除列</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%87%8D%E5%91%BD%E5%90%8D%E8%A1%A8"><span class="toc-text">重命名表</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Exercise-17-%E2%80%94-Tasks"><span class="toc-text">Exercise 17 — Tasks</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#SQL-Lesson-18-Dropping-tables"><span class="toc-text">SQL Lesson 18: Dropping tables</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Exercise-18-%E2%80%94-Tasks"><span class="toc-text">Exercise 18 — Tasks</span></a></li></ol></li></ol></li></ol>
+    </div>
+</aside>
+                
+                
+  <aside id="krw-categories" class="widget widget-kratos-categories clearfix">
+    <h4 class="widget-title"><i class="fa fa-folder"></i>分类目录</h4>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Hadoop/">Hadoop</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/JAVA/">JAVA</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/MySQL/">MySQL</a><span class="category-list-count">20</span></li></ul>
+  </aside>
+
+
+            
+                
+  <aside id="krw-tags" class="widget widget-kratos-tags clearfix">
+    <h4 class="widget-title"><i class="fa fa-tags"></i>标签聚合</h4>
+      <div class="tag-clouds">
+        <a href="/tags/Centos7/" style="font-size: 0.7em;">Centos7</a> <a href="/tags/Hadoop/" style="font-size: 0.6em;">Hadoop</a> <a href="/tags/JAVA/" style="font-size: 0.65em;">JAVA</a> <a href="/tags/Linux/" style="font-size: 0.7em;">Linux</a> <a href="/tags/MySQL/" style="font-size: 0.75em;">MySQL</a> <a href="/tags/docker/" style="font-size: 0.6em;">docker</a> <a href="/tags/hive/" style="font-size: 0.6em;">hive</a> <a href="/tags/sqoop/" style="font-size: 0.6em;">sqoop</a> <a href="/tags/%E5%A4%A7%E6%95%B0%E6%8D%AE/" style="font-size: 0.8em;">大数据</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" style="font-size: 0.75em;">数据库</a>
+      </div>
+  </aside>
+
+            
+                
+  <aside id="krw-posts" class="widget widget-kratos-posts">
+  <h4 class="widget-title"><i class="fa fa-file"></i>最新文章</h4>
+  <div class="tab-content">
+      <ul class="list-group">
+        
+        
+          
+          
+        
+          
+          
+        
+          
+          
+            <a class="list-group-item" href="/2021/11/02/Linux/Centos7/vim%E6%8C%87%E4%BB%A4/"><i class="fa  fa-book"></i> vim常用指令</a>
+            
+          
+        
+          
+          
+            <a class="list-group-item" href="/2021/10/29/Linux/Centos7/find%E5%91%BD%E4%BB%A4%E8%AF%A6%E8%A7%A3/"><i class="fa  fa-book"></i> find命令</a>
+            
+          
+        
+          
+          
+            <a class="list-group-item" href="/2021/10/29/Linux/Centos7/CENTOS7%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AE/"><i class="fa  fa-book"></i> Centos7安装配置</a>
+            
+          
+        
+          
+          
+            <a class="list-group-item" href="/2021/10/27/MySQL/SQL%E7%BB%8F%E5%85%B850%E9%A2%98&%E7%AD%94%E6%A1%88/SQL%E7%BB%8F%E5%85%B850%E9%A2%98&%E7%AD%94%E6%A1%88/"><i class="fa  fa-book"></i> SQL经典50题</a>
+            
+          
+        
+          
+          
+            <a class="list-group-item" href="/2021/06/28/JAVA/JAVA%E5%9F%BA%E7%A1%80%E5%AD%A6%E4%B9%A0/JAVA%E5%9F%BA%E7%A1%80%E5%AD%A6%E4%B9%A0-DAY1/"><i class="fa  fa-book"></i> JAVA基础学习-DAY1</a>
+            
+          
+        
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+      </ul>
+  </div>
+  </aside>
+
+            
+    </div>
+</section>
+        
+        </div>
+    </div>
+</div>
+<footer>
+    <div id="footer"  >
+        <div class="kr-tool text-center">
+            <div class="tool">
+                
+                    <div class="box search-box">
+                        <a href="/search/">
+                            <span class="fa fa-search"></span>
+                        </a>
+                    </div>
+                
+                
+                    <div class="box theme-box" id="darkmode-switch">
+                        <span class="fa fa-adjust"></span>
+                    </div>
+                
+                
+            </div>
+            <div class="box gotop-box">
+                <span class="fa fa-chevron-up"></span>
+            </div>
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 col-md-offset-3 footer-list text-center">
+                    <ul class="kratos-social-icons">
+                        
+                        <li><a href="mailto:438626154@qq.com"><i class="fa fa-envelope"></i></a></li>
+                        
+                        
+                        
+                        
+                        
+                        <li><a target="_blank" rel="nofollow" href="https://github.com/WenJie2000"><i class="fa fa-github"></i></a></li>
+                        
+                    </ul>
+                    <ul class="kratos-copyright">
+                        <div>
+                            <li>&copy; 2021 张文杰的个人博客 版权所有.</li>
+                            <li>本站已运行<span id="span_dt">Loading...</span></li>
+                        </div>
+                        
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+</div>
+</div>
+
+        <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@3.3.4/dist/js/bootstrap.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.js"></script>
+<script>
+    if (!window.kr) {
+        window.kr = {};
+    }
+    window.kr.notMobile = (!(navigator.userAgent.match(/(phone|pad|pod|iPhone|iPod|ios|iPad|Android|Mobile|BlackBerry|IEMobile|MQQBrowser|JUC|Fennec|wOSBrowser|BrowserNG|WebOS|Symbian|Windows Phone)/i)));
+    window.kr.siteRoot = "/";
+</script>
+
+    <div>
+        <canvas id="snow"></canvas>
+        <script async type="text/javascript" src="/js/snow.min.js"></script>
+    </div>
+
+
+    <script async src="/js/candy.min.js"></script>
+
+
+
+
+    <script defer src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+
+<script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js"></script>
+<script defer src="/js/kratosr.min.js"></script>
+<script defer src="/js/pjax.min.js"></script>
+
+    <script defer src="https://cdn.jsdelivr.net/npm/layui-src@2.5.5/dist/layui.all.js"></script>
+
+
+    <script defer src="/js/kr-dark.min.js"></script>
+
+
+
+<!-- Extra support for third-party plguins  -->
+
+
+    </body>
+</html>
