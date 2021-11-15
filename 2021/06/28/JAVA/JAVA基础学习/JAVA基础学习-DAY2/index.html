@@ -4,7 +4,7 @@
   <!-- 元数据 -->
   <meta charset="utf-8">
   <link rel="icon" href="/images/logo.png">
-  <title>SQL Lesson 14: Updating rows | 张文杰的个人博客</title>
+  <title>JAVA基础学习-DAY2 | 张文杰的个人博客</title>
   <meta name="author" content="Wen" />
   <meta http-equiv="Cache-Control" content="no-transform" />
   <meta http-equiv="Cache-Control" content="no-siteapp" />
@@ -13,24 +13,22 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
   <meta name="format-detection" content="telphone=no, email=no" />
   
-    <meta name="keywords" content="MySQL, 大数据, 数据库" />
+    <meta name="keywords" content="JAVA" />
   
-  <meta name="description" content="在sqlbolt上学习SQL学习网站原网址https:&#x2F;&#x2F;sqlbolt.com&#x2F; (！少数指令该网站不支持！)  SQL Lesson 14: Updating rows跟新表数据 12345UPDATE mytableSET 列1 &#x3D; value_or_expr,     列2 &#x3D; another_value_or_expr,     …WHERE condition;     Exercis">
+  <meta name="description" content="尚未开放">
 <meta property="og:type" content="article">
-<meta property="og:title" content="SQL Lesson 14: Updating rows">
-<meta property="og:url" content="http://example.com/2020/10/20/MySQL/%E5%9C%A8SQLBolt%E5%AD%A6%E4%B9%A0%E6%95%B0%E6%8D%AE%E5%BA%93/14.SQL%20Lesson%2014%20Updating%20rows/SQL%20Lesson%2014%20Updating%20rows/index.html">
+<meta property="og:title" content="JAVA基础学习-DAY2">
+<meta property="og:url" content="http://example.com/2021/06/28/JAVA/JAVA%E5%9F%BA%E7%A1%80%E5%AD%A6%E4%B9%A0/JAVA%E5%9F%BA%E7%A1%80%E5%AD%A6%E4%B9%A0-DAY2/index.html">
 <meta property="og:site_name" content="张文杰的个人博客">
-<meta property="og:description" content="在sqlbolt上学习SQL学习网站原网址https:&#x2F;&#x2F;sqlbolt.com&#x2F; (！少数指令该网站不支持！)  SQL Lesson 14: Updating rows跟新表数据 12345UPDATE mytableSET 列1 &#x3D; value_or_expr,     列2 &#x3D; another_value_or_expr,     …WHERE condition;     Exercis">
+<meta property="og:description" content="尚未开放">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="http://example.com/2020/10/20/MySQL/%E5%9C%A8SQLBolt%E5%AD%A6%E4%B9%A0%E6%95%B0%E6%8D%AE%E5%BA%93/14.SQL%20Lesson%2014%20Updating%20rows/SQL%20Lesson%2014%20Updating%20rows/https:/gimg2.baidu.com/image_search/src=http%3A%2F%2Fwww.veesworld.com%2Fstorage%2Ftools%2F1575962925_762666648531_obdaukqwjd9w.png&refer=http%3A%2F%2Fwww.veesworld.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1637285302&t=5dad48b2d2516df948d8645ba1bd2563">
-<meta property="article:published_time" content="2020-10-19T17:00:00.000Z">
-<meta property="article:modified_time" content="2021-11-15T14:39:40.162Z">
+<meta property="og:image" content="http://example.com/2021/06/28/JAVA/JAVA%E5%9F%BA%E7%A1%80%E5%AD%A6%E4%B9%A0/JAVA%E5%9F%BA%E7%A1%80%E5%AD%A6%E4%B9%A0-DAY2/https:/gimg2.baidu.com/image_search/src=http%3A%2F%2Fwww.shuangzishu.com%2Fattachment%2Finformation%2F202005%2F15892060436q1hq.jpg&refer=http%3A%2F%2Fwww.shuangzishu.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1638416677&t=5c8d5526f94b293863f381359c2167a4">
+<meta property="article:published_time" content="2021-06-27T16:00:01.000Z">
+<meta property="article:modified_time" content="2021-11-15T15:07:33.638Z">
 <meta property="article:author" content="Wen">
-<meta property="article:tag" content="大数据">
-<meta property="article:tag" content="数据库">
-<meta property="article:tag" content="MySQL">
+<meta property="article:tag" content="JAVA">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://example.com/2020/10/20/MySQL/%E5%9C%A8SQLBolt%E5%AD%A6%E4%B9%A0%E6%95%B0%E6%8D%AE%E5%BA%93/14.SQL%20Lesson%2014%20Updating%20rows/SQL%20Lesson%2014%20Updating%20rows/https:/gimg2.baidu.com/image_search/src=http%3A%2F%2Fwww.veesworld.com%2Fstorage%2Ftools%2F1575962925_762666648531_obdaukqwjd9w.png&refer=http%3A%2F%2Fwww.veesworld.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1637285302&t=5dad48b2d2516df948d8645ba1bd2563">
+<meta name="twitter:image" content="http://example.com/2021/06/28/JAVA/JAVA%E5%9F%BA%E7%A1%80%E5%AD%A6%E4%B9%A0/JAVA%E5%9F%BA%E7%A1%80%E5%AD%A6%E4%B9%A0-DAY2/https:/gimg2.baidu.com/image_search/src=http%3A%2F%2Fwww.shuangzishu.com%2Fattachment%2Finformation%2F202005%2F15892060436q1hq.jpg&refer=http%3A%2F%2Fwww.shuangzishu.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1638416677&t=5c8d5526f94b293863f381359c2167a4">
 <meta name="twitter:site" content="@null">
   
   <!-- 站点验证相关 -->
@@ -163,22 +161,22 @@
     <div class="kratos-hentry kratos-post-inner clearfix">
         <header class="kratos-entry-header">
             
-                <h1 class="kratos-entry-title text-center">SQL Lesson 14: Updating rows</h1>
+                <h1 class="kratos-entry-title text-center">JAVA基础学习-DAY2</h1>
             
             
             <ul class="kratos-post-meta text-center">
-                <li><i class="fa fa-calendar"></i> 2020-10-20</li>
+                <li><i class="fa fa-calendar"></i> 2021-06-28</li>
                 <li><i class="fa fa-user"></i> 作者 Wen</li>
                 <li>
                     <i class="fa fa-edit"></i> 
                     
                     
-                        867
+                        5
                     
                     字
                 </li>
                 
-                    <li id="/2020/10/20/MySQL/%E5%9C%A8SQLBolt%E5%AD%A6%E4%B9%A0%E6%95%B0%E6%8D%AE%E5%BA%93/14.SQL%20Lesson%2014%20Updating%20rows/SQL%20Lesson%2014%20Updating%20rows/" class="leancloud_visitors" data-flag-title="SQL Lesson 14: Updating rows">
+                    <li id="/2021/06/28/JAVA/JAVA%E5%9F%BA%E7%A1%80%E5%AD%A6%E4%B9%A0/JAVA%E5%9F%BA%E7%A1%80%E5%AD%A6%E4%B9%A0-DAY2/" class="leancloud_visitors" data-flag-title="JAVA基础学习-DAY2">
                         <i class="fa fa-eye"></i>
                         <span class="leancloud-visitors-count"> </span> 次阅读
                     </li>
@@ -188,37 +186,11 @@
         </header>
         <div class="kratos-post-content">
             <div id="expire-alert" class="alert alert-warning hidden" role="alert">
-                本文最后编辑于 <time datetime="1636987180162"></time> 前，其中的内容可能需要更新。
+                本文最后编辑于 <time datetime="1636988853638"></time> 前，其中的内容可能需要更新。
             </div>
             
-                <div class="kratos-post-inner-toc">
-                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%9C%A8sqlbolt%E4%B8%8A%E5%AD%A6%E4%B9%A0SQL"><span class="toc-number">1.</span> <span class="toc-text">在sqlbolt上学习SQL</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#SQL-Lesson-14-Updating-rows"><span class="toc-number">1.1.</span> <span class="toc-text">SQL Lesson 14: Updating rows</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Exercise-14-%E2%80%94-Tasks"><span class="toc-number">1.1.1.</span> <span class="toc-text">Exercise 14 — Tasks</span></a></li></ol></li></ol></li></ol>
-                </div>
-            
             <hr />
-            <h1 id="在sqlbolt上学习SQL"><a href="#在sqlbolt上学习SQL" class="headerlink" title="在sqlbolt上学习SQL"></a>在sqlbolt上学习SQL</h1><p>学习网站原网址<a target="_blank" rel="noopener" href="https://sqlbolt.com/">https://sqlbolt.com/ </a>(！少数指令该网站不支持！)</p>
-<hr>
-<h2 id="SQL-Lesson-14-Updating-rows"><a href="#SQL-Lesson-14-Updating-rows" class="headerlink" title="SQL Lesson 14: Updating rows"></a>SQL Lesson 14: Updating rows</h2><p><strong>跟新表数据</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">UPDATE mytable</span><br><span class="line">SET 列1 = value_or_expr, </span><br><span class="line">    列2 = another_value_or_expr, </span><br><span class="line">    …</span><br><span class="line">WHERE condition;</span><br></pre></td></tr></table></figure>
-
-
-
-<p><img src="/2020/10/20/MySQL/%E5%9C%A8SQLBolt%E5%AD%A6%E4%B9%A0%E6%95%B0%E6%8D%AE%E5%BA%93/14.SQL%20Lesson%2014%20Updating%20rows/SQL%20Lesson%2014%20Updating%20rows/SQL-Lesson-14.png"></p>
-<h3 id="Exercise-14-—-Tasks"><a href="#Exercise-14-—-Tasks" class="headerlink" title="Exercise 14 — Tasks"></a>Exercise 14 — Tasks</h3><table><tr><td bgcolor="#EBEAE2">
-1.The director for A Bug's Life is incorrect, it was actually directed by John Lasseter<br>
-    A Bug's Life的导演是错误的，实际上是John Lasseter导演的<br>
-2.The year that Toy Story 2 was released is incorrect, it was actually released in 1999<br>
-    Toy Story 2发布的年份是不正确的，它实际上是在1999年上映的<br>
-3.Both the title and director for Toy Story 8 is incorrect! The title should be "Toy Story 3" and it was directed by Lee Unkrich<br>
-    Toy Story 2的片名和导演都是错误的！标题应该是“Toy Story 3”，它是由李昂克里奇导演的<br>
-</td></tr></table>
-
-<div class="xControl">
-    <div class="xHeading"><div class="xIcon"><i class="fa fa-plus"></i></div><span>参考答案</span></div>
-    <div class="xContent"><div class="inner">
-        <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">UPDATE movies</span><br><span class="line">SET director = &quot;John Lasseter&quot;</span><br><span class="line">WHERE Title = &#x27;A Bug&#x27;s Life&#x27;;</span><br><span class="line"></span><br><span class="line">UPDATE Movies</span><br><span class="line">SET Year = 1999</span><br><span class="line">WHERE Title=&#x27;Toy Story 2&#x27;;</span><br></pre></td></tr></table></figure> 
-    </div></div>
-    </div>
+            <p>尚未开放</p>
 
         </div>
         
@@ -270,7 +242,7 @@
     <script type="text/javascript">
         $(()=>{
             new QRCode("wechat-qr", {
-                text: "http://example.com/2020/10/20/MySQL/%E5%9C%A8SQLBolt%E5%AD%A6%E4%B9%A0%E6%95%B0%E6%8D%AE%E5%BA%93/14.SQL%20Lesson%2014%20Updating%20rows/SQL%20Lesson%2014%20Updating%20rows/",
+                text: "http://example.com/2021/06/28/JAVA/JAVA%E5%9F%BA%E7%A1%80%E5%AD%A6%E4%B9%A0/JAVA%E5%9F%BA%E7%A1%80%E5%AD%A6%E4%B9%A0-DAY2/",
                 width: 150,
                 height: 150,
                 correctLevel : QRCode.CorrectLevel.H
@@ -282,12 +254,10 @@
             const qzoneBase     = "https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?";
             const facebookBase  = "https://www.facebook.com/sharer/sharer.php?";
             const twitterBase   = "https://twitter.com/intent/tweet?";
-            const hostUrl       = "http://example.com/2020/10/20/MySQL/%E5%9C%A8SQLBolt%E5%AD%A6%E4%B9%A0%E6%95%B0%E6%8D%AE%E5%BA%93/14.SQL%20Lesson%2014%20Updating%20rows/SQL%20Lesson%2014%20Updating%20rows/";
-            const title         = "「SQL Lesson 14: Updating rows」";
-            const excerpt       = `在sqlbolt上学习SQL学习网站原网址https://sqlbolt.com/ (！少数指令该网站不支持！)
-
-SQL Lesson 14: Updating rows跟新表数据
-12345UPDATE mytableSET 列1...`;
+            const hostUrl       = "http://example.com/2021/06/28/JAVA/JAVA%E5%9F%BA%E7%A1%80%E5%AD%A6%E4%B9%A0/JAVA%E5%9F%BA%E7%A1%80%E5%AD%A6%E4%B9%A0-DAY2/";
+            const title         = "「JAVA基础学习-DAY2」";
+            const excerpt       = `尚未开放
+`;
             let _URL;
             switch (dest) {
                 case "qq"       : _URL = qqBase+"url="+hostUrl+"&title="+title+"&desc=&summary="+excerpt+"&site=cxpy";     break;
@@ -306,7 +276,7 @@ SQL Lesson 14: Updating rows跟新表数据
             <div class="footer-tag clearfix">
                 <div class="pull-left">
                 <i class="fa fa-tags"></i>
-                    <a class="tag-none-link" href="/tags/MySQL/" rel="tag">MySQL</a>, <a class="tag-none-link" href="/tags/%E5%A4%A7%E6%95%B0%E6%8D%AE/" rel="tag">大数据</a>, <a class="tag-none-link" href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" rel="tag">数据库</a>
+                    <a class="tag-none-link" href="/tags/JAVA/" rel="tag">JAVA</a>
                 </div>
                 <div class="pull-date">
                 <span>最后编辑：2021-11-15</span>
@@ -318,12 +288,12 @@ SQL Lesson 14: Updating rows跟新表数据
         <nav class="navigation post-navigation clearfix" role="navigation">
             
             <div class="nav-previous clearfix">
-                <a title=" SQL Lesson 13: Inserting rows" href="/2020/10/20/MySQL/在SQLBolt学习数据库/13.SQL Lesson 13 Inserting rows/SQL Lesson 13 Inserting rows/">&lt; 上一篇</a>
+                <a title=" JAVA基础学习-DAY1" href="/2021/06/28/JAVA/JAVA基础学习/JAVA基础学习-DAY1/">&lt; 上一篇</a>
             </div>
             
             
             <div class="nav-next clearfix">
-                <a title=" SQL Lesson 15: Deleting rows" href="/2020/10/21/MySQL/在SQLBolt学习数据库/15.SQL Lesson 15 Deleting rows/SQL Lesson 15 Deleting rows/">下一篇 &gt;</a>
+                <a title=" SQL经典50题" href="/2021/10/27/MySQL/SQL经典50题&答案/SQL经典50题&答案/">下一篇 &gt;</a>
             </div>
             
         </nav>
@@ -339,7 +309,7 @@ SQL Lesson 14: Updating rows跟新表数据
                 appKey: 'B2wMGp8TE3duzmpI04GwcOxv',
                 visitor: true,
                 enableQQ: true,
-                path: '/2020/10/20/MySQL/%E5%9C%A8SQLBolt%E5%AD%A6%E4%B9%A0%E6%95%B0%E6%8D%AE%E5%BA%93/14.SQL%20Lesson%2014%20Updating%20rows/SQL%20Lesson%2014%20Updating%20rows/'
+                path: '/2021/06/28/JAVA/JAVA%E5%9F%BA%E7%A1%80%E5%AD%A6%E4%B9%A0/JAVA%E5%9F%BA%E7%A1%80%E5%AD%A6%E4%B9%A0-DAY2/'
             });
         }
         if (typeof Valine == 'undefined') {
@@ -381,18 +351,6 @@ SQL Lesson 14: Updating rows跟新表数据
 </aside>
             
                     <div class="sticky-area">
-                
-                    <aside id="krw-toc" class="widget widget-kratos-toc clearfix">
-    <div class="photo-background"></div>
-    <h4 class="widget-title no-after">
-        <i class="fa fa-compass"></i>
-        文章目录
-        <span class="toc-progress-bar"></span>
-    </h4>
-    <div class="textwidget">
-        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%9C%A8sqlbolt%E4%B8%8A%E5%AD%A6%E4%B9%A0SQL"><span class="toc-text">在sqlbolt上学习SQL</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#SQL-Lesson-14-Updating-rows"><span class="toc-text">SQL Lesson 14: Updating rows</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Exercise-14-%E2%80%94-Tasks"><span class="toc-text">Exercise 14 — Tasks</span></a></li></ol></li></ol></li></ol>
-    </div>
-</aside>
                 
                 
   <aside id="krw-categories" class="widget widget-kratos-categories clearfix">
